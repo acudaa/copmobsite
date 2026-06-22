@@ -1,0 +1,20 @@
+{
+  "id": "uc-mr04",
+  "segment": "marine",
+  "title": "Water-quality and algal-bloom monitoring for ports and aquaculture",
+  "summary": "Ocean-colour and biogeochemistry data provide early warning of algal blooms and water-quality issues.",
+  "services": [
+    "CMEMS",
+    "Sentinel"
+  ],
+  "problem": "Harmful algal blooms threaten aquaculture, bathing waters and port operations. Ground sampling is sparse and slow, so blooms are often detected only after damage occurs.",
+  "solution": "CMEMS biogeochemistry products and Sentinel-3 OLCI ocean-colour data track chlorophyll and turbidity, providing early warning of bloom development. Operators can take protective action for fish farms, beaches and water intakes before impacts escalate.",
+  "relatedCaseStudies": [
+    "cs-mr04"
+  ],
+  "maturity": "trial",
+  "copernicusRole": {
+    "mode": "Requires further processing",
+    "detail": "CMEMS biogeochemistry and Sentinel-3 ocean-colour data are processed into chlorophyll and turbidity indicators with thresholds for bloom alerts."
+  }
+}

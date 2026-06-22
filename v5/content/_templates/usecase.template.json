@@ -1,0 +1,15 @@
+{
+  "id": "uc-XXNN",
+  "segment": "aviation-drones | rail | road-automotive | marine | urban",
+  "title": "Short use case title",
+  "summary": "One-sentence summary shown on cards.",
+  "services": ["CAMS", "CLMS"],
+  "maturity": "research | trial | operational",
+  "copernicusRole": {
+    "mode": "Directly applicable | Data-fusion input | Requires further processing | Data-fusion input + processing",
+    "detail": "Explain whether Copernicus is used directly, as one input in a fusion workflow, or needs further processing."
+  },
+  "problem": "The generic challenge this use case addresses.",
+  "solution": "How Copernicus data helps address it.",
+  "relatedCaseStudies": ["cs-XXNN"]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "cs-ud04",
+  "segment": "urban",
+  "real": true,
+  "maturity": "research",
+  "title": "Space4Cities: dynamic management of urban public space",
+  "user": "Space4Cities consortium (coordinator Forum Virium Helsinki; cities incl. Amsterdam, Guimarães, Attica Region)",
+  "location": "Helsinki, Amsterdam, Guimarães, Attica & more (Horizon Europe / EUSPA)",
+  "services": [
+    "CLMS",
+    "Sentinel"
+  ],
+  "summary": "The EUSPA-funded Space4Cities project builds replicable, space-data-based solutions for dynamic management of urban public spaces, on the ground and in the air.",
+  "challenge": "Public-space management lags behind other smart-city domains in digital transformation. Cities cannot manage public space — on ground and in air — in an agile way that adapts to fast-changing needs, events and climate disruptions.",
+  "approach": "Space4Cities (Horizon Europe, EUSPA, grant 101131955; €5.2M, coordinated by Forum Virium Helsinki) exploits Copernicus and Galileo data to build replicable solutions for dynamic, data-driven management of public areas, with a roadmap for Europe-wide implementation. City partners including Amsterdam, Guimarães and the Attica Region help define and validate the needs.",
+  "results": "The project targets agile reallocation of public space, better response to disruptive events and increased urban resilience — demonstrating how space data can move public-space management from static planning to dynamic, evidence-based operation.",
+  "link": "https://www.euspa.europa.eu/opportunities/horizon-europe/project-portfolio/space4cities-integrating-galileo-and-copernicus"
+}

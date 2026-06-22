@@ -1,0 +1,18 @@
+{
+  "id": "cs-mr02",
+  "segment": "marine",
+  "real": false,
+  "maturity": "operational",
+  "title": "Sea-ice charting for Baltic winter navigation",
+  "user": "Maritime administration / ice service (illustrative)",
+  "location": "Baltic Sea",
+  "services": [
+    "CMEMS",
+    "Sentinel"
+  ],
+  "summary": "CMEMS sea-ice products and Sentinel-1 SAR supported safer, more efficient winter navigation and icebreaker tasking.",
+  "challenge": "Rapidly changing Baltic sea ice forced conservative routing and heavy icebreaker dependence, with coarse ice information raising risk and transit times.",
+  "approach": "CMEMS sea-ice concentration, thickness and drift products were combined with Sentinel-1 SAR imagery — which sees through cloud and darkness — to provide timely ice charting for route selection and icebreaker tasking.",
+  "results": "The administration reported safer route selection, better icebreaker coordination and reduced transit times during the ice season.",
+  "link": "https://marine.copernicus.eu"
+}

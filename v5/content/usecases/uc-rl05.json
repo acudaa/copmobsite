@@ -1,0 +1,20 @@
+{
+  "id": "uc-rl05",
+  "segment": "rail",
+  "title": "Flood rapid mapping for rail network management",
+  "summary": "Satellite flood mapping supports targeted track closure and reopening decisions during flood events.",
+  "services": [
+    "CEMS",
+    "Sentinel"
+  ],
+  "problem": "During fast-developing floods, infrastructure managers must make closure decisions across many lines simultaneously, often with no current map of which sections are actually inundated. Gauge data alone leads to both unnecessary closures and missed hazards.",
+  "solution": "CEMS Rapid Mapping delivers Sentinel-1 SAR-derived flood extent and depth products within hours of activation. Shared with crisis operations centres, these maps enable targeted closure and reopening decisions, restoring services faster while maintaining safety.",
+  "relatedCaseStudies": [
+    "cs-rl02"
+  ],
+  "maturity": "operational",
+  "copernicusRole": {
+    "mode": "Directly applicable",
+    "detail": "CEMS flood products are used directly by crisis teams for closure decisions. Sentinel-1 SAR underpins them, but the delivered maps need no further processing."
+  }
+}

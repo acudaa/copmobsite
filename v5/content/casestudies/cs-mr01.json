@@ -1,0 +1,17 @@
+{
+  "id": "cs-mr01",
+  "segment": "marine",
+  "real": false,
+  "maturity": "operational",
+  "title": "CMEMS weather routing for a shipping line",
+  "user": "Container shipping line (illustrative)",
+  "location": "North Atlantic & Mediterranean",
+  "services": [
+    "CMEMS"
+  ],
+  "summary": "A shipping line integrated CMEMS ocean and wave forecasts into weather routing, cutting fuel use and emissions.",
+  "challenge": "Adverse currents and waves increased fuel consumption and emissions on long routes. Existing route planning could not fully exploit favourable conditions or reliably avoid costly weather.",
+  "approach": "CMEMS forecasts of currents, waves, sea level and wind were integrated into the line's weather-routing system, optimising route and speed for each voyage.",
+  "results": "The line achieved measurable per-voyage fuel savings and corresponding emissions reductions, with improved schedule reliability across its main corridors.",
+  "link": "https://marine.copernicus.eu"
+}

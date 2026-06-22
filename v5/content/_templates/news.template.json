@@ -1,0 +1,10 @@
+{
+  "id": "nNN",
+  "date": "2026-07-01",
+  "type": "Grant call | CASSINI | Product update | Procurement | Project",
+  "segment": "all | aviation-drones | rail | road-automotive | marine | urban",
+  "title": "News headline",
+  "summary": "Short summary.",
+  "body": "Fuller text shown on the news page.",
+  "link": "https://..."
+}

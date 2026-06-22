@@ -1,0 +1,51 @@
+[
+  {
+    "id": "CAMS",
+    "name": "CAMS — Atmosphere Monitoring",
+    "url": "https://atmosphere.copernicus.eu",
+    "color": "#0C447C",
+    "bg": "#E6F1FB"
+  },
+  {
+    "id": "C3S",
+    "name": "C3S — Climate Change",
+    "url": "https://climate.copernicus.eu",
+    "color": "#27500A",
+    "bg": "#EAF3DE"
+  },
+  {
+    "id": "CLMS",
+    "name": "CLMS — Land Monitoring",
+    "url": "https://land.copernicus.eu",
+    "color": "#633806",
+    "bg": "#FAEEDA"
+  },
+  {
+    "id": "CMEMS",
+    "name": "CMEMS — Marine Environment",
+    "url": "https://marine.copernicus.eu",
+    "color": "#085041",
+    "bg": "#E1F5EE"
+  },
+  {
+    "id": "CEMS",
+    "name": "CEMS — Emergency Management",
+    "url": "https://emergency.copernicus.eu",
+    "color": "#791F1F",
+    "bg": "#FCEBEB"
+  },
+  {
+    "id": "EGMS",
+    "name": "EGMS — Ground Motion",
+    "url": "https://egms.land.copernicus.eu",
+    "color": "#3C3489",
+    "bg": "#EEEDFE"
+  },
+  {
+    "id": "Sentinel",
+    "name": "Copernicus Sentinels",
+    "url": "https://www.copernicus.eu/en/about-copernicus/infrastructure/discover-our-satellites",
+    "color": "#444",
+    "bg": "#ECEAE5"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "id": "uc-ra02",
+  "segment": "road-automotive",
+  "title": "Slope and pavement stability monitoring with ground motion",
+  "summary": "Ground motion time series reveal slow movement under roads and embankments before failure.",
+  "services": [
+    "EGMS"
+  ],
+  "problem": "Roads crossing unstable geology can experience slow slope movement and subsidence that is invisible at the surface until failure occurs. Point-based sensors leave most of a corridor unmonitored.",
+  "solution": "EGMS displacement time series from ascending and descending Sentinel-1 orbits can be combined to map 2D ground motion across an entire road corridor. Persistent-movement sectors are flagged for geotechnical investigation and proactive remediation.",
+  "relatedCaseStudies": [
+    "cs-ra02"
+  ],
+  "maturity": "operational",
+  "copernicusRole": {
+    "mode": "Directly applicable",
+    "detail": "EGMS 2D-decomposed ground motion is used as delivered to flag moving sectors, with light analysis to prioritise geotechnical investigation."
+  }
+}

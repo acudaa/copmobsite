@@ -1,0 +1,17 @@
+{
+  "id": "cs-ra02",
+  "segment": "road-automotive",
+  "real": false,
+  "maturity": "operational",
+  "title": "EGMS slope monitoring on an Alpine motorway",
+  "user": "Motorway concessionaire (illustrative)",
+  "location": "Eastern Alps",
+  "services": [
+    "EGMS"
+  ],
+  "summary": "EGMS revealed previously unmonitored slow-moving slope sectors on a mountain motorway, enabling proactive remediation.",
+  "challenge": "A motorway through unstable geology had a history of slope failures but only six point sensors across a 28 km corridor, leaving most of it unmonitored.",
+  "approach": "EGMS ascending and descending displacement series were combined to decompose 2D ground motion across the full corridor, revealing several previously unmonitored sectors with persistent downslope movement.",
+  "results": "Geotechnical investigation confirmed active failure surfaces at most flagged sectors. Containment structures were installed proactively, with large estimated avoided costs based on a comparable past failure.",
+  "link": "https://egms.land.copernicus.eu"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "cs-rl04",
+  "segment": "rail",
+  "real": false,
+  "maturity": "research",
+  "title": "Climate-adjusted design standards for asset renewal",
+  "user": "National rail administration (illustrative)",
+  "location": "Northern Europe",
+  "services": [
+    "C3S"
+  ],
+  "summary": "C3S projections were integrated into a 30-year capital-investment model, revising design standards for hundreds of km of renewals.",
+  "challenge": "A national rail administration's renewal model used historical climate statistics that did not account for projected increases in extreme precipitation, heat and freeze-thaw cycling, risking under-specified assets.",
+  "approach": "C3S downscaled projections provided updated return-period statistics for extreme rainfall, temperature thresholds and frost depth to mid-century. These were translated into adjusted parameters for embankment drainage, ballast and expansion tolerance.",
+  "results": "The updated model identified a meaningful share of planned renewals where standard specifications would be inadequate under future climate. Revised specifications were adopted for several hundred km of line scheduled for renewal, with large estimated avoided-failure costs.",
+  "link": "https://cds.climate.copernicus.eu"
+}

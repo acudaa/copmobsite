@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .about-body { max-width: 740px; margin: 0 auto; padding: 56px 32px; }
+  .about-body h2 { font-size: 20px; font-weight: 500; margin: 40px 0 12px; }
+  .about-body h2:first-child { margin-top: 0; }
+  .about-body p { font-size: 15px; color: var(--text-muted); line-height: 1.8; margin-bottom: 14px; }
+  .about-body strong { color: var(--text); }
+  .contact-box { margin-top: 48px; padding: 32px; background: var(--bg-off); border: 1px solid var(--border); border-radius: var(--radius); text-align: center; }
+  .contact-box h3 { font-size: 20px; font-weight: 500; margin-bottom: 10px; }
+  .contact-box p { font-size: 15px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
+  .contact-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .contact-btns a { display: inline-block; padding: 11px 22px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; }
+  .btn-fill { background: var(--blue-dark); color: white; }
+  .btn-fill:hover { background: #063a6b; text-decoration: none; }
+  .btn-outline { background: var(--bg); color: var(--text); border: 1px solid var(--border-mid); }
+  .btn-outline:hover { background: var(--bg-off); text-decoration: none; }
+  .mat-key { display:flex; gap:10px; flex-wrap:wrap; margin-top:8px; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<section class="page-hero">
+  <div class="container">
+    <h1>About this resource</h1>
+    <p>A EUSPA resource demonstrating how Copernicus Earth observation supports European transport, mobility and urban development.</p>
+  </div>
+</section>
+<div class="about-body">
+  <h2>Purpose</h2>
+  <p>This site brings together <strong>use cases</strong> and <strong>case studies</strong> showing how the free and open Copernicus programme delivers value across five transport and mobility sectors: aviation and drones, rail, road and automotive, marine and inland waterways, and urban development.</p>
+  <p>It is intended to help infrastructure operators, downstream service developers, public authorities and policymakers understand where Copernicus data can make a difference — and to point them towards concrete examples and the underlying services.</p>
+
+  <h2>Use cases vs. case studies</h2>
+  <p>A <strong>use case</strong> is a generic description of a transport or mobility challenge and how Copernicus data could help address it. It is sector-specific but not tied to any single organisation — a template for what is possible.</p>
+  <p>A <strong>case study</strong> is a specific, real-world illustration of how a particular user addressed a concrete problem using Copernicus. Several case studies are drawn from EUSPA-funded Horizon Europe projects, including <strong>SPATRA</strong> (rail temperature and buckling prediction), <strong>BUILDSPACE</strong> (urban digital twins for energy efficiency) and <strong>Space4Cities</strong> (dynamic management of urban public space).</p>
+
+  <h2>Maturity levels</h2>
+  <p>Each case study is tagged with a maturity level to indicate how far the application has progressed:</p>
+  <div class="mat-key">
+    <span class="maturity research">Research</span>
+    <span class="maturity trial">Trial</span>
+    <span class="maturity operational">Operational</span>
+  </div>
+  <p style="margin-top:14px"><strong>Research</strong> — early-stage exploration or proof of concept. <strong>Trial</strong> — piloted or demonstrated with users in a real setting. <strong>Operational</strong> — deployed and used routinely in day-to-day operations.</p>
+
+  <h2>EUSPA's role</h2>
+  <p>The <strong>EU Agency for the Space Programme (EUSPA)</strong> implements the EU Space Programme and works to maximise its socio-economic benefits. For Copernicus, EUSPA focuses on <strong>market uptake and user adoption</strong> — connecting Earth observation data and services to real user needs across industry sectors.</p>
+  <p>EUSPA engages stakeholders, develops use cases, runs the User Consultation Platform, funds downstream innovation through Horizon Europe and CASSINI, and produces market intelligence such as the EU Space Market Report. Its mission is captured in the phrase <em>"linking space to user needs."</em></p>
+
+  <h2>About the data</h2>
+  <p>Copernicus provides free and open data through six thematic services — atmosphere (CAMS), marine (CMEMS), land (CLMS), climate (C3S), emergency (CEMS) and security — plus dedicated services such as the European Ground Motion Service (EGMS), all underpinned by the Sentinel satellites.</p>
+  <p>Illustrative case studies describe plausible applications based on documented capabilities; figures in those examples are indicative. Case studies marked as EU projects reflect publicly documented EUSPA and Horizon Europe activities.</p>
+
+  <div class="contact-box">
+    <h3>Get in touch</h3>
+    <p>Interested in adopting Copernicus for your transport or mobility application, or have a use case to share? We'd love to hear from you.</p>
+    <div class="contact-btns">
+      <a class="btn-fill" href="https://www.euspa.europa.eu/about/contact" target="_blank" rel="noopener">Contact EUSPA</a>
+      <a class="btn-outline" href="https://www.euspa.europa.eu/eu-space-programme/eu-space-market-and-users/user-consultation-platform" target="_blank" rel="noopener">User Consultation Platform</a>
+    </div>
+  </div>
+</div>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>loadContent().then(data => mountChrome(data, 'about'));</script>
+</body>
+</html>

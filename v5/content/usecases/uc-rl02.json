@@ -1,0 +1,19 @@
+{
+  "id": "uc-rl02",
+  "segment": "rail",
+  "title": "Embankment and cutting stability monitoring with InSAR",
+  "summary": "Ground motion data reveals slow subsidence and slope movement along track before visible defects appear.",
+  "services": [
+    "EGMS"
+  ],
+  "problem": "Track-side embankments and cuttings can move slowly for months before visible track-geometry defects appear. Manual inspection is too sparse and slow to characterise movement across an entire corridor or to prioritise intervention.",
+  "solution": "The European Ground Motion Service provides millimetre-precision displacement time series derived from Sentinel-1, across the whole continent at regular grid spacing. Analysts can identify deformation hotspots, prioritise geotechnical inspection and intervene before failures develop.",
+  "relatedCaseStudies": [
+    "cs-rl02"
+  ],
+  "maturity": "operational",
+  "copernicusRole": {
+    "mode": "Directly applicable",
+    "detail": "EGMS displacement time series are used largely as delivered. Analysts threshold velocities and prioritise hotspots, but no heavy reprocessing of the InSAR data is required."
+  }
+}

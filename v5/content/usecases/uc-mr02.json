@@ -1,0 +1,20 @@
+{
+  "id": "uc-mr02",
+  "segment": "marine",
+  "title": "Sea-ice charting for safe Arctic and Baltic navigation",
+  "summary": "Sea-ice products and SAR imagery support safe, efficient navigation in ice-affected waters.",
+  "services": [
+    "CMEMS",
+    "Sentinel"
+  ],
+  "problem": "Navigation in northern and Baltic waters is constrained by sea ice that changes rapidly. Outdated or coarse ice information forces conservative routing, icebreaker dependence and higher risk.",
+  "solution": "CMEMS sea-ice concentration, thickness and drift products, combined with Sentinel-1 SAR imagery that sees through cloud and darkness, provide timely ice charting. This supports safer route selection, icebreaker tasking and reduced transit times.",
+  "relatedCaseStudies": [
+    "cs-mr02"
+  ],
+  "maturity": "operational",
+  "copernicusRole": {
+    "mode": "Data-fusion input",
+    "detail": "CMEMS sea-ice products are combined with Sentinel-1 SAR scenes and navigational judgement for ice charting. Copernicus provides complementary model and image inputs."
+  }
+}

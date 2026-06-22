@@ -1,0 +1,17 @@
+{
+  "id": "cs-ad02",
+  "segment": "aviation-drones",
+  "real": false,
+  "maturity": "trial",
+  "title": "CAMS-integrated drone delivery corridors in Brussels",
+  "user": "Last-mile drone logistics operator (illustrative)",
+  "location": "Brussels, Belgium",
+  "services": [
+    "CAMS"
+  ],
+  "summary": "A drone delivery operator integrated CAMS air-quality forecasts into route planning to keep BVLOS corridors out of high-pollution zones.",
+  "challenge": "Planning beyond-visual-line-of-sight delivery corridors in a dense city, the operator needed to avoid concentrating flights in high-pollution areas, both for regulatory acceptance and to limit particulate wear on UAV systems.",
+  "approach": "CAMS European air-quality forecasts at high resolution, updated four times daily, were integrated into the operator's route-planning API. Corridors exceeding PM2.5 and NO2 thresholds were flagged automatically and alternative paths generated.",
+  "results": "Over a six-month pilot, around 12% of planned sorties were rerouted. Regulators accepted the CAMS-integrated approach as part of the operational authorisation, setting a precedent for CAMS use in U-Space applications.",
+  "link": "https://atmosphere.copernicus.eu"
+}

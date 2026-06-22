@@ -1,0 +1,18 @@
+{
+  "id": "cs-ud02",
+  "segment": "urban",
+  "real": false,
+  "maturity": "trial",
+  "title": "Urban heat exposure mapping for an adaptation plan",
+  "user": "City authority (illustrative)",
+  "location": "Large EU city",
+  "services": [
+    "CLMS",
+    "C3S"
+  ],
+  "summary": "A city combined CLMS land-surface-temperature and imperviousness data with C3S climate data to target cooling interventions.",
+  "challenge": "Recurring heatwaves raised health risks and energy demand, but the city lacked a spatial evidence base to identify the hottest areas and prioritise greening or cool-surface interventions.",
+  "approach": "CLMS land-surface-temperature and imperviousness products were combined with C3S climate data to build a composite urban heat-exposure index, cross-referenced with population vulnerability.",
+  "results": "The city identified priority districts for tree planting and cool-surface pilots, and incorporated the heat-exposure mapping into its climate-adaptation plan.",
+  "link": "https://land.copernicus.eu"
+}

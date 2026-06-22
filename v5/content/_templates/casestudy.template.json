@@ -1,0 +1,15 @@
+{
+  "id": "cs-XXNN",
+  "segment": "aviation-drones | rail | road-automotive | marine | urban",
+  "real": false,
+  "maturity": "research | trial | operational",
+  "title": "Case study title",
+  "user": "Who did this (organisation / project)",
+  "location": "Where",
+  "services": ["EGMS"],
+  "summary": "One-sentence summary shown on cards.",
+  "challenge": "The specific problem the user faced.",
+  "approach": "What they did with Copernicus.",
+  "results": "Outcome and impact.",
+  "link": "https://..."
+}

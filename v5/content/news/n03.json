@@ -1,0 +1,10 @@
+{
+  "id": "n03",
+  "date": "2026-05-15",
+  "type": "Product update",
+  "segment": "rail",
+  "title": "EGMS 2025 update released with extended coverage and improved time series",
+  "summary": "The European Ground Motion Service has published its annual update, extending the displacement time series used widely in rail and road infrastructure monitoring.",
+  "body": "The latest EGMS release extends the Sentinel-1-derived ground-motion time series and improves the calibrated and ortho product layers. Infrastructure managers in rail and road sectors use EGMS to prioritise inspection of embankments, cuttings and structures by deformation hotspot.",
+  "link": "https://egms.land.copernicus.eu"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "cs-ad03",
+  "segment": "aviation-drones",
+  "real": false,
+  "maturity": "trial",
+  "title": "Urban Atlas-based U-Space corridor network for a pilot city",
+  "user": "National civil aviation authority (illustrative)",
+  "location": "Mid-sized EU city",
+  "services": [
+    "CLMS"
+  ],
+  "summary": "A CAA used CLMS Urban Atlas to derive a 3D obstacle model and design a low-altitude drone corridor network.",
+  "challenge": "Developing a U-Space implementation, the authority needed detailed, consistent land-use and building-morphology data to define corridors, exclusion zones and contingency landing areas. Existing cadastral data was outdated and inconsistent.",
+  "approach": "CLMS Urban Atlas provided harmonised land-use classification across the city. Combined with building-height data, it produced a 3D obstacle model and a ground-risk grid, used to generate a candidate corridor network for the U-Space volume.",
+  "results": "The corridor network was approved for the pilot U-Space implementation. The Urban Atlas-based methodology was highlighted as a replicable approach for ground-risk mapping in mid-sized European cities.",
+  "link": "https://land.copernicus.eu/en/products/urban-atlas"
+}

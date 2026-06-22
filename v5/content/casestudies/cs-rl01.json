@@ -1,0 +1,18 @@
+{
+  "id": "cs-rl01",
+  "segment": "rail",
+  "real": true,
+  "maturity": "trial",
+  "title": "SPATRA: predicting rail buckling risk from satellite data",
+  "user": "SPATRA project consortium (OHB Digital Services, University of Niš, Zentrix Lab, Nelt, Twist Robotics)",
+  "location": "EU (Horizon Europe / EUSPA)",
+  "services": [
+    "C3S",
+    "Sentinel"
+  ],
+  "summary": "The EUSPA-funded SPATRA project develops a space-based service to estimate rail temperature and predict track-buckling risk, helping prevent heat-induced derailments.",
+  "challenge": "Extreme temperatures cause continuously welded rail to buckle, which can lead to train derailments. Rail managers need to anticipate where rail temperature will exceed safe limits, but air temperature is an unreliable proxy for actual rail temperature.",
+  "approach": "SPATRA — Space-based Applications for Transport Monitoring and Management (Horizon Europe, EUSPA, grant 101129658) — develops a downstream application that estimates rail temperature using Copernicus satellite data and EGNSS combined with assisted in-situ data, producing a novel service that predicts the risk of rail buckling. SPATRA delivers two demonstrators addressing the principal modes of land transport: rail temperature/buckling for rail, and traffic-flow/logistics monitoring for road.",
+  "results": "SPATRA's rail-temperature service supports rail-management plans aimed at preventing track-buckling-induced derailments, demonstrating how Copernicus and EGNSS can be combined into an operational safety service for European rail. The project is part of EUSPA's portfolio increasing satellite-data uptake in land transport.",
+  "link": "https://www.euspa.europa.eu/opportunities/horizon-europe/project-portfolio/spatra-space-based-applications-transport-monitoring"
+}

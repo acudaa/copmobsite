@@ -1,0 +1,17 @@
+{
+  "id": "cs-ra04",
+  "segment": "road-automotive",
+  "real": false,
+  "maturity": "trial",
+  "title": "Climate-informed EV charging network rollout",
+  "user": "EV charging network operator (illustrative)",
+  "location": "Central Europe",
+  "services": [
+    "C3S"
+  ],
+  "summary": "A charging operator used C3S thermal data to set site-specific thermal specifications for hundreds of fast-charging sites.",
+  "challenge": "Planning hundreds of fast-charging sites, the operator needed to account for thermal stress — cold reducing battery acceptance, heat derating charger electronics and cables — in siting and specification.",
+  "approach": "C3S historical percentiles and projections generated a thermal-stress index per site, capturing cold-season demand spikes and heat-related derating days. High-stress sites received upgraded thermal-management specifications.",
+  "results": "A significant share of sites were reclassified to a higher thermal tier. The upfront cost uplift was projected to be more than offset by reduced warranty claims and outage days over the asset life.",
+  "link": "https://climate.copernicus.eu"
+}

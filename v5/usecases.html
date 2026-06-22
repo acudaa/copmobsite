@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Use cases — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<section class="page-hero">
+  <div class="container">
+    <h1>Use cases</h1>
+    <p>Generic descriptions of transport and mobility challenges and how Copernicus data can help address them. Each is marked by maturity and links to relevant real-world case studies.</p>
+  </div>
+</section>
+<section style="padding:28px 32px 64px;">
+  <div class="container">
+    <div class="filter-bar" id="filter-bar"></div>
+    <div class="result-count" id="result-count"></div>
+    <div class="grid grid-3" id="uc-grid"></div>
+  </div>
+</section>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>
+let DATA;
+function ucCard(u){
+  const s = DATA.segments.find(x => x.id === u.segment);
+  const nRel = (u.relatedCaseStudies||[]).length;
+  return `<a class="box" href="usecase.html?id=${u.id}" style="--box-accent:${s.color}">
+    <div class="box-top"><div class="box-meta">${segBadge(s)}</div>${maturityBadge(u.maturity)}</div>
+    <div class="box-title">${esc(u.title)}</div>
+    <div class="box-summary">${esc(u.summary)}</div>
+    <div class="box-foot">
+      <div class="box-services">${u.services.map(sv => svcBadge(DATA, sv)).join('')}</div>
+      <span class="box-cta">${nRel ? nRel + ' case stud' + (nRel>1?'ies':'y') + ' →' : 'View →'}</span>
+    </div>
+  </a>`;
+}
+function renderList(seg){
+  const list = seg === 'all' ? DATA.usecases : DATA.usecases.filter(u => u.segment === seg);
+  document.getElementById('result-count').textContent = `${list.length} use case${list.length!==1?'s':''}`;
+  document.getElementById('uc-grid').innerHTML = list.length ? list.map(ucCard).join('') : '<p style="color:var(--text-faint)">No use cases in this segment.</p>';
+}
+loadContent().then(data => {
+  DATA = data;
+  mountChrome(data, 'usecases');
+  const seg = new URLSearchParams(location.search).get('segment') || 'all';
+  buildFilterButtons(document.getElementById('filter-bar'), data, seg, renderList);
+  renderList(seg);
+});
+</script>
+</body>
+</html>

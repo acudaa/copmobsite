@@ -1,0 +1,21 @@
+{
+  "id": "uc-ud01",
+  "segment": "urban",
+  "title": "Urban heat island mapping for climate adaptation",
+  "summary": "Land surface temperature and land cover data identify urban heat hotspots for targeted intervention.",
+  "services": [
+    "CLMS",
+    "C3S"
+  ],
+  "problem": "Urban heat islands worsen health risks and energy demand during heatwaves, but city authorities often lack a spatial evidence base to identify the hottest areas and prioritise cooling interventions such as greening or reflective surfaces.",
+  "solution": "CLMS land-surface-temperature and imperviousness products, combined with C3S climate data, produce composite urban heat-exposure maps. Authorities use them to target tree planting, cool-surface pilots and vulnerable-population support where heat stress is greatest.",
+  "relatedCaseStudies": [
+    "cs-ud01",
+    "cs-ud02"
+  ],
+  "maturity": "trial",
+  "copernicusRole": {
+    "mode": "Requires further processing",
+    "detail": "CLMS land-surface-temperature and imperviousness products are combined with C3S data into a composite heat-exposure index. Copernicus supplies the layers; analysis builds the indicator."
+  }
+}

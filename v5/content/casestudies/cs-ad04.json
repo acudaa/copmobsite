@@ -1,0 +1,17 @@
+{
+  "id": "cs-ad04",
+  "segment": "aviation-drones",
+  "real": false,
+  "maturity": "research",
+  "title": "Climate-proofing runway capacity at a major hub",
+  "user": "Major European airport (illustrative)",
+  "location": "Northwest Europe",
+  "services": [
+    "C3S"
+  ],
+  "summary": "An airport used C3S projections to quantify rising heat-restriction days and justify a runway-capacity study.",
+  "challenge": "Rising temperatures reduce air density and aircraft take-off performance. The airport's runway-length assumptions were based on historical temperature distributions that no longer reflected the climate trajectory, risking unplanned weight restrictions on long-haul departures.",
+  "approach": "C3S downscaled projections modelled summer temperature-exceedance frequencies to mid-century under multiple scenarios, validated against ERA5. Results fed aircraft-performance models for a range of long-haul types to quantify payload-penalty days per year.",
+  "results": "Analysis showed a marked increase in high-temperature restriction days by the 2040s. The airport used the outputs to justify a runway-extension feasibility study and updated its master plan with climate-adjusted capacity assumptions.",
+  "link": "https://climate.copernicus.eu"
+}

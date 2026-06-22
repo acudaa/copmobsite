@@ -1,0 +1,20 @@
+{
+  "id": "uc-ad05",
+  "segment": "aviation-drones",
+  "title": "Rapid mapping for emergency-response UAV missions",
+  "summary": "Post-event satellite mapping gives drone teams current hazard and access maps for safe deployment.",
+  "services": [
+    "CEMS",
+    "Sentinel"
+  ],
+  "problem": "After floods, wildfires or earthquakes, UAV teams supporting search and rescue need up-to-date maps of access, hazards and safe takeoff/landing sites. Pre-event maps quickly become obsolete and ground reconnaissance is slow and dangerous.",
+  "solution": "CEMS Rapid Mapping delivers satellite-derived flood extent, fire perimeter and damage-grading products within hours of activation, drawing on Sentinel-1 SAR and Sentinel-2 optical imagery. These give drone coordinators current situational awareness to plan safe, effective missions.",
+  "relatedCaseStudies": [
+    "cs-ad03"
+  ],
+  "maturity": "operational",
+  "copernicusRole": {
+    "mode": "Directly applicable",
+    "detail": "CEMS Rapid Mapping delivers finished flood-extent, fire-perimeter and damage-grading products that responders use directly. Sentinel imagery underpins them, but no user-side processing is required."
+  }
+}

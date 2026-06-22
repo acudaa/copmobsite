@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  body { background: var(--bg-off); }
+  .admin-body { max-width: 940px; margin: 24px auto 120px; padding: 0 24px; }
+  .howto { background: var(--blue-light); border: 1px solid rgba(24,95,165,0.25); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 20px; font-size: 13px; color: var(--blue-dark); line-height: 1.7; }
+  .howto strong { font-weight: 600; }
+  .howto code { background: rgba(255,255,255,0.6); padding: 1px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 12px; }
+  .admin-section { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 18px; overflow: hidden; }
+  .admin-section-header { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+  .admin-section-header h2 { font-size: 14px; font-weight: 500; display:inline; }
+  .admin-section-header .count { font-size: 12px; color: var(--text-faint); font-family: var(--font-mono); margin-left: 8px; }
+  .toggle-icon { color: var(--text-faint); font-size: 16px; transition: transform 0.2s; }
+  .admin-section-body { padding: 0 20px 20px; display: none; }
+  .admin-section.open .admin-section-body { display: block; }
+  .admin-section.open .admin-section-header { border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .admin-section.open .toggle-icon { transform: rotate(180deg); }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 12px; font-weight: 500; color: var(--text-muted); margin-bottom: 5px; }
+  .field input[type=text], .field textarea, .field select { width: 100%; padding: 8px 12px; border: 1px solid var(--border-mid); border-radius: var(--radius-sm); font-family: var(--font); font-size: 13px; background: var(--bg); color: var(--text); }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--blue); }
+  .field textarea { resize: vertical; min-height: 70px; line-height: 1.6; }
+  .item-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 12px; background: var(--bg-off); }
+  .item-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; gap: 8px; }
+  .item-card-id { font-size: 11px; font-family: var(--font-mono); color: var(--text-faint); }
+  .item-actions { display:flex; gap:6px; }
+  .btn { font-size: 12px; padding: 5px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg); color: var(--text-muted); cursor: pointer; font-family: var(--font); }
+  .btn:hover { background: var(--bg-subtle); color: var(--text); }
+  .btn-dl { border-color: rgba(15,110,86,0.35); color: #0F6E56; }
+  .btn-dl:hover { background: #E1F5EE; }
+  .btn-danger { border-color: rgba(163,45,45,0.3); color: #A32D2D; }
+  .btn-danger:hover { background: #FCEBEB; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  @media(max-width:640px){ .row2,.row3{grid-template-columns:1fr;} }
+  .add-btn { width: 100%; padding: 10px; border: 1px dashed var(--border-mid); border-radius: var(--radius-sm); background: transparent; color: var(--text-faint); font-size: 13px; cursor: pointer; font-family: var(--font); margin-top: 4px; }
+  .add-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+  .save-bar { position: fixed; bottom: 0; left: 0; right: 0; padding: 12px 24px; background: var(--bg); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; z-index: 200; flex-wrap: wrap; }
+  .save-note { font-size: 12px; color: var(--text-muted); }
+  .real-flag { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: #E1F5EE; color: #085041; font-weight: 500; }
+  .hint { font-size: 11px; color: var(--text-faint); margin-top: 3px; }
+  .place { font-size: 11px; color: var(--text-faint); font-family: var(--font-mono); margin-left: 6px; }
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><div class="nav-logo-mark">🛰</div><span>Copernicus <span class="nav-logo-sub">for Transport</span></span></a>
+  <div class="nav-links"><a href="index.html">← Back to site</a></div>
+  <span style="font-size:12px;color:var(--text-faint)">Admin</span>
+</nav>
+<div style="padding:24px 24px 0;background:var(--bg);border-bottom:1px solid var(--border);">
+  <div style="max-width:940px;margin:0 auto;">
+    <h1 style="font-size:20px;font-weight:500;">Content authoring</h1>
+    <p style="font-size:13px;color:var(--text-muted);margin:4px 0 16px;">Create and edit items, then download them as individual files for the <code style="font-family:var(--font-mono)">content/</code> folders.</p>
+  </div>
+</div>
+<div class="admin-body">
+  <div class="howto">
+    <strong>Workflow:</strong> edit an item → click <strong>⬇ file</strong> to download its <code>&lt;id&gt;.json</code> →
+    place it in the matching <code>content/</code> subfolder → run <code>python generate_manifest.py</code> → commit.
+    Singletons (site, services, segments) have their own download buttons. The manifest is regenerated by the script, never here.
+  </div>
+  <div id="admin-root"><p style="color:var(--text-faint);padding:20px 0">Loading…</p></div>
+</div>
+<div class="save-bar">
+  <span class="save-note">Downloads are per-file. After placing files, run <code style="font-family:var(--font-mono)">python generate_manifest.py</code>.</span>
+  <div style="display:flex;gap:8px;">
+    <button class="btn btn-dl" onclick="dlSingleton('site')">⬇ site.json</button>
+    <button class="btn btn-dl" onclick="dlSingleton('services')">⬇ services.json</button>
+    <button class="btn btn-dl" onclick="dlSingleton('segments')">⬇ segments.json</button>
+  </div>
+</div>
+<script src="app.js"></script>
+<script>
+let DATA = null;
+loadContent().then(d => { DATA = d; render(); });
+
+function dl(filename, obj){
+  const blob = new Blob([JSON.stringify(obj, null, 2) + "\n"], {type:'application/json'});
+  const url = URL.createObjectURL(blob); const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url);
+}
+function dlSingleton(which){
+  if (which==='site') dl('site.json', DATA.site);
+  if (which==='services') dl('services.json', DATA.services);
+  if (which==='segments') dl('segments.json', DATA.segments.map(stripSeg));
+}
+// strip helper fields we don't persist (none currently) — passthrough
+function stripSeg(s){ return s; }
+function itemOut(o){ const c = JSON.parse(JSON.stringify(o)); return c; }
+
+function render(){
+  document.getElementById('admin-root').innerHTML = segmentsSection() + usecasesSection() + casestudiesSection() + newsSection();
+  document.querySelectorAll('.admin-section-header').forEach(h=>h.addEventListener('click',()=>h.closest('.admin-section').classList.toggle('open')));
+}
+function sec(key,title,count,inner,open){
+  return `<div class="admin-section ${open?'open':''}" data-k="${key}">
+    <div class="admin-section-header"><div><h2>${title}</h2><span class="count">${count}</span></div><span class="toggle-icon">▾</span></div>
+    <div class="admin-section-body">${inner}</div></div>`;
+}
+function segOpts(sel){ return DATA.segments.map(s=>`<option value="${s.id}" ${s.id===sel?'selected':''}>${esc(s.name)}</option>`).join(''); }
+function matOpts(sel){ return ['research','trial','operational'].map(m=>`<option value="${m}" ${m===sel?'selected':''}>${m[0].toUpperCase()+m.slice(1)}</option>`).join(''); }
+function ensureRole(o){ if(!o.copernicusRole) o.copernicusRole={mode:'',detail:''}; }
+function parseNeeds(v){ return v.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const p=l.split('|');return{text:(p[0]||'').trim(),usecases:(p[1]||'').split(',').map(x=>x.trim()).filter(Boolean)};}); }
+
+function segmentsSection(){
+  const inner = DATA.segments.map((seg,i)=>`
+    <div class="item-card">
+      <div class="item-card-head"><span class="item-card-id">${esc(seg.id)} <span class="place">→ content/segments.json</span></span></div>
+      <div class="row2">
+        <div class="field"><label>Name</label><input type="text" value="${esc(seg.name)}" onchange="DATA.segments[${i}].name=this.value"></div>
+        <div class="field"><label>Icon</label><input type="text" value="${esc(seg.icon)}" onchange="DATA.segments[${i}].icon=this.value"></div>
+      </div>
+      <div class="field"><label>Intro</label><textarea onchange="DATA.segments[${i}].intro=this.value">${esc(seg.intro)}</textarea></div>
+      <div class="field"><label>Role of Earth observation</label><textarea onchange="DATA.segments[${i}].eoRole=this.value">${esc(seg.eoRole)}</textarea></div>
+      <div class="field"><label>User needs (one per line — format: need text | uc-id, uc-id)</label><textarea style="min-height:120px" onchange="DATA.segments[${i}].needs=parseNeeds(this.value)">${seg.needs.map(n=>n.text+' | '+(n.usecases||[]).join(', ')).join('\n')}</textarea><div class="hint">Edit segments together, then use the segments.json button in the bottom bar.</div></div>
+    </div>`).join('');
+  return sec('segments','Segments','content/segments.json',inner,false);
+}
+function usecasesSection(){
+  const items = DATA.usecases.map((u,i)=>`
+    <div class="item-card">
+      <div class="item-card-head"><span class="item-card-id">${esc(u.id)} <span class="place">→ content/usecases/${esc(u.id)}.json</span></span>
+        <div class="item-actions"><button class="btn btn-dl" onclick='dl("${esc(u.id)}.json", itemOut(DATA.usecases[${i}]))'>⬇ file</button><button class="btn btn-danger" onclick="DATA.usecases.splice(${i},1);render();reopen('usecases')">Remove</button></div></div>
+      <div class="row3">
+        <div class="field"><label>ID</label><input type="text" value="${esc(u.id)}" onchange="DATA.usecases[${i}].id=this.value"></div>
+        <div class="field"><label>Segment</label><select onchange="DATA.usecases[${i}].segment=this.value">${segOpts(u.segment)}</select></div>
+        <div class="field"><label>Services (comma-sep)</label><input type="text" value="${(u.services||[]).join(', ')}" onchange="DATA.usecases[${i}].services=this.value.split(',').map(x=>x.trim()).filter(Boolean)"></div>
+      </div>
+      <div class="field"><label>Title</label><input type="text" value="${esc(u.title)}" onchange="DATA.usecases[${i}].title=this.value"></div>
+      <div class="row2">
+        <div class="field"><label>Maturity</label><select onchange="DATA.usecases[${i}].maturity=this.value">${matOpts(u.maturity)}</select></div>
+        <div class="field"><label>Copernicus role — mode</label><input type="text" value="${esc((u.copernicusRole||{}).mode||'')}" onchange="ensureRole(DATA.usecases[${i}]);DATA.usecases[${i}].copernicusRole.mode=this.value"><div class="hint">Directly applicable / Data-fusion input / Requires further processing</div></div>
+      </div>
+      <div class="field"><label>Copernicus role — detail</label><textarea onchange="ensureRole(DATA.usecases[${i}]);DATA.usecases[${i}].copernicusRole.detail=this.value">${esc((u.copernicusRole||{}).detail||'')}</textarea></div>
+      <div class="field"><label>Summary</label><textarea style="min-height:50px" onchange="DATA.usecases[${i}].summary=this.value">${esc(u.summary)}</textarea></div>
+      <div class="field"><label>Problem / challenge</label><textarea onchange="DATA.usecases[${i}].problem=this.value">${esc(u.problem)}</textarea></div>
+      <div class="field"><label>How Copernicus helps</label><textarea onchange="DATA.usecases[${i}].solution=this.value">${esc(u.solution)}</textarea></div>
+      <div class="field"><label>Related case study IDs (comma-sep)</label><input type="text" value="${(u.relatedCaseStudies||[]).join(', ')}" onchange="DATA.usecases[${i}].relatedCaseStudies=this.value.split(',').map(x=>x.trim()).filter(Boolean)"></div>
+    </div>`).join('');
+  return sec('usecases','Use cases',DATA.usecases.length+' items',items+`<button class="add-btn" onclick="addUsecase()">+ New use case</button>`,false);
+}
+function casestudiesSection(){
+  const items = DATA.casestudies.map((c,i)=>`
+    <div class="item-card">
+      <div class="item-card-head"><span class="item-card-id">${esc(c.id)} ${c.real?'<span class="real-flag">EU project</span>':''} <span class="place">→ content/casestudies/${esc(c.id)}.json</span></span>
+        <div class="item-actions"><button class="btn btn-dl" onclick='dl("${esc(c.id)}.json", itemOut(DATA.casestudies[${i}]))'>⬇ file</button><button class="btn btn-danger" onclick="DATA.casestudies.splice(${i},1);render();reopen('casestudies')">Remove</button></div></div>
+      <div class="row3">
+        <div class="field"><label>ID</label><input type="text" value="${esc(c.id)}" onchange="DATA.casestudies[${i}].id=this.value"></div>
+        <div class="field"><label>Segment</label><select onchange="DATA.casestudies[${i}].segment=this.value">${segOpts(c.segment)}</select></div>
+        <div class="field"><label>Maturity</label><select onchange="DATA.casestudies[${i}].maturity=this.value">${matOpts(c.maturity)}</select></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Real EU project?</label><select onchange="DATA.casestudies[${i}].real=(this.value==='yes')"><option value="no" ${!c.real?'selected':''}>No (illustrative)</option><option value="yes" ${c.real?'selected':''}>Yes</option></select></div>
+        <div class="field"><label>Services (comma-sep)</label><input type="text" value="${(c.services||[]).join(', ')}" onchange="DATA.casestudies[${i}].services=this.value.split(',').map(x=>x.trim()).filter(Boolean)"></div>
+      </div>
+      <div class="field"><label>Title</label><input type="text" value="${esc(c.title)}" onchange="DATA.casestudies[${i}].title=this.value"></div>
+      <div class="row2">
+        <div class="field"><label>User</label><input type="text" value="${esc(c.user)}" onchange="DATA.casestudies[${i}].user=this.value"></div>
+        <div class="field"><label>Location</label><input type="text" value="${esc(c.location)}" onchange="DATA.casestudies[${i}].location=this.value"></div>
+      </div>
+      <div class="field"><label>Summary</label><textarea style="min-height:50px" onchange="DATA.casestudies[${i}].summary=this.value">${esc(c.summary)}</textarea></div>
+      <div class="field"><label>Challenge</label><textarea onchange="DATA.casestudies[${i}].challenge=this.value">${esc(c.challenge)}</textarea></div>
+      <div class="field"><label>Approach</label><textarea onchange="DATA.casestudies[${i}].approach=this.value">${esc(c.approach)}</textarea></div>
+      <div class="field"><label>Results</label><textarea onchange="DATA.casestudies[${i}].results=this.value">${esc(c.results)}</textarea></div>
+      <div class="field"><label>Link</label><input type="text" value="${esc(c.link)}" onchange="DATA.casestudies[${i}].link=this.value"></div>
+    </div>`).join('');
+  return sec('casestudies','Case studies',DATA.casestudies.length+' items',items+`<button class="add-btn" onclick="addCasestudy()">+ New case study</button>`,false);
+}
+function newsSection(){
+  const items = DATA.news.map((n,i)=>`
+    <div class="item-card">
+      <div class="item-card-head"><span class="item-card-id">${esc(n.id)} <span class="place">→ content/news/${esc(n.id)}.json</span></span>
+        <div class="item-actions"><button class="btn btn-dl" onclick='dl("${esc(n.id)}.json", itemOut(DATA.news[${i}]))'>⬇ file</button><button class="btn btn-danger" onclick="DATA.news.splice(${i},1);render();reopen('news')">Remove</button></div></div>
+      <div class="row3">
+        <div class="field"><label>Date (YYYY-MM-DD)</label><input type="text" value="${esc(n.date)}" onchange="DATA.news[${i}].date=this.value"></div>
+        <div class="field"><label>Type</label><input type="text" value="${esc(n.type)}" onchange="DATA.news[${i}].type=this.value"></div>
+        <div class="field"><label>Segment</label><select onchange="DATA.news[${i}].segment=this.value"><option value="all" ${n.segment==='all'?'selected':''}>All segments</option>${segOpts(n.segment)}</select></div>
+      </div>
+      <div class="field"><label>Title</label><input type="text" value="${esc(n.title)}" onchange="DATA.news[${i}].title=this.value"></div>
+      <div class="field"><label>Summary</label><textarea style="min-height:50px" onchange="DATA.news[${i}].summary=this.value">${esc(n.summary)}</textarea></div>
+      <div class="field"><label>Body</label><textarea onchange="DATA.news[${i}].body=this.value">${esc(n.body||'')}</textarea></div>
+      <div class="field"><label>Link</label><input type="text" value="${esc(n.link)}" onchange="DATA.news[${i}].link=this.value"></div>
+    </div>`).join('');
+  return sec('news','News',DATA.news.length+' items',items+`<button class="add-btn" onclick="addNews()">+ New news item</button>`,false);
+}
+function addUsecase(){ const id='uc-new-'+Date.now(); DATA.usecases.push({id,segment:DATA.segments[0].id,title:'New use case',summary:'',services:[],maturity:'research',copernicusRole:{mode:'',detail:''},problem:'',solution:'',relatedCaseStudies:[]}); render(); reopen('usecases'); }
+function addCasestudy(){ const id='cs-new-'+Date.now(); DATA.casestudies.push({id,segment:DATA.segments[0].id,real:false,maturity:'research',title:'New case study',user:'',location:'',services:[],summary:'',challenge:'',approach:'',results:'',link:''}); render(); reopen('casestudies'); }
+function addNews(){ const id='n-new-'+Date.now(); DATA.news.unshift({id,date:new Date().toISOString().slice(0,10),type:'Product update',segment:'all',title:'New item',summary:'',body:'',link:''}); render(); reopen('news'); }
+function reopen(k){ const el=document.querySelector(`.admin-section[data-k="${k}"]`); if(el){el.classList.add('open'); el.scrollIntoView({behavior:'smooth',block:'start'});} }
+</script>
+</body>
+</html>

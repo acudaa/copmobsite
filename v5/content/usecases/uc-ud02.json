@@ -1,0 +1,20 @@
+{
+  "id": "uc-ud02",
+  "segment": "urban",
+  "title": "Building energy performance and renovation prioritisation",
+  "summary": "Thermal and emissions data help cities target building renovation for maximum energy and climate benefit.",
+  "services": [
+    "CAMS",
+    "CLMS"
+  ],
+  "problem": "Buildings account for a large share of urban energy use and emissions, but cities struggle to identify which buildings to renovate first. Whole-stock thermal surveys are expensive and quickly outdated.",
+  "solution": "CAMS residential-emissions data and CLMS land-cover products, combined with drone-based thermal imaging and building information, support digital twins that identify worst-performing buildings. Planners can prioritise renovation for the greatest energy and emissions benefit.",
+  "relatedCaseStudies": [
+    "cs-ud01"
+  ],
+  "maturity": "trial",
+  "copernicusRole": {
+    "mode": "Data-fusion input + processing",
+    "detail": "CAMS emissions and CLMS land cover are fused with drone thermal imagery, BIM and IoT data into a digital twin. Copernicus is one input among several in a multi-source workflow."
+  }
+}

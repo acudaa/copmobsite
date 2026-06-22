@@ -1,0 +1,18 @@
+{
+  "id": "cs-ra01",
+  "segment": "road-automotive",
+  "real": false,
+  "maturity": "operational",
+  "title": "Network-wide flood management for a motorway operator",
+  "user": "National motorway operator (illustrative)",
+  "location": "Southern Europe",
+  "services": [
+    "CEMS",
+    "Sentinel"
+  ],
+  "summary": "CEMS flood maps gave a motorway operator a network-wide inundation picture during a major flood, improving closure decisions.",
+  "challenge": "During a major flood, the operator had to make closure decisions across hundreds of km at once. Road-weather sensors were submerged or offline, and incident reports were too slow and localised.",
+  "approach": "CEMS Rapid Mapping delivered Sentinel-1-derived flood-extent maps within hours of the peak, updated twice daily over several days and integrated into the GIS-based traffic-management system.",
+  "results": "Many closure and reopening decisions were made using the maps, with post-event review confirming high accuracy against on-site inspection. Several unnecessary closures were avoided, maintaining emergency access.",
+  "link": "https://emergency.copernicus.eu"
+}

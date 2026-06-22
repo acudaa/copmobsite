@@ -1,0 +1,18 @@
+{
+  "id": "cs-rl03",
+  "segment": "rail",
+  "real": false,
+  "maturity": "operational",
+  "title": "Automated vegetation monitoring across a national network",
+  "user": "National infrastructure manager (illustrative)",
+  "location": "Central Europe",
+  "services": [
+    "CLMS",
+    "Sentinel"
+  ],
+  "summary": "CLMS-derived canopy-change detection replaced manual line-side inspection across thousands of kilometres of rural corridor.",
+  "challenge": "Monitoring vegetation encroachment along 8,000 km of rural track via manual patrols was expensive, seasonal and inconsistent, contributing to recurring overhead-line contact incidents.",
+  "approach": "Annual CLMS tree-cover-density and vegetation-phenology products from Sentinel-2 were processed to detect canopy expansion within a corridor buffer. Change alerts above a density threshold triggered targeted inspection work orders.",
+  "results": "In the first year the system produced several hundred encroachment alerts, the large majority confirmed actionable on field verification. Reactive vegetation incidents fell substantially over two years, with significant annual inspection-cost savings.",
+  "link": "https://land.copernicus.eu"
+}

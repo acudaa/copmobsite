@@ -1,0 +1,19 @@
+{
+  "id": "uc-ad03",
+  "segment": "aviation-drones",
+  "title": "U-Space corridor and ground-risk mapping",
+  "summary": "High-resolution land cover supports safe drone corridor design, exclusion zones and contingency landing areas.",
+  "services": [
+    "CLMS"
+  ],
+  "problem": "Defining safe low-altitude drone corridors requires detailed, consistent land use and building information to assess ground risk, identify exclusion zones and plan contingency landing sites. Cadastral data is often outdated or inconsistently formatted across regions.",
+  "solution": "CLMS Urban Atlas and High Resolution Layers provide harmonised land use classification and imperviousness across European cities at fine spatial resolution. Combined with building height data, these products support 3D obstacle models, ground-risk grids and replicable U-Space volume design.",
+  "relatedCaseStudies": [
+    "cs-ad03"
+  ],
+  "maturity": "trial",
+  "copernicusRole": {
+    "mode": "Requires further processing",
+    "detail": "CLMS Urban Atlas and High Resolution Layers are processed with building-height data into 3D obstacle models and ground-risk grids. Copernicus provides the base land-use layer; substantial GIS processing is needed before operational use."
+  }
+}

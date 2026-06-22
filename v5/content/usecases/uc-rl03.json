@@ -1,0 +1,20 @@
+{
+  "id": "uc-rl03",
+  "segment": "rail",
+  "title": "Vegetation encroachment monitoring along corridors",
+  "summary": "Satellite vegetation products detect canopy growth near tracks and overhead lines, targeting clearance work.",
+  "services": [
+    "CLMS",
+    "Sentinel"
+  ],
+  "problem": "Vegetation growing near tracks and overhead lines causes contact incidents, signal obstruction and leaf-fall adhesion problems. Manual line-side patrols are expensive, seasonal and inconsistent, missing fast-growing species between inspection cycles.",
+  "solution": "CLMS tree-cover and vegetation-phenology products derived from Sentinel-2 can detect canopy change within a corridor buffer along the network. Change alerts above a defined threshold trigger targeted clearance work orders, replacing calendar-based inspection.",
+  "relatedCaseStudies": [
+    "cs-rl03"
+  ],
+  "maturity": "operational",
+  "copernicusRole": {
+    "mode": "Requires further processing",
+    "detail": "CLMS tree-cover and phenology products from Sentinel-2 are clipped to a corridor buffer and differenced over time to flag encroachment. Copernicus supplies the vegetation layer; change-detection processing turns it into alerts."
+  }
+}

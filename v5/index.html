@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Copernicus for Transport & Mobility — EUSPA</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .hero { padding: 80px 32px 64px; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, var(--bg-off) 0%, var(--bg) 100%); }
+  .hero-inner { max-width: var(--maxw); margin: 0 auto; }
+  .hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+  .hero h1 { font-size: 42px; font-weight: 300; line-height: 1.18; letter-spacing: -0.02em; margin-bottom: 20px; max-width: 720px; }
+  .hero h1 em { font-style: normal; font-weight: 500; }
+  .hero-desc { font-size: 17px; color: var(--text-muted); line-height: 1.75; max-width: 600px; margin-bottom: 32px; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { display: inline-block; padding: 11px 22px; background: var(--blue-dark); color: white; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; }
+  .btn-primary:hover { background: #063a6b; text-decoration: none; }
+  .btn-secondary { display: inline-block; padding: 11px 22px; background: var(--bg); color: var(--text); border: 1px solid var(--border-mid); border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; }
+  .btn-secondary:hover { background: var(--bg-off); text-decoration: none; }
+  .overview { padding: 64px 32px; border-bottom: 1px solid var(--border); }
+  .overview-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; }
+  @media (max-width: 820px) { .overview-grid { grid-template-columns: 1fr; gap: 32px; } }
+  .overview h2 { font-size: 24px; font-weight: 500; margin-bottom: 16px; letter-spacing: -0.01em; }
+  .overview p { font-size: 15px; color: var(--text-muted); line-height: 1.8; margin-bottom: 14px; }
+  .stat-row { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 8px; }
+  .stat-num { font-size: 30px; font-weight: 300; letter-spacing: -0.02em; color: var(--blue); display: block; }
+  .stat-label { font-size: 12px; color: var(--text-faint); }
+  .svc-list { border: 1px solid var(--border); border-radius: var(--radius); padding: 8px; background: var(--bg-off); }
+  .svc-list a { display: flex; align-items: baseline; gap: 10px; padding: 12px 14px; border-radius: var(--radius-sm); transition: background 0.15s; }
+  .svc-list a:hover { background: var(--bg); text-decoration: none; }
+  .svc-list a + a { border-top: 1px solid var(--border); }
+  .svc-list .svc-code { font-family: var(--font-mono); font-weight: 500; font-size: 13px; min-width: 56px; }
+  .svc-list .svc-text { font-size: 13px; color: var(--text-muted); }
+  .segments-section { padding: 64px 32px; border-bottom: 1px solid var(--border); }
+  .seg-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+  .segments-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 14px; margin-top: 24px; }
+  .seg-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; background: var(--bg); display: block; color: var(--text); transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s; }
+  .seg-card:hover { border-color: var(--border-mid); transform: translateY(-2px); box-shadow: 0 4px 18px rgba(0,0,0,0.06); text-decoration: none; }
+  .seg-icon { width: 44px; height: 44px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
+  .seg-card-name { font-size: 15px; font-weight: 500; margin-bottom: 6px; line-height: 1.3; }
+  .seg-card-count { font-size: 12px; color: var(--text-faint); }
+  .cta-section { padding: 64px 32px; text-align: center; }
+  .cta-inner { max-width: 560px; margin: 0 auto; }
+  .cta-inner h2 { font-size: 24px; font-weight: 500; margin-bottom: 12px; }
+  .cta-inner p { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">EU Agency for the Space Programme · Copernicus</div>
+    <h1>Earth observation in service of <em>European transport &amp; mobility</em></h1>
+    <p class="hero-desc" id="hero-desc"></p>
+    <div class="hero-cta">
+      <a href="segments.html" class="btn-primary">Explore by segment</a>
+      <a href="usecases.html" class="btn-secondary">Browse use cases</a>
+    </div>
+  </div>
+</section>
+<section class="overview">
+  <div class="container overview-grid">
+    <div>
+      <p class="section-eyebrow">What is Copernicus</p>
+      <h2>The EU's eyes on Earth</h2>
+      <p>Copernicus is the European Union's Earth observation programme, delivering free and open data and information services from a constellation of Sentinel satellites and contributing missions. Coordinated by the European Commission and implemented with ESA, EUMETSAT and EUSPA, it is one of the world's largest providers of environmental data.</p>
+      <p>Through six thematic services — atmosphere, marine, land, climate, emergency and security — Copernicus turns raw satellite observations into actionable information. EUSPA promotes the operational adoption of these services across transport and mobility sectors, helping public authorities and industry put space data to work.</p>
+      <div class="stat-row" id="stat-row"></div>
+    </div>
+    <div>
+      <p class="section-eyebrow" style="margin-bottom:14px">Copernicus services</p>
+      <div class="svc-list" id="svc-list"></div>
+    </div>
+  </div>
+</section>
+<section class="segments-section">
+  <div class="container">
+    <div class="seg-head">
+      <div><p class="section-eyebrow">Sectors</p><h2 style="font-size:24px;font-weight:500;">Five transport &amp; mobility segments</h2></div>
+      <a href="segments.html" style="font-size:14px;">Segment overviews →</a>
+    </div>
+    <div class="segments-grid" id="segments-grid"></div>
+  </div>
+</section>
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="section-eyebrow">Get involved</p>
+    <h2>Putting space data to work</h2>
+    <p>Whether you operate infrastructure, develop downstream services or shape policy, Copernicus offers free and open data to support your mission. Explore how — or get in touch with EUSPA.</p>
+    <a href="about.html" class="btn-primary">Learn more &amp; contact</a>
+  </div>
+</section>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>
+loadContent().then(data => {
+  mountChrome(data, 'index');
+  document.getElementById('hero-desc').textContent = data.site.description;
+  document.getElementById('stat-row').innerHTML = `
+    <div><span class="stat-num">${data.usecases.length}</span><span class="stat-label">use cases</span></div>
+    <div><span class="stat-num">${data.casestudies.length}</span><span class="stat-label">case studies</span></div>
+    <div><span class="stat-num">${data.segments.length}</span><span class="stat-label">segments</span></div>`;
+  document.getElementById('svc-list').innerHTML = data.services.filter(s=>s.id!=='Sentinel').map(s => `
+    <a href="${s.url}" target="_blank" rel="noopener"><span class="svc-code" style="color:${s.color}">${s.id}</span><span class="svc-text">${esc(s.name.split(' — ')[1])}</span></a>`).join('');
+  document.getElementById('segments-grid').innerHTML = data.segments.map(s => {
+    const uc = data.usecases.filter(u => u.segment === s.id).length;
+    const cs = data.casestudies.filter(c => c.segment === s.id).length;
+    return `<a class="seg-card" href="segments.html?segment=${s.id}">
+      <div class="seg-icon" style="background:${s.colorBg};color:${s.color}">${s.icon}</div>
+      <div class="seg-card-name">${esc(s.name)}</div>
+      <div class="seg-card-count">${uc} use cases · ${cs} case studies</div></a>`;
+  }).join('');
+});
+</script>
+</body>
+</html>

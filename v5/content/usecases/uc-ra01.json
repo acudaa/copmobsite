@@ -1,0 +1,20 @@
+{
+  "id": "uc-ra01",
+  "segment": "road-automotive",
+  "title": "Flood extent mapping for road network closure decisions",
+  "summary": "Satellite flood mapping gives road operators a network-wide inundation picture for closure decisions.",
+  "services": [
+    "CEMS",
+    "Sentinel"
+  ],
+  "problem": "During major floods, road operators must make closure decisions across hundreds of kilometres at once. Road-weather sensors may be submerged or offline, and incident reports are too slow and localised to give an accurate network-wide picture.",
+  "solution": "CEMS Rapid Mapping provides Sentinel-1-derived flood extent maps within hours, updated through the event and integrated into GIS-based traffic-management systems. Operators gain a comprehensive, accurate basis for closure and reopening decisions.",
+  "relatedCaseStudies": [
+    "cs-ra01"
+  ],
+  "maturity": "operational",
+  "copernicusRole": {
+    "mode": "Directly applicable",
+    "detail": "CEMS Rapid Mapping flood-extent products are loaded directly into traffic-management GIS for closure decisions; no user-side processing of the satellite data is required."
+  }
+}

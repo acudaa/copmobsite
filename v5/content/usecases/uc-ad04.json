@@ -1,0 +1,19 @@
+{
+  "id": "uc-ad04",
+  "segment": "aviation-drones",
+  "title": "Climate-resilient airport infrastructure planning",
+  "summary": "Climate projections help airports anticipate heat, storm and flood impacts on capacity and infrastructure.",
+  "services": [
+    "C3S"
+  ],
+  "problem": "Aircraft take-off performance falls as temperatures rise, and airport drainage and pavements face increasing climate stress. Infrastructure planning based on historical climate statistics underestimates future heat-restriction days and extreme-weather frequency.",
+  "solution": "C3S climate projections and ERA5 reanalysis provide downscaled temperature, precipitation and extreme-event statistics to mid-century. These feed aircraft-performance modelling, drainage design and master-plan capacity assumptions, allowing airports to plan adaptation proactively.",
+  "relatedCaseStudies": [
+    "cs-ad04"
+  ],
+  "maturity": "research",
+  "copernicusRole": {
+    "mode": "Requires further processing",
+    "detail": "C3S projections and ERA5 are downscaled and fed into aircraft-performance and drainage models. Copernicus is the climate input to an engineering modelling chain, not a ready-made answer."
+  }
+}

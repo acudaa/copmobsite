@@ -1,0 +1,18 @@
+{
+  "id": "cs-mr03",
+  "segment": "marine",
+  "real": false,
+  "maturity": "trial",
+  "title": "Low-water forecasting for Rhine-corridor logistics",
+  "user": "Inland-waterway logistics operator (illustrative)",
+  "location": "Rhine corridor",
+  "services": [
+    "CEMS",
+    "CLMS"
+  ],
+  "summary": "CEMS discharge forecasts and CLMS surface-water products supported load planning and low-water early warning on a major river corridor.",
+  "challenge": "Low water during drought forces reduced barge loading or halts navigation, with major logistics impacts that are hard to anticipate days in advance.",
+  "approach": "CEMS flood-awareness discharge forecasts (EFAS) and CLMS water-and-wetness products were combined to anticipate water levels and surface-water extent along the corridor, supporting navigability and load decisions.",
+  "results": "The operator improved load planning and gained earlier warning of low-water periods, reducing last-minute disruption and improving fleet utilisation.",
+  "link": "https://www.efas.eu"
+}

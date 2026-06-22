@@ -1,0 +1,17 @@
+{
+  "id": "cs-ad01",
+  "segment": "aviation-drones",
+  "real": false,
+  "maturity": "operational",
+  "title": "Rerouting transatlantic traffic during an Icelandic eruption",
+  "user": "Network manager & airlines (illustrative)",
+  "location": "North Atlantic airspace",
+  "services": [
+    "CAMS"
+  ],
+  "summary": "During a sustained Icelandic eruption, CAMS ash forecasts supported rerouting of hundreds of daily transatlantic flights with no groundings.",
+  "challenge": "A sustained eruption spread volcanic ash across North Atlantic flight levels, creating a dynamic hazard zone. Airlines and the network manager needed frequent, multi-level ash-concentration forecasts to reroute safely without resorting to blanket closures.",
+  "approach": "CAMS volcanic-ash forecasts, updated every six hours across the relevant flight levels and combined with ERA5 wind fields, were integrated into network management. Dispersion modelling produced probabilistic ash envelopes used directly in NOTAM issuance and airline dispatch.",
+  "results": "Over a multi-day event, the large majority of affected flights were rerouted within hours of each forecast update, avoiding blanket groundings. No ash-related incidents were recorded, and carriers avoided substantial potential costs from mass cancellations.",
+  "link": "https://atmosphere.copernicus.eu"
+}

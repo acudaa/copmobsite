@@ -1,0 +1,20 @@
+{
+  "id": "uc-ud03",
+  "segment": "urban",
+  "title": "Green-space and soil-sealing monitoring for liveability",
+  "summary": "Land cover products track green space and soil sealing to support liveable, compliant urban planning.",
+  "services": [
+    "CLMS",
+    "Sentinel"
+  ],
+  "problem": "Urban densification erodes green space and increases soil sealing, harming liveability, biodiversity and stormwater management. Cities need consistent, repeatable monitoring to track change and demonstrate policy compliance.",
+  "solution": "CLMS Urban Atlas, imperviousness and tree-cover products derived from Sentinel-2 provide harmonised, repeatable measurement of green space and sealed surfaces. These support planning decisions, green-infrastructure strategies and reporting against EU and local targets.",
+  "relatedCaseStudies": [
+    "cs-ud03"
+  ],
+  "maturity": "operational",
+  "copernicusRole": {
+    "mode": "Directly applicable",
+    "detail": "CLMS Urban Atlas and imperviousness products are used largely as delivered to measure green space and sealing, with light analysis for reporting."
+  }
+}

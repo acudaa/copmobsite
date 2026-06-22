@@ -1,0 +1,20 @@
+{
+  "id": "uc-ra03",
+  "segment": "road-automotive",
+  "title": "HD-map validation and change detection for ADAS/AV",
+  "summary": "Satellite land cover change detection targets re-survey effort for HD maps used by driver-assistance systems.",
+  "services": [
+    "CLMS",
+    "Sentinel"
+  ],
+  "problem": "HD maps underpinning advanced driver-assistance and autonomous systems degrade as the roadside environment changes. Calendar-based re-survey is inefficient — surveying unchanged areas while missing significant changes that cause sensor-fusion errors.",
+  "solution": "Annual CLMS High Resolution Layers and Sentinel-2 change detection flag land-cover change along road corridors. Change alerts trigger targeted re-survey assignments, focusing mobile-mapping effort where the environment has actually changed.",
+  "relatedCaseStudies": [
+    "cs-ra03"
+  ],
+  "maturity": "trial",
+  "copernicusRole": {
+    "mode": "Data-fusion input + processing",
+    "detail": "CLMS layers and Sentinel-2 change detection flag where to re-survey; the HD map itself is built from mobile mapping. Copernicus acts as a change-trigger within a larger mapping workflow."
+  }
+}
