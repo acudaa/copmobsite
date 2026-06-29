@@ -1,0 +1,22 @@
+{
+  "id": "tool-park-irrigation-alerts",
+  "title": "Urban park irrigation alerts with Copernicus",
+  "summary": "A demonstrator that flags urban parks and green spaces showing vegetation stress, using Sentinel-2 vegetation indices and CLMS soil water indicators to prioritise irrigation.",
+  "narrative": "## What it does\nThis demonstrator monitors vegetation health across a city's parks and green spaces using Sentinel-2 derived vegetation indices (e.g. NDVI/NDWI trends) and the CLMS Soil Water Index, surfacing an alert when a green space shows stress signals consistent with under-irrigation, ahead of visible browning.\n\n## Why it matters\nMunicipal parks departments typically irrigate on a fixed schedule or react to visible distress. A satellite-derived stress signal lets cities prioritise limited irrigation resources (often constrained further during droughts) toward the green spaces that need it most, and supports the case for urban green infrastructure investment as a climate-adaptation measure.\n\n## Status\nThis is a placeholder entry describing a demonstrator concept; no live instance is published yet.",
+  "status": "draft",
+  "maturity": "concept",
+  "classification": {
+    "market_segments": ["transport.urban"],
+    "products": ["sentinel-2", "clms"],
+    "eo_techniques": ["optical", "vegetation indices", "soil moisture"],
+    "regions": ["European Union"],
+    "organisation_types": ["public authority"],
+    "outcome_types": ["cost reduction", "situational awareness"]
+  },
+  "tags": ["urban green space", "irrigation", "vegetation stress", "Sentinel-2"],
+  "relations": [],
+  "sources": [],
+  "history": [
+    { "timestamp": "2026-06-25T00:00:00Z", "author": "lauku", "comment": "Placeholder demonstrator concept." }
+  ]
+}

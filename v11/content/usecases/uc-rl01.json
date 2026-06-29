@@ -1,0 +1,42 @@
+{
+  "id": "uc-rl01",
+  "title": "Rail temperature forecasting to prevent track buckling",
+  "summary": "Predicting rail temperature from satellite and weather data helps prevent heat-induced track buckling and derailment.",
+  "description": "In extreme heat, continuously welded rail can buckle, forcing speed restrictions or causing derailments. Infrastructure managers need to anticipate where and when rail temperature will exceed safe thresholds, but air temperature alone is a poor predictor of actual rail temperature.\n\nCombining C3S/ERA5 meteorological data, land surface temperature from Sentinel-3, and in-situ measurements, downstream services can forecast rail temperature and buckling risk along specific track sections. This supports proactive speed-management and inspection planning during heatwaves.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.rail"
+    ],
+    "products": [
+      "era5",
+      "sentinel-3"
+    ],
+    "site": {
+      "integration_mode": "Data-fusion input + processing",
+      "integration_detail": "Copernicus land-surface temperature (Sentinel-3) and ERA5 are fused with in-situ rail sensors and a thermal model to estimate actual rail temperature. Copernicus is one input in a fusion-and-modelling pipeline, not a standalone product."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.rl01",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

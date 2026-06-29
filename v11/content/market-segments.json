@@ -1,0 +1,254 @@
+[
+  {
+    "id": "transport",
+    "name": "Transport & Mobility",
+    "description": "Movement of people and goods across road, rail, aviation, maritime, and urban systems."
+  },
+  {
+    "id": "infrastructure",
+    "name": "Infrastructure",
+    "description": "Built infrastructure assets (bridges, tunnels, dams, buildings) across sectors."
+  },
+  {
+    "id": "transport.aviation",
+    "name": "Aviation & Drones",
+    "parent": "transport",
+    "description": "Commercial aviation, general aviation and the fast-growing drone sector all depend on accurate atmospheric, weather and land information. Copernicus services support safe routing, environmental compliance, U-Space corridor planning and emergency response across the airspace.",
+    "site": {
+      "icon": "✈",
+      "color": "#185FA5",
+      "color_bg": "#E6F1FB",
+      "color_text": "#0C447C",
+      "intro": "Commercial aviation, general aviation and the fast-growing drone sector all depend on accurate atmospheric, weather and land information. Copernicus services support safe routing, environmental compliance, U-Space corridor planning and emergency response across the airspace.",
+      "eo_role": "Earth observation provides the atmospheric, weather and land-surface information that aviation and drone operations depend on — from volcanic-ash and air-quality hazard detection to obstacle and terrain awareness. It complements navigation and surveillance data to improve safety and efficiency across the airspace, at scales and update rates that ground sensors alone cannot match.",
+      "copernicus_role": [
+        {
+          "product": "cams",
+          "description": "Atmospheric composition forecasts — volcanic ash, aerosols, ozone, and near-surface air quality used in aviation meteorology and drone corridor planning."
+        },
+        {
+          "product": "clms",
+          "description": "Urban Atlas and High Resolution Layers underpin U-Space ground-risk mapping and obstacle-aware route generation."
+        },
+        {
+          "product": "era5",
+          "description": "ERA5 reanalysis and projections support airport climate resilience and long-term planning."
+        },
+        {
+          "product": "cems",
+          "description": "Rapid mapping activations provide situational awareness for emergency UAV deployment and air-traffic disruption."
+        }
+      ],
+      "links": [
+        {
+          "label": "EUSPA — Aviation and Drones",
+          "url": "https://www.euspa.europa.eu/industry-sectors/aviation-and-drones"
+        },
+        {
+          "label": "CAMS aviation products",
+          "url": "https://atmosphere.copernicus.eu"
+        },
+        {
+          "label": "CLMS Urban Atlas",
+          "url": "https://land.copernicus.eu/en/products/urban-atlas"
+        }
+      ]
+    }
+  },
+  {
+    "id": "transport.rail",
+    "name": "Rail",
+    "parent": "transport",
+    "description": "Europe's rail network spans over 200,000 km of track across diverse climates and geologies. Infrastructure managers use Copernicus to anticipate ground movement, climate hazards, vegetation encroachment and thermal stress — improving safety and timetable resilience.",
+    "site": {
+      "icon": "⊟",
+      "color": "#854F0B",
+      "color_bg": "#FAEEDA",
+      "color_text": "#633806",
+      "intro": "Europe's rail network spans over 200,000 km of track across diverse climates and geologies. Infrastructure managers use Copernicus to anticipate ground movement, climate hazards, vegetation encroachment and thermal stress — improving safety and timetable resilience.",
+      "eo_role": "Earth observation gives rail infrastructure managers a synoptic, repeatable view of the entire network and its surroundings. It reveals slow ground movement, vegetation growth and climate hazards that are impractical to monitor comprehensively from the ground, allowing maintenance to shift from reactive inspection to data-driven prioritisation.",
+      "copernicus_role": [
+        {
+          "product": "egms",
+          "description": "Millimetre-precision ground motion data lets infrastructure managers prioritise inspection by deformation hotspot."
+        },
+        {
+          "product": "era5",
+          "description": "Climate reanalysis and projections feed rail temperature forecasting and long-term adaptation planning."
+        },
+        {
+          "product": "clms",
+          "description": "Land cover and vegetation products support corridor monitoring and encroachment detection."
+        },
+        {
+          "product": "cems",
+          "description": "Rapid mapping for flood and landslide events affecting rail operations."
+        }
+      ],
+      "links": [
+        {
+          "label": "EUSPA — Rail",
+          "url": "https://www.euspa.europa.eu/industry-sectors/rail"
+        },
+        {
+          "label": "EGMS — European Ground Motion Service",
+          "url": "https://egms.land.copernicus.eu"
+        },
+        {
+          "label": "C3S Climate Data Store",
+          "url": "https://cds.climate.copernicus.eu"
+        }
+      ]
+    }
+  },
+  {
+    "id": "transport.road",
+    "name": "Road & Automotive",
+    "parent": "transport",
+    "description": "Road networks are Europe's most extensive transport infrastructure, while the automotive sector is transforming through ADAS, autonomous driving and electrification. Copernicus supports network risk management, climate-resilient planning, HD-map validation and air-quality compliance.",
+    "site": {
+      "icon": "◈",
+      "color": "#993C1D",
+      "color_bg": "#FAECE7",
+      "color_text": "#4A1B0C",
+      "intro": "Road networks are Europe's most extensive transport infrastructure, while the automotive sector is transforming through ADAS, autonomous driving and electrification. Copernicus supports network risk management, climate-resilient planning, HD-map validation and air-quality compliance.",
+      "eo_role": "Earth observation delivers wide-area, frequently-updated information on terrain, land cover, weather and hazards across vast road networks. It underpins network risk management and resilience planning, and provides the up-to-date ground-truth that high-definition mapping for assisted and automated driving requires.",
+      "copernicus_role": [
+        {
+          "product": "cems",
+          "description": "Flood and wildfire rapid mapping supports real-time network management and emergency response."
+        },
+        {
+          "product": "egms",
+          "description": "Ground motion time series reveal slow subsidence under roads, enabling proactive maintenance."
+        },
+        {
+          "product": "clms",
+          "description": "Imperviousness, land cover and Urban Atlas inform HD-map validation, drainage risk and planning."
+        },
+        {
+          "product": "era5",
+          "description": "Climate projections support road asset risk screening and EV infrastructure planning."
+        },
+        {
+          "product": "cams",
+          "description": "Roadside air quality forecasts feed in-vehicle exposure models and low-emission-zone tools."
+        }
+      ],
+      "links": [
+        {
+          "label": "EUSPA — Road and Automotive",
+          "url": "https://www.euspa.europa.eu/industry-sectors/road-and-automotive"
+        },
+        {
+          "label": "CEMS — Emergency Management",
+          "url": "https://emergency.copernicus.eu"
+        },
+        {
+          "label": "EGMS Ground Motion",
+          "url": "https://egms.land.copernicus.eu"
+        }
+      ]
+    }
+  },
+  {
+    "id": "transport.maritime",
+    "name": "Marine, Maritime & Inland Waterways",
+    "parent": "transport",
+    "description": "Shipping, ports, fisheries and inland-waterway operators depend on accurate ocean, sea-ice, water-level and weather information. Copernicus marine and land services support route optimisation, safe navigation, water-quality monitoring and coastal-infrastructure resilience.",
+    "site": {
+      "icon": "⚓",
+      "color": "#0F6E80",
+      "color_bg": "#E0F2F4",
+      "color_text": "#08484F",
+      "intro": "Shipping, ports, fisheries and inland-waterway operators depend on accurate ocean, sea-ice, water-level and weather information. Copernicus marine and land services support route optimisation, safe navigation, water-quality monitoring and coastal-infrastructure resilience.",
+      "eo_role": "Earth observation is uniquely suited to the marine domain, offering all-weather, wide-area monitoring of the ocean surface, sea ice, water quality and vessel activity far beyond the reach of in-situ sensors. It turns vast, data-sparse waters into a continuously observed operating environment for navigation, surveillance and environmental protection.",
+      "copernicus_role": [
+        {
+          "product": "cmems",
+          "description": "Ocean currents, waves, sea level, sea ice and biogeochemistry products for navigation, route optimisation and water-quality monitoring."
+        },
+        {
+          "product": "cems",
+          "description": "Flood awareness and rapid mapping for inland waterways and coastal events; EFAS/GloFAS discharge forecasts."
+        },
+        {
+          "product": "clms",
+          "description": "Water and wetness, coastal-zone and land-cover products for inland-waterway and coastal monitoring."
+        },
+        {
+          "product": "sentinel-1",
+          "description": "Sentinel-1 SAR and Sentinel-2/3 optical imagery for vessel detection, oil-spill monitoring and water turbidity."
+        },
+        {
+          "product": "sentinel-2",
+          "description": "Sentinel-1 SAR and Sentinel-2/3 optical imagery for vessel detection, oil-spill monitoring and water turbidity."
+        },
+        {
+          "product": "sentinel-3",
+          "description": "Sentinel-1 SAR and Sentinel-2/3 optical imagery for vessel detection, oil-spill monitoring and water turbidity."
+        }
+      ],
+      "links": [
+        {
+          "label": "EUSPA — Maritime and Inland Waterways",
+          "url": "https://www.euspa.europa.eu/industry-sectors/maritime-and-inland-waterways"
+        },
+        {
+          "label": "CMEMS — Marine Service",
+          "url": "https://marine.copernicus.eu"
+        },
+        {
+          "label": "CEMS Flood Awareness (EFAS)",
+          "url": "https://www.efas.eu"
+        }
+      ]
+    }
+  },
+  {
+    "id": "transport.urban",
+    "name": "Urban Development",
+    "parent": "transport",
+    "description": "Cities consume most of Europe's energy and resources while occupying a fraction of its surface. Urban planners and city authorities use Copernicus to monitor urban growth, heat, green space, building energy performance and flood risk — supporting climate-resilient, liveable cities.",
+    "site": {
+      "icon": "◰",
+      "color": "#534AB7",
+      "color_bg": "#EEEDFE",
+      "color_text": "#26215C",
+      "intro": "Cities consume most of Europe's energy and resources while occupying a fraction of its surface. Urban planners and city authorities use Copernicus to monitor urban growth, heat, green space, building energy performance and flood risk — supporting climate-resilient, liveable cities.",
+      "eo_role": "Earth observation provides consistent, comparable, repeatable measurements of the urban environment — heat, green space, soil sealing, subsidence and air quality — across whole cities and over time. It enables planners to base decisions on evidence rather than assumption, and to benchmark progress against climate and liveability targets.",
+      "copernicus_role": [
+        {
+          "product": "clms",
+          "description": "Urban Atlas, imperviousness, tree-cover and land-surface-temperature products are the backbone of urban monitoring and digital twins."
+        },
+        {
+          "product": "cams",
+          "description": "Urban air-quality and emissions data help prioritise building renovation and monitor residential emissions."
+        },
+        {
+          "product": "era5",
+          "description": "Climate projections and extreme-event indices support urban climate adaptation strategies."
+        },
+        {
+          "product": "cems",
+          "description": "Flood mapping and risk products underpin urban flood-resilience analysis."
+        }
+      ],
+      "links": [
+        {
+          "label": "EUSPA — Urban Development and Cultural Heritage",
+          "url": "https://www.euspa.europa.eu/industry-sectors/urban-development-and-cultural-heritage"
+        },
+        {
+          "label": "CLMS Urban Atlas",
+          "url": "https://land.copernicus.eu/en/products/urban-atlas"
+        },
+        {
+          "label": "CLMS Land Surface Temperature",
+          "url": "https://land.copernicus.eu"
+        }
+      ]
+    }
+  }
+]

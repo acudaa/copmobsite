@@ -1,0 +1,27 @@
+{
+  "id": "need.ud02",
+  "kind": "need",
+  "summary": "Prioritise building energy renovation",
+  "statement": "Prioritise building energy renovation",
+  "status": "accepted",
+  "classification": {
+    "market_segments": [
+      "transport.urban"
+    ]
+  },
+  "tags": [],
+  "relations": [],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from segments.json needs[] (pre-graph content model)"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old segments.json inline need."
+    }
+  ]
+}

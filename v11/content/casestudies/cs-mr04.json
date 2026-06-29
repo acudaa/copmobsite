@@ -1,0 +1,50 @@
+{
+  "id": "cs-mr04",
+  "title": "Algal-bloom early warning for coastal aquaculture",
+  "summary": "CMEMS biogeochemistry and Sentinel-3 ocean-colour data gave early warning of harmful algal blooms threatening fish farms.",
+  "narrative": "## Challenge\nHarmful algal blooms threatened aquaculture and bathing waters, but sparse ground sampling meant blooms were often detected only after damage occurred.\n\n## Approach\nCMEMS biogeochemistry products and Sentinel-3 OLCI ocean-colour data tracked chlorophyll and turbidity, providing early warning of bloom development for protective action.\n\n## Results\nProducers gained lead time to take protective measures for fish farms and water intakes, reducing losses from bloom events.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.maritime"
+    ],
+    "products": [
+      "cmems",
+      "sentinel-3"
+    ],
+    "regions": [
+      "Atlantic coast"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://marine.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-mr04",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Aquaculture producer / coastal authority (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

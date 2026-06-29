@@ -1,0 +1,41 @@
+{
+  "id": "uc-ra04",
+  "title": "Climate-informed EV charging infrastructure siting",
+  "summary": "Climate data optimises placement and thermal specification of EV charging stations.",
+  "description": "EV charging equipment is sensitive to thermal extremes — cold reduces battery acceptance rates, heat derates charger electronics and cables. Siting and specification decisions based on average climate underestimate thermal stress at specific locations.\n\nC3S historical percentiles and climate projections generate a thermal-stress index for each candidate site, capturing both cold-season demand spikes and heat-related derating days. High-stress sites receive upgraded thermal specifications, reducing outages and warranty claims.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.road"
+    ],
+    "products": [
+      "era5"
+    ],
+    "site": {
+      "integration_mode": "Requires further processing",
+      "integration_detail": "C3S climate statistics are processed into a per-site thermal-stress index. Copernicus is the climate input to a siting and specification model."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.ra04",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

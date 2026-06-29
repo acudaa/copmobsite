@@ -1,0 +1,41 @@
+{
+  "id": "uc-ad02",
+  "title": "Air quality corridor planning for urban drone logistics",
+  "summary": "Near-surface air quality data helps UAV operators design BVLOS delivery corridors that avoid polluted zones.",
+  "description": "Commercial drone logistics operators planning beyond-visual-line-of-sight corridors in cities must consider air quality both for regulatory acceptance and to avoid particulate-related wear on UAV systems. Static route planning ignores the strong spatial and temporal variability of urban pollution.\n\nCAMS European air quality forecasts (PM2.5, NO2, ozone) at high spatial resolution, updated four times daily, can be integrated into route-planning systems. Corridors exceeding pollution thresholds are flagged and alternatives generated automatically, supporting U-Space operational authorisations.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.aviation"
+    ],
+    "products": [
+      "cams"
+    ],
+    "site": {
+      "integration_mode": "Data-fusion input",
+      "integration_detail": "CAMS air-quality forecasts are combined with the operator's route-planning logic, airspace constraints and UAV performance data. Copernicus supplies the environmental layer within a broader planning workflow rather than a finished route."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.ad02",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

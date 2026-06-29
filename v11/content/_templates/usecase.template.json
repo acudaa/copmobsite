@@ -1,0 +1,24 @@
+{
+  "id": "uc-XXNN",
+  "title": "Short use case title",
+  "summary": "One-sentence summary shown on cards.",
+  "description": "The generic challenge this use case addresses, and how Copernicus data helps address it. Supports Markdown.",
+  "status": "draft",
+  "maturity": "concept | pilot | demonstrated | operational | scaled",
+  "classification": {
+    "market_segments": ["transport.aviation | transport.rail | transport.road | transport.maritime | transport.urban"],
+    "products": ["cams | clms | cmems | c3s | cems | egms | sentinel-1 | sentinel-2 | sentinel-3 | era5 | ..."],
+    "site": {
+      "integration_mode": "Directly applicable | Data-fusion input | Requires further processing | Data-fusion input + processing",
+      "integration_detail": "Explain whether Copernicus is used directly, as one input in a fusion workflow, or needs further processing."
+    }
+  },
+  "tags": [],
+  "relations": [
+    { "type": "addresses", "target": "need.XXNN", "target_kind": "need" }
+  ],
+  "sources": [],
+  "history": [
+    { "timestamp": "2026-01-01T00:00:00Z", "author": "your-name", "comment": "Drafted." }
+  ]
+}

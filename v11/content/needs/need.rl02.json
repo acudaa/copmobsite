@@ -1,0 +1,27 @@
+{
+  "id": "need.rl02",
+  "kind": "need",
+  "summary": "Detect slow embankment and cutting movement before defects appear",
+  "statement": "Detect slow embankment and cutting movement before defects appear",
+  "status": "accepted",
+  "classification": {
+    "market_segments": [
+      "transport.rail"
+    ]
+  },
+  "tags": [],
+  "relations": [],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from segments.json needs[] (pre-graph content model)"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old segments.json inline need."
+    }
+  ]
+}

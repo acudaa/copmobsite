@@ -1,0 +1,42 @@
+{
+  "id": "uc-ud04",
+  "title": "Urban flood risk and resilience assessment",
+  "summary": "Land cover and flood data support city-scale flood-damage modelling and resilience planning.",
+  "description": "Urban flooding causes growing damage as climate change intensifies rainfall and impervious surfaces expand. Cities need to model flood scenarios and quantify potential damage to prioritise resilience investment.\n\nCLMS Urban Atlas land-use classes combined with CEMS flood mapping enable city-scale flood-damage modelling, attributing monetary damage by land-use class and building stock. Planners can compare scenarios and target flood-resilience measures cost-effectively.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.urban"
+    ],
+    "products": [
+      "clms",
+      "cems"
+    ],
+    "site": {
+      "integration_mode": "Requires further processing",
+      "integration_detail": "CLMS Urban Atlas land-use classes are combined with CEMS flood layers in a damage model that attributes monetary loss by class. Copernicus provides inputs to a scenario model."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.ud04",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

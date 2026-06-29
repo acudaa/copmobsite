@@ -1,0 +1,19 @@
+{
+  "id": "need.XXNN",
+  "kind": "need",
+  "summary": "One-sentence need statement shown on segment pages.",
+  "statement": "The full need statement. Supports Markdown.",
+  "status": "draft",
+  "priority": "should",
+  "confidence": "medium",
+  "classification": {
+    "market_segments": ["transport.aviation | transport.rail | transport.road | transport.maritime | transport.urban"],
+    "products": []
+  },
+  "tags": [],
+  "relations": [],
+  "sources": [],
+  "history": [
+    { "timestamp": "2026-01-01T00:00:00Z", "author": "your-name", "comment": "Drafted." }
+  ]
+}

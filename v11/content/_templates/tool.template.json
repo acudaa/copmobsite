@@ -1,0 +1,24 @@
+{
+  "id": "tool-XXNN",
+  "title": "Tool title",
+  "summary": "One-sentence summary shown on cards.",
+  "narrative": "## What it does\nWhat the tool does and what Copernicus data it draws on.\n\n## Why it matters\nWho it's for and the problem it solves.\n\n## Status\nConcept placeholder, or details of the live instance.\n\n(The ## headers are a convention this site's tool.html splits back into three display boxes - not a schema requirement, and not enforced if you write something different. This is the SAME schema as case-study.template.json - a tool has no schema of its own; it validates against case-study.schema.json verbatim. What makes this a 'tool' rather than a 'case study' is purely that the file lives in content/tools/. Supports Markdown.)",
+  "status": "draft",
+  "maturity": "concept | pilot | demonstrated | operational | scaled",
+  "classification": {
+    "market_segments": ["transport.aviation | transport.rail | transport.road | transport.maritime | transport.urban"],
+    "products": [],
+    "site": {
+      "project_link": "https://... (omit entirely if there is no live demo yet - tool.html then shows a disabled 'no demo available' state instead of a launch button)"
+    }
+  },
+  "tags": [],
+  "relations": [],
+  "stakeholders": [
+    { "name": "Who built it (organisation / project)" }
+  ],
+  "sources": [],
+  "history": [
+    { "timestamp": "2026-01-01T00:00:00Z", "author": "your-name", "comment": "Drafted." }
+  ]
+}

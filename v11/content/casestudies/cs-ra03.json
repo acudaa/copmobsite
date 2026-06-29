@@ -1,0 +1,50 @@
+{
+  "id": "cs-ra03",
+  "title": "CLMS change detection for HD-map maintenance",
+  "summary": "An OEM used CLMS change detection to target HD-map re-surveys, cutting unnecessary surveys while catching significant changes.",
+  "narrative": "## Challenge\nHD maps for the OEM's ADAS suite across many countries suffered staleness — roadside changes caused sensor-fusion errors, while calendar-based re-survey was inefficient.\n\n## Approach\nAnnual CLMS High Resolution Layers and Sentinel-2 change detection flagged land-cover change along corridors, triggering targeted re-survey assignments instead of calendar-based scheduling.\n\n## Results\nOver 18 months, unnecessary remapping surveys fell by about a third while detection of significant changes improved. False-positive ADAS alerts from unmapped vegetation growth were eliminated after the first update cycle.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.road"
+    ],
+    "products": [
+      "clms",
+      "sentinel-2"
+    ],
+    "regions": [
+      "Multiple EU markets"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://land.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ra03",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Automotive OEM (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

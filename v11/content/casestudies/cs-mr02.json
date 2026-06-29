@@ -1,0 +1,55 @@
+{
+  "id": "cs-mr02",
+  "title": "Sea-ice charting for Baltic winter navigation",
+  "summary": "CMEMS sea-ice products and Sentinel-1 SAR supported safer, more efficient winter navigation and icebreaker tasking.",
+  "narrative": "## Challenge\nRapidly changing Baltic sea ice forced conservative routing and heavy icebreaker dependence, with coarse ice information raising risk and transit times.\n\n## Approach\nCMEMS sea-ice concentration, thickness and drift products were combined with Sentinel-1 SAR imagery — which sees through cloud and darkness — to provide timely ice charting for route selection and icebreaker tasking.\n\n## Results\nThe administration reported safer route selection, better icebreaker coordination and reduced transit times during the ice season.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.maritime"
+    ],
+    "products": [
+      "cmems",
+      "sentinel-1"
+    ],
+    "regions": [
+      "Baltic Sea"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://marine.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-mr02",
+      "target_kind": "use_case"
+    },
+    {
+      "type": "instantiates",
+      "target": "uc-mr05",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Maritime administration / ice service (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

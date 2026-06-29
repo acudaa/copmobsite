@@ -1,0 +1,15 @@
+{
+  "id": "n10",
+  "date": "2025-12-10",
+  "type": "project",
+  "title": "SPATRA showcases AI-driven rail and road transport services",
+  "summary": "The EUSPA-funded SPATRA project highlights its use of AI and Copernicus data to forecast rail-track temperature and optimise road logistics.",
+  "body": "SPATRA (Space-based Applications for Transport Monitoring and Management) develops two demonstrators: a rail-temperature service predicting track-buckling risk, and a road traffic-flow and logistics-monitoring application. The project illustrates how AI applied to Copernicus and EGNSS data creates practical transport services.",
+  "link": "https://www.euspa.europa.eu/opportunities/horizon-europe/project-portfolio/spatra-space-based-applications-transport-monitoring",
+  "classification": {
+    "market_segments": [
+      "transport.rail"
+    ]
+  },
+  "tags": []
+}

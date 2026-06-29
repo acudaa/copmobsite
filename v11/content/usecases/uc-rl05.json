@@ -1,0 +1,42 @@
+{
+  "id": "uc-rl05",
+  "title": "Flood rapid mapping for rail network management",
+  "summary": "Satellite flood mapping supports targeted track closure and reopening decisions during flood events.",
+  "description": "During fast-developing floods, infrastructure managers must make closure decisions across many lines simultaneously, often with no current map of which sections are actually inundated. Gauge data alone leads to both unnecessary closures and missed hazards.\n\nCEMS Rapid Mapping delivers Sentinel-1 SAR-derived flood extent and depth products within hours of activation. Shared with crisis operations centres, these maps enable targeted closure and reopening decisions, restoring services faster while maintaining safety.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.rail"
+    ],
+    "products": [
+      "cems",
+      "sentinel-1"
+    ],
+    "site": {
+      "integration_mode": "Directly applicable",
+      "integration_detail": "CEMS flood products are used directly by crisis teams for closure decisions. Sentinel-1 SAR underpins them, but the delivered maps need no further processing."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.rl05",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "uc-ad01",
+  "title": "Volcanic ash and aerosol avoidance for flight routing",
+  "summary": "Atmospheric forecasts let airlines and ANSPs reroute around volcanic ash and high-aerosol zones safely and efficiently.",
+  "description": "Volcanic eruptions and major dust events create dynamic, poorly-bounded hazards across flight levels. Without timely, spatially-resolved ash and aerosol forecasts, airlines and air navigation service providers face the choice between costly blanket groundings and unacceptable safety risk.\n\nCAMS provides global atmospheric composition forecasts — volcanic ash, aerosols and dust — at multiple flight levels, updated several times daily. Integrated into network management and meteorology systems, these forecasts support targeted rerouting and NOTAM issuance, replacing broad airspace closures with precise avoidance envelopes.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.aviation"
+    ],
+    "products": [
+      "cams"
+    ],
+    "site": {
+      "integration_mode": "Directly applicable",
+      "integration_detail": "CAMS volcanic-ash and aerosol forecasts are ingested largely as delivered into aviation meteorology and network-management systems. Dispersion modelling and wind fields refine the picture, but the forecasts are operationally usable as provided."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.ad01",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "uc-ra01",
+  "title": "Flood extent mapping for road network closure decisions",
+  "summary": "Satellite flood mapping gives road operators a network-wide inundation picture for closure decisions.",
+  "description": "During major floods, road operators must make closure decisions across hundreds of kilometres at once. Road-weather sensors may be submerged or offline, and incident reports are too slow and localised to give an accurate network-wide picture.\n\nCEMS Rapid Mapping provides Sentinel-1-derived flood extent maps within hours, updated through the event and integrated into GIS-based traffic-management systems. Operators gain a comprehensive, accurate basis for closure and reopening decisions.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.road"
+    ],
+    "products": [
+      "cems",
+      "sentinel-1"
+    ],
+    "site": {
+      "integration_mode": "Directly applicable",
+      "integration_detail": "CEMS Rapid Mapping flood-extent products are loaded directly into traffic-management GIS for closure decisions; no user-side processing of the satellite data is required."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.ra01",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

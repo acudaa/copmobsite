@@ -1,0 +1,49 @@
+{
+  "id": "cs-ad02",
+  "title": "CAMS-integrated drone delivery corridors in Brussels",
+  "summary": "A drone delivery operator integrated CAMS air-quality forecasts into route planning to keep BVLOS corridors out of high-pollution zones.",
+  "narrative": "## Challenge\nPlanning beyond-visual-line-of-sight delivery corridors in a dense city, the operator needed to avoid concentrating flights in high-pollution areas, both for regulatory acceptance and to limit particulate wear on UAV systems.\n\n## Approach\nCAMS European air-quality forecasts at high resolution, updated four times daily, were integrated into the operator's route-planning API. Corridors exceeding PM2.5 and NO2 thresholds were flagged automatically and alternative paths generated.\n\n## Results\nOver a six-month pilot, around 12% of planned sorties were rerouted. Regulators accepted the CAMS-integrated approach as part of the operational authorisation, setting a precedent for CAMS use in U-Space applications.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.aviation"
+    ],
+    "products": [
+      "cams"
+    ],
+    "regions": [
+      "Brussels, Belgium"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://atmosphere.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ad02",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Last-mile drone logistics operator (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "uc-ra05",
+  "title": "Air quality data for low-emission zones and in-vehicle exposure",
+  "summary": "Air quality forecasts support low-emission-zone planning and in-cabin air management features.",
+  "description": "City authorities planning low-emission zones, and manufacturers developing cabin air-quality features, both need consistent, spatially-resolved air quality data. Ground stations provide only sparse point measurements.\n\nCAMS reanalysis and forecasts provide consistent gridded NO2, PM2.5 and ozone fields across Europe. Authorities use them for low-emission-zone design and reporting, while manufacturers integrate forecasts to trigger cabin recirculation before entering polluted zones.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.road"
+    ],
+    "products": [
+      "cams"
+    ],
+    "site": {
+      "integration_mode": "Data-fusion input",
+      "integration_detail": "CAMS gridded pollutant fields feed low-emission-zone design and cabin-air models alongside traffic and sensor data. Copernicus provides the consistent air-quality layer within a wider analysis."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.ra05",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

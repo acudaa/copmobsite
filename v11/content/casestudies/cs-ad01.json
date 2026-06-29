@@ -1,0 +1,49 @@
+{
+  "id": "cs-ad01",
+  "title": "Rerouting transatlantic traffic during an Icelandic eruption",
+  "summary": "During a sustained Icelandic eruption, CAMS ash forecasts supported rerouting of hundreds of daily transatlantic flights with no groundings.",
+  "narrative": "## Challenge\nA sustained eruption spread volcanic ash across North Atlantic flight levels, creating a dynamic hazard zone. Airlines and the network manager needed frequent, multi-level ash-concentration forecasts to reroute safely without resorting to blanket closures.\n\n## Approach\nCAMS volcanic-ash forecasts, updated every six hours across the relevant flight levels and combined with ERA5 wind fields, were integrated into network management. Dispersion modelling produced probabilistic ash envelopes used directly in NOTAM issuance and airline dispatch.\n\n## Results\nOver a multi-day event, the large majority of affected flights were rerouted within hours of each forecast update, avoiding blanket groundings. No ash-related incidents were recorded, and carriers avoided substantial potential costs from mass cancellations.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.aviation"
+    ],
+    "products": [
+      "cams"
+    ],
+    "regions": [
+      "North Atlantic airspace"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://atmosphere.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ad01",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Network manager & airlines (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

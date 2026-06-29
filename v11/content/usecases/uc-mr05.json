@@ -1,0 +1,42 @@
+{
+  "id": "uc-mr05",
+  "title": "Vessel detection and oil-spill monitoring for maritime surveillance",
+  "summary": "SAR imagery supports detection of vessels and oil spills for surveillance and environmental protection.",
+  "description": "Authorities monitoring large maritime areas for illegal activity, accidents and pollution cannot rely on patrols or cooperative tracking alone. Non-cooperative vessels and spills can go undetected over vast areas.\n\nSentinel-1 SAR imagery detects vessels and oil slicks regardless of cloud or darkness, while CMEMS current and wind data support drift modelling. Together they enable wide-area surveillance, spill-response planning and environmental enforcement.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.maritime"
+    ],
+    "products": [
+      "sentinel-1",
+      "cmems"
+    ],
+    "site": {
+      "integration_mode": "Requires further processing",
+      "integration_detail": "Sentinel-1 SAR scenes are processed with detection algorithms for vessels and slicks; CMEMS drift data supports response. Copernicus imagery needs algorithmic processing before it is actionable."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.mr05",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

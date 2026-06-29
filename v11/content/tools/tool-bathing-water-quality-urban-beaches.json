@@ -1,0 +1,22 @@
+{
+  "id": "tool-bathing-water-quality-urban-beaches",
+  "title": "Bathing water quality monitoring for urban beaches",
+  "summary": "A demonstrator using Sentinel-2 and Copernicus Marine Service data to flag potential water quality issues at urban bathing sites between official sampling dates.",
+  "narrative": "## What it does\nThis demonstrator screens Sentinel-2 optical imagery and CMEMS coastal water products for indicators associated with poor bathing water quality (turbidity, chlorophyll/algal bloom signals, river-plume intrusion after heavy rain) at urban beaches and bathing sites, complementing the periodic in-situ sampling required under the EU Bathing Water Directive.\n\n## Why it matters\nOfficial bathing water sampling happens on a fixed schedule, typically every 1-4 weeks in season. A satellite-based screening layer can flag anomalies between sampling dates, particularly after storm events that cause sewer overflow or runoff, giving municipalities an early signal to consider precautionary advisories.\n\n## Status\nThis is a placeholder entry describing a demonstrator concept; no live instance is published yet.",
+  "status": "draft",
+  "maturity": "concept",
+  "classification": {
+    "market_segments": ["transport.maritime", "transport.urban"],
+    "products": ["sentinel-2", "cmems"],
+    "eo_techniques": ["optical", "ocean colour"],
+    "regions": ["European Union"],
+    "organisation_types": ["public authority", "regulator"],
+    "outcome_types": ["risk mitigation", "regulatory compliance"]
+  },
+  "tags": ["water quality", "bathing water", "urban beaches", "Sentinel-2"],
+  "relations": [],
+  "sources": [],
+  "history": [
+    { "timestamp": "2026-06-25T00:00:00Z", "author": "lauku", "comment": "Placeholder demonstrator concept." }
+  ]
+}

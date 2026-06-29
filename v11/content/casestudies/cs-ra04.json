@@ -1,0 +1,49 @@
+{
+  "id": "cs-ra04",
+  "title": "Climate-informed EV charging network rollout",
+  "summary": "A charging operator used C3S thermal data to set site-specific thermal specifications for hundreds of fast-charging sites.",
+  "narrative": "## Challenge\nPlanning hundreds of fast-charging sites, the operator needed to account for thermal stress — cold reducing battery acceptance, heat derating charger electronics and cables — in siting and specification.\n\n## Approach\nC3S historical percentiles and projections generated a thermal-stress index per site, capturing cold-season demand spikes and heat-related derating days. High-stress sites received upgraded thermal-management specifications.\n\n## Results\nA significant share of sites were reclassified to a higher thermal tier. The upfront cost uplift was projected to be more than offset by reduced warranty claims and outage days over the asset life.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.road"
+    ],
+    "products": [
+      "era5"
+    ],
+    "regions": [
+      "Central Europe"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://climate.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ra04",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "EV charging network operator (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

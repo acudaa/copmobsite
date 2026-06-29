@@ -1,0 +1,41 @@
+{
+  "id": "uc-ud05",
+  "title": "Dynamic management of public space",
+  "summary": "Combining EO and positioning data supports agile, data-driven management of urban public spaces.",
+  "description": "Cities struggle to manage public space — on the ground and increasingly in the air — in an agile way that adapts to changing needs, events and disruptions. Static planning cannot respond to fast-changing requirements for transport, open space and maintenance.\n\nCombining Copernicus land-cover and change data with Galileo/EGNOS positioning supports dynamic, data-driven management of public space. Replicable tools help cities reallocate space flexibly, respond to disruptive events and increase resilience.",
+  "status": "published",
+  "maturity": "concept",
+  "classification": {
+    "market_segments": [
+      "transport.urban"
+    ],
+    "products": [
+      "clms"
+    ],
+    "site": {
+      "integration_mode": "Data-fusion input",
+      "integration_detail": "Copernicus land-cover and change data combine with Galileo/EGNOS positioning and city data to manage public space. Copernicus is one layer in a dynamic, multi-source system."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.ud05",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "need.rl04",
+  "kind": "need",
+  "summary": "Adjust asset-renewal design standards for future climate",
+  "statement": "Adjust asset-renewal design standards for future climate",
+  "status": "accepted",
+  "classification": {
+    "market_segments": [
+      "transport.rail"
+    ]
+  },
+  "tags": [],
+  "relations": [],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from segments.json needs[] (pre-graph content model)"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old segments.json inline need."
+    }
+  ]
+}

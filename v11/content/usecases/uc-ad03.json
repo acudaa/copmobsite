@@ -1,0 +1,41 @@
+{
+  "id": "uc-ad03",
+  "title": "U-Space corridor and ground-risk mapping",
+  "summary": "High-resolution land cover supports safe drone corridor design, exclusion zones and contingency landing areas.",
+  "description": "Defining safe low-altitude drone corridors requires detailed, consistent land use and building information to assess ground risk, identify exclusion zones and plan contingency landing sites. Cadastral data is often outdated or inconsistently formatted across regions.\n\nCLMS Urban Atlas and High Resolution Layers provide harmonised land use classification and imperviousness across European cities at fine spatial resolution. Combined with building height data, these products support 3D obstacle models, ground-risk grids and replicable U-Space volume design.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.aviation"
+    ],
+    "products": [
+      "clms"
+    ],
+    "site": {
+      "integration_mode": "Requires further processing",
+      "integration_detail": "CLMS Urban Atlas and High Resolution Layers are processed with building-height data into 3D obstacle models and ground-risk grids. Copernicus provides the base land-use layer; substantial GIS processing is needed before operational use."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.ad03",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

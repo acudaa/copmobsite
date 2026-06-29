@@ -1,0 +1,15 @@
+{
+  "id": "n08",
+  "date": "2026-01-30",
+  "type": "product_update",
+  "title": "CAMS upgrades global air-quality forecast resolution",
+  "summary": "The Copernicus Atmosphere Monitoring Service has upgraded its global forecasting system, improving resolution relevant to aviation and drone operations.",
+  "body": "The latest CAMS upgrade improves the spatial resolution and accuracy of global atmospheric-composition forecasts, including aerosols, ozone and near-surface pollutants. Aviation meteorology and U-Space drone applications benefit from more precise hazard and air-quality information.",
+  "link": "https://atmosphere.copernicus.eu",
+  "classification": {
+    "market_segments": [
+      "transport.aviation"
+    ]
+  },
+  "tags": []
+}

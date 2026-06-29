@@ -1,0 +1,42 @@
+{
+  "id": "uc-mr03",
+  "title": "Water-level and discharge monitoring for inland waterways",
+  "summary": "Hydrological forecasts support navigability planning and load decisions on rivers and canals.",
+  "description": "Inland-waterway operators depend on adequate water depth, which varies with discharge and drought. Low water forces reduced loading or halts navigation, while floods close waterways — both with major logistics impacts that are hard to anticipate.\n\nCEMS flood-awareness systems (EFAS/GloFAS) provide discharge forecasts, while CLMS water-and-wetness products track surface-water extent. Together they support navigability planning, load optimisation and early warning for low-water and flood conditions.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.maritime"
+    ],
+    "products": [
+      "cems",
+      "clms"
+    ],
+    "site": {
+      "integration_mode": "Data-fusion input + processing",
+      "integration_detail": "CEMS discharge forecasts (EFAS) and CLMS water products are combined and interpreted for navigability and loading. Copernicus provides hydrological inputs that require interpretation for the corridor."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.mr03",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

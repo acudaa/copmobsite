@@ -1,0 +1,50 @@
+{
+  "id": "cs-ud02",
+  "title": "Urban heat exposure mapping for an adaptation plan",
+  "summary": "A city combined CLMS land-surface-temperature and imperviousness data with C3S climate data to target cooling interventions.",
+  "narrative": "## Challenge\nRecurring heatwaves raised health risks and energy demand, but the city lacked a spatial evidence base to identify the hottest areas and prioritise greening or cool-surface interventions.\n\n## Approach\nCLMS land-surface-temperature and imperviousness products were combined with C3S climate data to build a composite urban heat-exposure index, cross-referenced with population vulnerability.\n\n## Results\nThe city identified priority districts for tree planting and cool-surface pilots, and incorporated the heat-exposure mapping into its climate-adaptation plan.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.urban"
+    ],
+    "products": [
+      "clms",
+      "era5"
+    ],
+    "regions": [
+      "Large EU city"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://land.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ud01",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "City authority (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

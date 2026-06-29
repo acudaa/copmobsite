@@ -1,0 +1,27 @@
+{
+  "id": "need.rl03",
+  "kind": "need",
+  "summary": "Monitor vegetation encroachment near tracks and overhead lines",
+  "statement": "Monitor vegetation encroachment near tracks and overhead lines",
+  "status": "accepted",
+  "classification": {
+    "market_segments": [
+      "transport.rail"
+    ]
+  },
+  "tags": [],
+  "relations": [],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from segments.json needs[] (pre-graph content model)"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old segments.json inline need."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "cs-ad03",
+  "title": "Urban Atlas-based U-Space corridor network for a pilot city",
+  "summary": "A CAA used CLMS Urban Atlas to derive a 3D obstacle model and design a low-altitude drone corridor network.",
+  "narrative": "## Challenge\nDeveloping a U-Space implementation, the authority needed detailed, consistent land-use and building-morphology data to define corridors, exclusion zones and contingency landing areas. Existing cadastral data was outdated and inconsistent.\n\n## Approach\nCLMS Urban Atlas provided harmonised land-use classification across the city. Combined with building-height data, it produced a 3D obstacle model and a ground-risk grid, used to generate a candidate corridor network for the U-Space volume.\n\n## Results\nThe corridor network was approved for the pilot U-Space implementation. The Urban Atlas-based methodology was highlighted as a replicable approach for ground-risk mapping in mid-sized European cities.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.aviation"
+    ],
+    "products": [
+      "clms"
+    ],
+    "regions": [
+      "Mid-sized EU city"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://land.copernicus.eu/en/products/urban-atlas"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ad03",
+      "target_kind": "use_case"
+    },
+    {
+      "type": "instantiates",
+      "target": "uc-ad05",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "National civil aviation authority (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

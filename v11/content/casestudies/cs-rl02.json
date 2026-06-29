@@ -1,0 +1,54 @@
+{
+  "id": "cs-rl02",
+  "title": "InSAR-prioritised inspection on a high-speed corridor",
+  "summary": "EGMS ground-motion data helped prioritise maintenance inspection on a 50 km high-speed section, catching subsidence before track defects appeared.",
+  "narrative": "## Challenge\nEmbankments along a 50 km section showed early signs of differential settlement. Visual patrols and sparse ground sensors were too slow to characterise movement extent or prioritise intervention across the full corridor.\n\n## Approach\nEGMS displacement products derived from Sentinel-1 provided line-of-sight velocities at regular grid spacing. Analysis of multi-year velocity maps revealed three subsidence hotspots correlated with clay geology and drainage features.\n\n## Results\nGeotechnical teams were deployed only to the prioritised locations, cutting unnecessary inspection mobilisations sharply. One site was escalated to remediation before any visible defect appeared, avoiding a potential speed restriction affecting well over a hundred trains per day.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.rail"
+    ],
+    "products": [
+      "egms"
+    ],
+    "regions": [
+      "Western Europe"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://egms.land.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-rl02",
+      "target_kind": "use_case"
+    },
+    {
+      "type": "instantiates",
+      "target": "uc-rl05",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Rail infrastructure manager (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

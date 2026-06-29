@@ -1,0 +1,41 @@
+{
+  "id": "uc-rl04",
+  "title": "Climate risk screening for rail asset renewal",
+  "summary": "Climate projections let infrastructure managers adjust design standards for long-term renewal programmes.",
+  "description": "Rail asset renewal programmes plan decades ahead, but standard design parameters often rely on historical climate statistics that no longer reflect projected increases in extreme precipitation, heat and freeze-thaw cycling.\n\nC3S downscaled climate projections provide updated return-period statistics for rainfall, temperature thresholds and frost depth. These translate into adjusted design parameters for drainage, ballast and expansion tolerance, ensuring renewals remain fit for future climate.",
+  "status": "published",
+  "maturity": "concept",
+  "classification": {
+    "market_segments": [
+      "transport.rail"
+    ],
+    "products": [
+      "era5"
+    ],
+    "site": {
+      "integration_mode": "Requires further processing",
+      "integration_detail": "C3S projections are converted into updated return-period statistics and design parameters. Copernicus provides the climate basis; engineering analysis is required to reach design standards."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.rl04",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "uc-ad04",
+  "title": "Climate-resilient airport infrastructure planning",
+  "summary": "Climate projections help airports anticipate heat, storm and flood impacts on capacity and infrastructure.",
+  "description": "Aircraft take-off performance falls as temperatures rise, and airport drainage and pavements face increasing climate stress. Infrastructure planning based on historical climate statistics underestimates future heat-restriction days and extreme-weather frequency.\n\nC3S climate projections and ERA5 reanalysis provide downscaled temperature, precipitation and extreme-event statistics to mid-century. These feed aircraft-performance modelling, drainage design and master-plan capacity assumptions, allowing airports to plan adaptation proactively.",
+  "status": "published",
+  "maturity": "concept",
+  "classification": {
+    "market_segments": [
+      "transport.aviation"
+    ],
+    "products": [
+      "era5"
+    ],
+    "site": {
+      "integration_mode": "Requires further processing",
+      "integration_detail": "C3S projections and ERA5 are downscaled and fed into aircraft-performance and drainage models. Copernicus is the climate input to an engineering modelling chain, not a ready-made answer."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.ad04",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

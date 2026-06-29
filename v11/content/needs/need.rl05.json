@@ -1,0 +1,27 @@
+{
+  "id": "need.rl05",
+  "kind": "need",
+  "summary": "Manage the network during flood events",
+  "statement": "Manage the network during flood events",
+  "status": "accepted",
+  "classification": {
+    "market_segments": [
+      "transport.rail"
+    ]
+  },
+  "tags": [],
+  "relations": [],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from segments.json needs[] (pre-graph content model)"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old segments.json inline need."
+    }
+  ]
+}

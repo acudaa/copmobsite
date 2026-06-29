@@ -1,0 +1,49 @@
+{
+  "id": "cs-rl04",
+  "title": "Climate-adjusted design standards for asset renewal",
+  "summary": "C3S projections were integrated into a 30-year capital-investment model, revising design standards for hundreds of km of renewals.",
+  "narrative": "## Challenge\nA national rail administration's renewal model used historical climate statistics that did not account for projected increases in extreme precipitation, heat and freeze-thaw cycling, risking under-specified assets.\n\n## Approach\nC3S downscaled projections provided updated return-period statistics for extreme rainfall, temperature thresholds and frost depth to mid-century. These were translated into adjusted parameters for embankment drainage, ballast and expansion tolerance.\n\n## Results\nThe updated model identified a meaningful share of planned renewals where standard specifications would be inadequate under future climate. Revised specifications were adopted for several hundred km of line scheduled for renewal, with large estimated avoided-failure costs.",
+  "status": "published",
+  "maturity": "concept",
+  "classification": {
+    "market_segments": [
+      "transport.rail"
+    ],
+    "products": [
+      "era5"
+    ],
+    "regions": [
+      "Northern Europe"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://cds.climate.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-rl04",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "National rail administration (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

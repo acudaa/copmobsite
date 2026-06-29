@@ -1,0 +1,27 @@
+{
+  "id": "need.ad05",
+  "kind": "need",
+  "summary": "Provide current hazard maps for emergency-response UAV missions",
+  "statement": "Provide current hazard maps for emergency-response UAV missions",
+  "status": "accepted",
+  "classification": {
+    "market_segments": [
+      "transport.aviation"
+    ]
+  },
+  "tags": [],
+  "relations": [],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from segments.json needs[] (pre-graph content model)"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old segments.json inline need."
+    }
+  ]
+}

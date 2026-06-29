@@ -1,0 +1,60 @@
+{
+  "id": "cs-ud01",
+  "title": "BUILDSPACE: digital twins for energy-efficient, climate-resilient cities",
+  "summary": "The EUSPA-funded BUILDSPACE project couples building IoT/BIM data, thermal drone imaging and Copernicus data to build digital twins for energy-efficient buildings and climate-resilient cities.",
+  "narrative": "## Challenge\nCities need to manage buildings and urban areas more sustainably — prioritising energy renovation and anticipating urban heat and flooding — but lack integrated tools combining building-scale and city-scale data.\n\n## Approach\nBUILDSPACE (Horizon Europe, EUSPA, grant 101082575) couples terrestrial data from buildings (IoT platforms, BIM) with thermal-camera drone imaging and location-annotated satellite data from EGNSS and Copernicus. It generates high-fidelity multi-modal digital twins at building scale and decision-support services at city scale for energy-demand prediction, urban-heat and urban-flood analysis. The Copernicus Atmosphere Monitoring Service helps monitor residential emissions so planners can target the worst-performing buildings, while Copernicus Urban Atlas land-use data underpins city-scale flood-damage analysis.\n\n## Results\nDigital-twin services were validated by the city services of Piraeus, Riga and Ljubljana. The urban-flood application demonstrated in Ljubljana lets users compare flood scenarios and compute land-use-based damage costs across the building stock, using continental-coverage Copernicus Urban Atlas data — making the tool replicable Europe-wide. BUILDSPACE has been showcased to the European Commission as a frontrunner in Copernicus for energy efficiency.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.urban"
+    ],
+    "products": [
+      "cams",
+      "clms"
+    ],
+    "regions": [
+      "Piraeus, Riga, Ljubljana (Horizon Europe / EUSPA)"
+    ],
+    "site": {
+      "eu_project": true,
+      "project_link": "https://www.euspa.europa.eu/opportunities/horizon-europe/project-portfolio/buildspace-enabling-innovative-space-driven-services"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ud01",
+      "target_kind": "use_case"
+    },
+    {
+      "type": "instantiates",
+      "target": "uc-ud02",
+      "target_kind": "use_case"
+    },
+    {
+      "type": "instantiates",
+      "target": "uc-ud04",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "BUILDSPACE project consortium (coordinator SingularLogic; city validators Piraeus, Riga, Ljubljana)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "uc-mr01",
+  "title": "Weather routing and fuel optimisation for shipping",
+  "summary": "Ocean current, wave and wind data let ships optimise routes for fuel saving and emissions reduction.",
+  "description": "Ships consume more fuel and emit more CO2 when fighting adverse currents and waves. Without accurate, forward-looking ocean and wave forecasts, route planning cannot fully exploit favourable conditions or avoid costly weather.\n\nCMEMS provides global and regional forecasts of ocean currents, waves, sea level and wind. Integrated into weather-routing systems, these enable ships to optimise routes and speed, cutting fuel consumption and emissions while improving schedule reliability.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.maritime"
+    ],
+    "products": [
+      "cmems"
+    ],
+    "site": {
+      "integration_mode": "Data-fusion input",
+      "integration_detail": "CMEMS currents, waves and wind feed a weather-routing engine together with vessel performance and schedule constraints. Copernicus supplies the metocean layer, not the route itself."
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "addresses",
+      "target": "need.mr01",
+      "target_kind": "need"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old usecases/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat use-case schema (problem/solution/services/copernicusRole)."
+    }
+  ]
+}

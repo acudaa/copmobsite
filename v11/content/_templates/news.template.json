@@ -1,0 +1,13 @@
+{
+  "id": "nNN",
+  "date": "2026-07-01",
+  "type": "grant_call | cassini | procurement | product_update | project | policy | event | other",
+  "title": "News headline",
+  "summary": "Short summary.",
+  "body": "Fuller text shown on the news page.",
+  "link": "https://...",
+  "classification": {
+    "market_segments": ["all"]
+  },
+  "tags": []
+}

@@ -1,0 +1,55 @@
+{
+  "id": "cs-ra01",
+  "title": "Network-wide flood management for a motorway operator",
+  "summary": "CEMS flood maps gave a motorway operator a network-wide inundation picture during a major flood, improving closure decisions.",
+  "narrative": "## Challenge\nDuring a major flood, the operator had to make closure decisions across hundreds of km at once. Road-weather sensors were submerged or offline, and incident reports were too slow and localised.\n\n## Approach\nCEMS Rapid Mapping delivered Sentinel-1-derived flood-extent maps within hours of the peak, updated twice daily over several days and integrated into the GIS-based traffic-management system.\n\n## Results\nMany closure and reopening decisions were made using the maps, with post-event review confirming high accuracy against on-site inspection. Several unnecessary closures were avoided, maintaining emergency access.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.road"
+    ],
+    "products": [
+      "cems",
+      "sentinel-1"
+    ],
+    "regions": [
+      "Southern Europe"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://emergency.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ra01",
+      "target_kind": "use_case"
+    },
+    {
+      "type": "instantiates",
+      "target": "uc-ra05",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "National motorway operator (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

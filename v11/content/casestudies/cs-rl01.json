@@ -1,0 +1,50 @@
+{
+  "id": "cs-rl01",
+  "title": "SPATRA: predicting rail buckling risk from satellite data",
+  "summary": "The EUSPA-funded SPATRA project develops a space-based service to estimate rail temperature and predict track-buckling risk, helping prevent heat-induced derailments.",
+  "narrative": "## Challenge\nExtreme temperatures cause continuously welded rail to buckle, which can lead to train derailments. Rail managers need to anticipate where rail temperature will exceed safe limits, but air temperature is an unreliable proxy for actual rail temperature.\n\n## Approach\nSPATRA — Space-based Applications for Transport Monitoring and Management (Horizon Europe, EUSPA, grant 101129658) — develops a downstream application that estimates rail temperature using Copernicus satellite data and EGNSS combined with assisted in-situ data, producing a novel service that predicts the risk of rail buckling. SPATRA delivers two demonstrators addressing the principal modes of land transport: rail temperature/buckling for rail, and traffic-flow/logistics monitoring for road.\n\n## Results\nSPATRA's rail-temperature service supports rail-management plans aimed at preventing track-buckling-induced derailments, demonstrating how Copernicus and EGNSS can be combined into an operational safety service for European rail. The project is part of EUSPA's portfolio increasing satellite-data uptake in land transport.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.rail"
+    ],
+    "products": [
+      "era5",
+      "sentinel-3"
+    ],
+    "regions": [
+      "EU (Horizon Europe / EUSPA)"
+    ],
+    "site": {
+      "eu_project": true,
+      "project_link": "https://www.euspa.europa.eu/opportunities/horizon-europe/project-portfolio/spatra-space-based-applications-transport-monitoring"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-rl01",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "SPATRA project consortium (OHB Digital Services, University of Niš, Zentrix Lab, Nelt, Twist Robotics)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

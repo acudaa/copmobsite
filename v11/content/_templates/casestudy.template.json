@@ -1,0 +1,28 @@
+{
+  "id": "cs-XXNN",
+  "title": "Case study title",
+  "summary": "One-sentence summary shown on cards.",
+  "narrative": "## Challenge\nThe specific problem the user faced.\n\n## Approach\nWhat they did with Copernicus.\n\n## Results\nOutcome and impact.\n\n(The ## headers are a convention this site's casestudy.html splits back into three display boxes - not a schema requirement. Supports Markdown.)",
+  "status": "draft",
+  "maturity": "concept | pilot | demonstrated | operational | scaled",
+  "classification": {
+    "market_segments": ["transport.aviation | transport.rail | transport.road | transport.maritime | transport.urban"],
+    "products": ["egms"],
+    "regions": ["Where this took place"],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://..."
+    }
+  },
+  "tags": [],
+  "relations": [
+    { "type": "instantiates", "target": "uc-XXNN", "target_kind": "use_case" }
+  ],
+  "stakeholders": [
+    { "name": "Who did this (organisation / project)" }
+  ],
+  "sources": [],
+  "history": [
+    { "timestamp": "2026-01-01T00:00:00Z", "author": "your-name", "comment": "Drafted." }
+  ]
+}

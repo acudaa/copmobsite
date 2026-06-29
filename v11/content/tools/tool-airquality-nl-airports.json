@@ -1,0 +1,22 @@
+{
+  "id": "tool-airquality-nl-airports",
+  "title": "Air quality assessment around Netherlands airports",
+  "summary": "A demonstrator combining CAMS air quality forecasts and Sentinel-5P observations to assess air quality impacts in the vicinity of major Dutch airports.",
+  "narrative": "## What it does\nThis demonstrator overlays CAMS European air quality model output with Sentinel-5P/TROPOMI NO2 and particulate observations around airport catchment areas in the Netherlands, giving airport operators and regulators a combined modelled-and-observed picture of local air quality.\n\n## Why it matters\nAirports sit under increasing regulatory scrutiny on local air quality (recast Ambient Air Quality Directive, ICAO environmental reporting). Combining modelled forecasts with satellite observations lets operators distinguish background air quality trends from airport-attributable contributions, and supports compliance reporting without standing up dedicated ground monitoring networks everywhere.\n\n## Status\nThis is a placeholder entry describing a demonstrator concept; no live instance is published yet.",
+  "status": "draft",
+  "maturity": "concept",
+  "classification": {
+    "market_segments": ["transport.aviation"],
+    "products": ["cams-european-air-quality", "tropomi", "s5p-no2"],
+    "eo_techniques": ["atmospheric modelling", "atmospheric composition"],
+    "regions": ["Netherlands"],
+    "organisation_types": ["infrastructure operator", "regulator"],
+    "outcome_types": ["regulatory compliance", "situational awareness"]
+  },
+  "tags": ["air quality", "aviation", "CAMS", "Sentinel-5P"],
+  "relations": [],
+  "sources": [],
+  "history": [
+    { "timestamp": "2026-06-25T00:00:00Z", "author": "lauku", "comment": "Placeholder demonstrator concept." }
+  ]
+}

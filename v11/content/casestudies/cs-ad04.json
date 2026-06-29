@@ -1,0 +1,49 @@
+{
+  "id": "cs-ad04",
+  "title": "Climate-proofing runway capacity at a major hub",
+  "summary": "An airport used C3S projections to quantify rising heat-restriction days and justify a runway-capacity study.",
+  "narrative": "## Challenge\nRising temperatures reduce air density and aircraft take-off performance. The airport's runway-length assumptions were based on historical temperature distributions that no longer reflected the climate trajectory, risking unplanned weight restrictions on long-haul departures.\n\n## Approach\nC3S downscaled projections modelled summer temperature-exceedance frequencies to mid-century under multiple scenarios, validated against ERA5. Results fed aircraft-performance models for a range of long-haul types to quantify payload-penalty days per year.\n\n## Results\nAnalysis showed a marked increase in high-temperature restriction days by the 2040s. The airport used the outputs to justify a runway-extension feasibility study and updated its master plan with climate-adjusted capacity assumptions.",
+  "status": "published",
+  "maturity": "concept",
+  "classification": {
+    "market_segments": [
+      "transport.aviation"
+    ],
+    "products": [
+      "era5"
+    ],
+    "regions": [
+      "Northwest Europe"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://climate.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ad04",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Major European airport (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

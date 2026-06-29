@@ -1,0 +1,27 @@
+{
+  "id": "need.mr03",
+  "kind": "need",
+  "summary": "Plan inland-waterway navigability and barge loading",
+  "statement": "Plan inland-waterway navigability and barge loading",
+  "status": "accepted",
+  "classification": {
+    "market_segments": [
+      "transport.maritime"
+    ]
+  },
+  "tags": [],
+  "relations": [],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from segments.json needs[] (pre-graph content model)"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old segments.json inline need."
+    }
+  ]
+}

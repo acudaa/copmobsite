@@ -1,0 +1,50 @@
+{
+  "id": "cs-mr03",
+  "title": "Low-water forecasting for Rhine-corridor logistics",
+  "summary": "CEMS discharge forecasts and CLMS surface-water products supported load planning and low-water early warning on a major river corridor.",
+  "narrative": "## Challenge\nLow water during drought forces reduced barge loading or halts navigation, with major logistics impacts that are hard to anticipate days in advance.\n\n## Approach\nCEMS flood-awareness discharge forecasts (EFAS) and CLMS water-and-wetness products were combined to anticipate water levels and surface-water extent along the corridor, supporting navigability and load decisions.\n\n## Results\nThe operator improved load planning and gained earlier warning of low-water periods, reducing last-minute disruption and improving fleet utilisation.",
+  "status": "published",
+  "maturity": "pilot",
+  "classification": {
+    "market_segments": [
+      "transport.maritime"
+    ],
+    "products": [
+      "cems",
+      "clms"
+    ],
+    "regions": [
+      "Rhine corridor"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://www.efas.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-mr03",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Inland-waterway logistics operator (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

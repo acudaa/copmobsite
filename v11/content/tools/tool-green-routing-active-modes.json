@@ -1,0 +1,22 @@
+{
+  "id": "tool-green-routing-active-modes",
+  "title": "Green routing for active modes of transport",
+  "summary": "A demonstrator routing engine for walking and cycling that scores route options by air quality, shade, and green-space exposure using Copernicus data.",
+  "narrative": "## What it does\nThis demonstrator suggests walking and cycling routes between two points that minimise exposure to poor air quality and maximise shade/green coverage, drawing on CAMS air quality fields and CLMS land cover (tree canopy, urban green space) alongside standard road/path network data.\n\n## Why it matters\nActive-mode routing tools today mostly optimise for distance or elevation. Layering in EO-derived environmental exposure gives cities and routing-app providers a way to promote healthier, more pleasant active travel - relevant to urban mobility strategies and public health co-benefits of cycling/walking investment.\n\n## Status\nThis is a placeholder entry describing a demonstrator concept; no live instance is published yet.",
+  "status": "draft",
+  "maturity": "concept",
+  "classification": {
+    "market_segments": ["transport.urban"],
+    "products": ["cams-european-air-quality", "corine-land-cover"],
+    "eo_techniques": ["atmospheric modelling", "land cover classification"],
+    "regions": ["European Union"],
+    "organisation_types": ["public authority", "SME"],
+    "outcome_types": ["situational awareness"]
+  },
+  "tags": ["active mobility", "cycling", "walking", "routing", "air quality"],
+  "relations": [],
+  "sources": [],
+  "history": [
+    { "timestamp": "2026-06-25T00:00:00Z", "author": "lauku", "comment": "Placeholder demonstrator concept." }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "need.ra03",
+  "kind": "need",
+  "summary": "Keep HD maps for ADAS and automated driving up to date",
+  "statement": "Keep HD maps for ADAS and automated driving up to date",
+  "status": "accepted",
+  "classification": {
+    "market_segments": [
+      "transport.road"
+    ]
+  },
+  "tags": [],
+  "relations": [],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from segments.json needs[] (pre-graph content model)"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old segments.json inline need."
+    }
+  ]
+}

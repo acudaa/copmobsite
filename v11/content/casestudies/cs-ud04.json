@@ -1,0 +1,49 @@
+{
+  "id": "cs-ud04",
+  "title": "Space4Cities: dynamic management of urban public space",
+  "summary": "The EUSPA-funded Space4Cities project builds replicable, space-data-based solutions for dynamic management of urban public spaces, on the ground and in the air.",
+  "narrative": "## Challenge\nPublic-space management lags behind other smart-city domains in digital transformation. Cities cannot manage public space — on ground and in air — in an agile way that adapts to fast-changing needs, events and climate disruptions.\n\n## Approach\nSpace4Cities (Horizon Europe, EUSPA, grant 101131955; €5.2M, coordinated by Forum Virium Helsinki) exploits Copernicus and Galileo data to build replicable solutions for dynamic, data-driven management of public areas, with a roadmap for Europe-wide implementation. City partners including Amsterdam, Guimarães and the Attica Region help define and validate the needs.\n\n## Results\nThe project targets agile reallocation of public space, better response to disruptive events and increased urban resilience — demonstrating how space data can move public-space management from static planning to dynamic, evidence-based operation.",
+  "status": "published",
+  "maturity": "concept",
+  "classification": {
+    "market_segments": [
+      "transport.urban"
+    ],
+    "products": [
+      "clms"
+    ],
+    "regions": [
+      "Helsinki, Amsterdam, Guimarães, Attica & more (Horizon Europe / EUSPA)"
+    ],
+    "site": {
+      "eu_project": true,
+      "project_link": "https://www.euspa.europa.eu/opportunities/horizon-europe/project-portfolio/space4cities-integrating-galileo-and-copernicus"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ud05",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Space4Cities consortium (coordinator Forum Virium Helsinki; cities incl. Amsterdam, Guimarães, Attica Region)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

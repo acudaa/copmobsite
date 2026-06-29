@@ -1,0 +1,50 @@
+{
+  "id": "cs-ud03",
+  "title": "Green-space and soil-sealing monitoring for planning compliance",
+  "summary": "A planning authority used CLMS Urban Atlas and imperviousness products to monitor green space and soil sealing against policy targets.",
+  "narrative": "## Challenge\nDensification was eroding green space and increasing soil sealing, but the authority lacked consistent, repeatable monitoring to track change and demonstrate compliance with EU and local targets.\n\n## Approach\nCLMS Urban Atlas, imperviousness and tree-cover products from Sentinel-2 provided harmonised, repeatable measurement of green and sealed surfaces across the region.\n\n## Results\nThe authority gained a defensible evidence base for planning decisions and green-infrastructure strategy, and could report progress against soil-sealing and green-space targets.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.urban"
+    ],
+    "products": [
+      "clms",
+      "sentinel-2"
+    ],
+    "regions": [
+      "EU metropolitan region"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://land.copernicus.eu/en/products/urban-atlas"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ud03",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Metropolitan planning authority (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}

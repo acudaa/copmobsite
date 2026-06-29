@@ -1,0 +1,22 @@
+{
+  "id": "tool-lez-modelling-cities",
+  "title": "Low emission zone modelling for cities",
+  "summary": "A demonstrator using Copernicus land cover, traffic proxies, and CAMS air quality data to help cities design and evaluate low emission zone boundaries.",
+  "narrative": "## What it does\nThis demonstrator lets a city planner draw candidate low emission zone (LEZ) boundaries and see modelled air quality impact, drawing on CAMS regional air quality fields, CLMS land cover/urban atlas data for context, and Sentinel-5P NO2 observations to validate model output against what's actually been observed.\n\n## Why it matters\nMany European cities are expanding or introducing LEZs under national clean-air legislation, but boundary design is often based on traffic counts alone. Adding a satellite-validated air quality layer helps planners target zones where the modelled benefit is real and observable, and gives a defensible evidence base for public consultation.\n\n## Status\nThis is a placeholder entry describing a demonstrator concept; no live instance is published yet.",
+  "status": "draft",
+  "maturity": "concept",
+  "classification": {
+    "market_segments": ["transport.urban", "transport.road"],
+    "products": ["cams-european-air-quality", "corine-land-cover", "s5p-no2"],
+    "eo_techniques": ["atmospheric modelling", "land cover classification"],
+    "regions": ["European Union"],
+    "organisation_types": ["public authority"],
+    "outcome_types": ["regulatory compliance", "risk mitigation"]
+  },
+  "tags": ["low emission zones", "air quality", "urban planning", "CAMS"],
+  "relations": [],
+  "sources": [],
+  "history": [
+    { "timestamp": "2026-06-25T00:00:00Z", "author": "lauku", "comment": "Placeholder demonstrator concept." }
+  ]
+}

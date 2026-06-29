@@ -1,0 +1,49 @@
+{
+  "id": "cs-ra02",
+  "title": "EGMS slope monitoring on an Alpine motorway",
+  "summary": "EGMS revealed previously unmonitored slow-moving slope sectors on a mountain motorway, enabling proactive remediation.",
+  "narrative": "## Challenge\nA motorway through unstable geology had a history of slope failures but only six point sensors across a 28 km corridor, leaving most of it unmonitored.\n\n## Approach\nEGMS ascending and descending displacement series were combined to decompose 2D ground motion across the full corridor, revealing several previously unmonitored sectors with persistent downslope movement.\n\n## Results\nGeotechnical investigation confirmed active failure surfaces at most flagged sectors. Containment structures were installed proactively, with large estimated avoided costs based on a comparable past failure.",
+  "status": "published",
+  "maturity": "operational",
+  "classification": {
+    "market_segments": [
+      "transport.road"
+    ],
+    "products": [
+      "egms"
+    ],
+    "regions": [
+      "Eastern Alps"
+    ],
+    "site": {
+      "eu_project": false,
+      "project_link": "https://egms.land.copernicus.eu"
+    }
+  },
+  "tags": [],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "uc-ra02",
+      "target_kind": "use_case"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Motorway concessionaire (illustrative)"
+    }
+  ],
+  "sources": [
+    {
+      "type": "derived",
+      "reference": "Migrated from old casestudies/*.json content model"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-25T00:00:00Z",
+      "author": "migration-script",
+      "comment": "Migrated from old flat case-study schema (challenge/approach/results/user/location/real/link)."
+    }
+  ]
+}
