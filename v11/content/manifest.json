@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-26T09:18:47+00:00",
+  "generated": "2026-06-29T11:59:38+00:00",
   "site": "site.json",
   "products": "products.json",
   "segments": "market-segments.json",
@@ -70,6 +70,7 @@
     "cs-ra02.json",
     "cs-ra03.json",
     "cs-ra04.json",
+    "CS-RAIL-NETWORKRAIL-INSAR-001/CS-RAIL-NETWORKRAIL-INSAR-001.json",
     "cs-rl01.json",
     "cs-rl02.json",
     "cs-rl03.json",
@@ -101,7 +102,7 @@
   "counts": {
     "needs": 25,
     "usecases": 25,
-    "casestudies": 20,
+    "casestudies": 21,
     "tools": 5,
     "news": 10
   }
