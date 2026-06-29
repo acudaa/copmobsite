@@ -1,0 +1,107 @@
+{
+  "id": "CS-RAIL-NETWORKRAIL-INSAR-001",
+  "title": "Network Rail: network-scale InSAR monitoring of rail earthworks using Sentinel-1",
+  "summary": "Network Rail and SatSense use Sentinel-1 InSAR time series to monitor ground deformation across the whole UK rail earthworks portfolio, prioritising inspections and reducing trackside risk under a multi-year operational contract announced in 2025.",
+  "narrative": "**Evidence-based case study prepared from public Network Rail, SatSense, PWI and EWSHM sources**\n\n![SatSense InSAR detection of the East Grinstead landslip, with average velocity points and displacement history](images/CS-RAIL-NETWORKRAIL-INSAR-001/fig1-east-grinstead-landslip.png)\n*Illustration 1. Real published InSAR detection of movement at East Grinstead landslip, with average velocity points and displacement history. Source: PWI Journal / SatSense.*\n\n## 1. Operational problem\n\nNetwork Rail manages one of Europe's densest and oldest railway asset portfolios. Its earthworks include roughly 190,000 assets - embankments, soil cuttings and rock cuttings - many inherited from the Victorian railway and not designed to modern geotechnical standards. Failures can cause speed restrictions, closures, derailment risk and large social costs.\n\nTraditional geotechnical assurance relies heavily on periodic visual examination and selected in-situ monitoring. That remains essential, but it is discontinuous in space and time: it may miss slow pre-failure movements between inspections, and it often cannot see deformation processes outside the railway boundary, such as mining, quarrying, construction or groundwater-driven subsidence.\n\n## 2. Copernicus-enabled solution\n\nThe operational concept is to process long Sentinel-1 radar image stacks with InSAR algorithms to derive ground-motion points along and around the railway. The Sentinel-1 archive gives historical context; continuing acquisitions allow repeated updates as new images arrive. SatSense's network analysis has been described as sensitive to movement rates of several millimetres per year, with tens of millions of points across the UK rail network.\n\nThe processed outputs are not simply imagery. They are converted into asset-management intelligence: motion velocities, displacement time series, threshold exceedances, risk indices by standard rail-length grid cells, and machine-learning flags trained on known failure examples. The intent is integration into Network Rail's earthworks asset management and GIS environment, alongside existing asset condition knowledge.\n\n## 3. Workflow from satellite pass to asset decision\n\n1. Sentinel-1 C-band SAR scenes are assembled into historical and rolling time-series stacks.\n2. Interferograms are formed, coherent measurement points are selected, atmospheric and processing artefacts are reduced, and velocities/displacement histories are estimated.\n3. Points are summarised by railway asset units and by adjacent land parcels.\n4. Movement patterns are screened by thresholds and/or machine learning.\n5. The result is used to prioritise site inspections, target detailed monitoring, validate remediation, or reduce unnecessary visits where stability is demonstrated.\n\n## 4. Operational value\n\nThe business value is a shift from periodic, site-by-site observation toward network intelligence. Network-wide InSAR can highlight unknown or developing ground movement, support predictive maintenance, and direct scarce geotechnical inspection capacity to the highest-risk locations. It also reduces staff exposure to hazardous trackside or remote sites and gives retrospective evidence where a slope or adjacent land begins moving years before visible failure.\n\nA concrete example is the East Grinstead / UK embankment failure evidence reported in the literature: InSAR showed steady movement before the large 2020 failure and then helped demonstrate post-remediation behaviour. More broadly, published network-scale work reports precursors in weeks, months or years before some failures and shows post-remediation stability after December 2020 in one example.\n\n![InSAR data across a UK embankment failure, showing clear displacement precursors](images/CS-RAIL-NETWORKRAIL-INSAR-001/fig2-uk-embankment-precursor.png)\n*Illustration 2. Real InSAR example across a UK embankment failure: satellite-derived displacement time series and coloured velocity points along the rail corridor. Source: Magnall et al., EWSHM 2024 / SatSense.*\n\n## 5. What makes it operational, not just a research demonstration\n\n| Operational feature | Why it matters |\n| --- | --- |\n| Network-wide coverage | The service is designed for the whole UK rail network rather than a single pilot asset. |\n| Update cycle | Historical Sentinel-1 stacks are kept updated as new satellite scenes are acquired, enabling ongoing monitoring. |\n| Decision integration | Outputs are intended to feed Network Rail's earthwork asset management and GIS systems, not remain as stand-alone EO products. |\n| Hybrid assurance | Satellite evidence complements - not replaces - engineering judgement, site inspection and local geotechnical knowledge. |\n| Operational procurement | A multi-year, multi-million-pound contract with SatSense was announced in 2025 for ground deformation monitoring, flood mapping and change detection services. |\n\n## 6. Limitations and risk controls\n\nInSAR is strongest for slow or progressive deformation on coherent surfaces; vegetation, water and rapidly changing ground can reduce measurement density. It measures motion in the satellite line-of-sight and needs geotechnical interpretation to convert signal into asset risk. Rapid slope failures may still occur faster than a satellite revisit cycle or without a useful precursor. Therefore, operational deployment should be treated as a risk-screening and evidence stream within a wider monitoring regime, supported by field verification, rainfall thresholds, LiDAR, track geometry, drainage records and local engineering judgement.\n\n## 7. Replicability for other rail infrastructure managers\n\nThe case is highly transferable to other rail networks where the asset owner has linear GIS asset data, historical failure records, and a process for turning remote-sensing alerts into field actions. The key institutional requirement is not only InSAR processing capability; it is the integration of alerts into existing asset-management workflows, inspection planning and risk governance.\n\n*Note: \"Sentinel-1\" is the Copernicus radar mission. Later network services may blend Copernicus Sentinel-1 with commercial or other SAR missions where higher spatial resolution or redundancy is needed.*",
+  "status": "published",
+  "maturity": "operational",
+  "hero_image": "images/CS-RAIL-NETWORKRAIL-INSAR-001/fig1-east-grinstead-landslip.png",
+  "language": "en",
+  "reading_time_minutes": 6,
+  "classification": {
+    "market_segments": ["transport.rail"],
+    "products": ["sentinel-1"],
+    "eo_techniques": ["InSAR", "SAR"],
+    "regions": ["United Kingdom"],
+    "organisation_types": ["infrastructure operator", "SME"],
+    "outcome_types": ["risk mitigation", "predictive maintenance", "cost reduction", "worker safety"],
+    "site": {
+      "copernicus_integration_mode": "data-fusion input",
+      "project_link": "https://www.satsense.com/"
+    }
+  },
+  "key_results": [
+    {
+      "statement": "Network-wide InSAR ground-motion monitoring covers the whole UK rail network, analysing tens of millions of measurement points.",
+      "metric": "~190,000 earthwork assets; tens of millions of InSAR points"
+    },
+    {
+      "statement": "SatSense's network analysis is sensitive to slow precursor movement well ahead of visible failure.",
+      "metric": "sensitive to several mm/year of movement"
+    },
+    {
+      "statement": "InSAR time series showed steady precursor movement at the East Grinstead embankment failure before it occurred, and later demonstrated post-remediation stability.",
+      "metric": "stable displacement observed from December 2020 after remediation"
+    },
+    {
+      "statement": "A multi-year, multi-million-pound contract was announced in 2025 to operationalise ground deformation monitoring, flood mapping and change detection across the network.",
+      "metric": "multi-year, multi-million-pound contract (2025)"
+    }
+  ],
+  "tags": [
+    "InSAR",
+    "Sentinel-1",
+    "ground deformation",
+    "rail earthworks",
+    "embankment monitoring",
+    "predictive maintenance",
+    "geotechnical asset management",
+    "Network Rail",
+    "SatSense",
+    "United Kingdom"
+  ],
+  "relations": [
+    {
+      "type": "instantiates",
+      "target": "UC-RAIL-EARTHWORKS-INSAR-001",
+      "target_kind": "use_case",
+      "note": "Concrete network-wide deployment of the InSAR ground-deformation monitoring use case for rail earthworks."
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Network Rail",
+      "role": "Infrastructure operator / decision user",
+      "organisation": "Network Rail, United Kingdom"
+    },
+    {
+      "name": "SatSense",
+      "role": "EO service provider / data analytics partner",
+      "organisation": "SatSense"
+    }
+  ],
+  "sources": [
+    {
+      "type": "document",
+      "reference": "Network Rail, Earthworks Technical Strategy, 2018.",
+      "date": "2018-01-01"
+    },
+    {
+      "type": "publication",
+      "reference": "Wright, Hooper, Gooding & Bray, \"Satellite Radar Interferometry (InSAR) for asset management of railway infrastructure\", PWI Journal, 2021.",
+      "date": "2021-01-01"
+    },
+    {
+      "type": "publication",
+      "reference": "Magnall et al., \"Utilising InSAR for monitoring infrastructure at national scales\", EWSHM 2024.",
+      "date": "2024-01-01"
+    },
+    {
+      "type": "press_release",
+      "reference": "GIM International, \"UK rail network to be monitored from space\", 2025.",
+      "date": "2025-01-01"
+    },
+    {
+      "type": "publication",
+      "reference": "SatSense, \"Keeping Rail Asset Management On The Right Tracks With InSAR\", 2022.",
+      "date": "2022-01-01"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2026-06-29T00:00:00Z",
+      "author": "Lauku",
+      "comment": "Initial creation from the 'Network Rail Copernicus InSAR Case Study' Word document, converted to case-study schema with embedded illustrations."
+    }
+  ]
+}
