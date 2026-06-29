@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case studies — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<section class="page-hero">
+  <div class="container">
+    <h1>Case studies</h1>
+    <p>Specific, real-world illustrations of how users have addressed concrete problems with Copernicus — including EUSPA-funded Horizon Europe projects such as SPATRA, BUILDSPACE and Space4Cities. Each is tagged by maturity: concept, pilot, demonstrated, operational or scaled.</p>
+  </div>
+</section>
+<section style="padding:28px 32px 64px;">
+  <div class="container">
+    <div class="filter-bar" id="filter-bar"></div>
+    <div class="result-count" id="result-count"></div>
+    <div class="grid grid-3" id="cs-grid"></div>
+  </div>
+</section>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>
+let DATA;
+function csCard(c){
+  const s = segmentById(DATA, primarySegmentId(c));
+  const isEuProject = c.classification && c.classification.site && c.classification.site.eu_project;
+  const realTag = isEuProject ? `<span class="badge" style="background:#E1F5EE;color:#085041">★ EU project</span>` : '';
+  const products = (c.classification && c.classification.products) || [];
+  return `<a class="box" href="casestudy.html?id=${c.id}" style="--box-accent:${(s.site&&s.site.color)||'#888'}">
+    <div class="box-top"><div class="box-meta">${segBadge(s)}${realTag}</div>${maturityBadge(c.maturity)}</div>
+    <div class="box-title">${esc(c.title)}</div>
+    <div class="box-summary">${esc(c.summary)}</div>
+    <div class="box-foot">
+      <div class="box-services">${products.map(sv => svcBadge(DATA, sv)).join('')}</div>
+      <span class="box-cta">Read →</span>
+    </div>
+  </a>`;
+}
+function renderList(seg){
+  const list = seg === 'all' ? DATA.casestudies : DATA.casestudies.filter(c => primarySegmentId(c) === seg);
+  document.getElementById('result-count').textContent = `${list.length} case stud${list.length!==1?'ies':'y'}`;
+  document.getElementById('cs-grid').innerHTML = list.length ? list.map(csCard).join('') : '<p style="color:var(--text-faint)">No case studies in this segment.</p>';
+}
+loadContent().then(data => {
+  DATA = data;
+  mountChrome(data, 'casestudies');
+  const seg = new URLSearchParams(location.search).get('segment') || 'all';
+  buildFilterButtons(document.getElementById('filter-bar'), data, seg, renderList);
+  renderList(seg);
+});
+</script>
+</body>
+</html>

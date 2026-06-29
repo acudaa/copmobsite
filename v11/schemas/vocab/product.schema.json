@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/vocab/product.schema.json",
+  "title": "Product / data source vocabulary entry",
+  "description": "A node in the EO product taxonomy. Nodes exist at varied levels of abstraction (component, service, mission, instrument, product, sub-product) and form a hierarchy via 'parent'. Content items reference a node by id from 'classification.products' or use-case 'steps[].products' at ANY level, uniformly. Owning service/mission is expressed structurally (walk 'parent'), not by a separate field.",
+  "type": "object",
+  "required": ["id", "name", "level"],
+  "properties": {
+    "id": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/identifier" },
+    "name": { "type": "string", "description": "Display name, e.g. 'European Ground Motion Service'." },
+    "level": {
+      "type": "string",
+      "enum": ["component", "service", "mission", "instrument", "product", "sub_product"],
+      "description": "Taxonomy layer (abstraction level) of this node, from coarse to fine. component: top-level grouping (e.g. Copernicus Services). service: a Copernicus service (CLMS, CAMS...). mission: a satellite mission (Sentinel-1...). instrument: a sensor on a mission (TROPOMI...). product: a distinct data/service product (EGMS, Sentinel-1 SLC, ERA5). sub_product: a variant/level of a product (EGMS Ortho, GLO-30). Depth is not fixed - branches can be 2 to 4 levels deep."
+    },
+    "parent": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/identifier",
+      "description": "Id of the single taxonomy parent (one layer up). Omit for root nodes. This is the structural hierarchy edge; it must resolve to another product id and must not form a cycle."
+    },
+    "family": {
+      "type": "string",
+      "enum": ["copernicus_sentinel", "copernicus_service", "copernicus_contributing", "commercial", "in_situ", "reanalysis", "other"],
+      "description": "High-level grouping/branch for filtering and product pages."
+    },
+    "nature": {
+      "type": "string",
+      "enum": ["observational", "modelled", "derived", "in_situ"],
+      "description": "Whether outputs are direct observations, model output, derived/processed, or in-situ. Captures the modelled-vs-observed distinction (e.g. CAMS modelled vs Sentinel-5P/TROPOMI observational)."
+    },
+    "type": {
+      "type": "string",
+      "description": "Optional free-text descriptive theme/kind, e.g. 'ground motion product', 'atmospheric reanalysis', 'DEM'. Descriptive only - the structural layer is 'level'."
+    },
+    "provider": { "type": "string", "description": "Operating/providing entity, e.g. 'ESA / EU', 'ECMWF', 'EEA'." },
+    "description": { "type": "string" },
+    "url": { "type": "string", "description": "Canonical reference URL." },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Alternative names/acronyms to improve search (e.g. 'CLC' for CORINE Land Cover)."
+    },
+    "derived_from": {
+      "type": "array",
+      "items": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/identifier" },
+      "description": "Cross-branch provenance links to other product ids (NOT the taxonomy hierarchy). E.g. EGMS derived_from Sentinel-1. Each id must resolve to a product."
+    },
+    "catalogue_metadata": {
+      "type": "object",
+      "description": "Escape hatch for rich, source-specific catalogue fields that don't fit the core taxonomy fields above (e.g. region/coverage, spatial/temporal resolution, processing level, access method, file format, date coverage, user manual link). Populated when importing from a detailed product catalogue (e.g. a CMEMS/CLMS/CAMS/CEMS/C3S product list) rather than hand-authored. Keep keys descriptive; this is intentionally open since catalogue exports vary by source. If a key here turns out to be useful for filtering/display across the site, promote it to a real top-level field instead.",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

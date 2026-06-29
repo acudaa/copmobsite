@@ -1,0 +1,12 @@
+Source rows: 844
+Exact full-record duplicates dropped: 2
+Old hand-authored nodes removed as superseded: 5 (['corine-land-cover', 'egms', 'egms-basic', 'egms-calibrated', 'egms-ortho'])
+Catalogue datasets reusing an existing id (no new id generated): 2
+  - (CLMS, 'European Ground Motion Service (EU-GMS)') -> reused id 'egms'
+  - (CLMS, 'Corine Land Cover (CLC) 2018, Version 2020_20u1') -> reused id 'corine-land-cover'
+Dataset (product-level) groups: 253
+New product-level nodes created: 253
+New sub_product-level nodes created: 674
+Total new nodes: 927
+Existing nodes carried over unchanged: 22
+Total nodes in products.merged.json: 949

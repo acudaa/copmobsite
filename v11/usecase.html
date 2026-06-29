@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Use case — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .uc-body { padding: 44px 32px; }
+  .uc-grid2 { display: grid; grid-template-columns: 1fr; gap: 28px; max-width: 760px; }
+  .uc-block h3 { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin-bottom: 10px; }
+  .uc-block p { font-size: 15px; line-height: 1.8; color: var(--text); }
+  .uc-block.solution { background: var(--bg-off); border-left: 3px solid var(--blue); padding: 20px 22px; border-radius: 0 var(--radius) var(--radius) 0; }
+  .services-strip { padding: 24px 32px; background: var(--bg-off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .services-strip h3 { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin-bottom: 12px; }
+  .svc-used { display: flex; flex-wrap: wrap; gap: 8px; }
+  .svc-used a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; font-size: 13px; }
+  /* Role of Copernicus block */
+  .corole { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+  .corole-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; display: flex; gap: 18px; align-items: flex-start; background: var(--bg); }
+  .corole-card .ic { width: 38px; height: 38px; border-radius: 9px; background: var(--blue-light); color: var(--blue-dark); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+  .corole-card h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--text-faint); margin-bottom: 8px; }
+  .corole-mode { margin-bottom: 10px; }
+  .corole-detail { font-size: 14.5px; line-height: 1.75; color: var(--text); }
+  .related { padding: 44px 32px; border-top: 1px solid var(--border); }
+  .related h2 { font-size: 18px; font-weight: 500; margin-bottom: 6px; }
+  .related-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb" id="breadcrumb"></div>
+    <div id="tags" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center;"></div>
+    <h1 id="uc-title"></h1>
+    <p id="uc-summary"></p>
+  </div>
+</section>
+<div class="services-strip">
+  <div class="container">
+    <h3>Copernicus services involved</h3>
+    <div class="svc-used" id="svc-used"></div>
+  </div>
+</div>
+<section class="uc-body">
+  <div class="container uc-grid2">
+    <div class="uc-block" id="uc-description-wrap"><h3>Use case</h3><p id="uc-description"></p></div>
+  </div>
+</section>
+<section style="padding:0 0 8px;">
+  <div class="corole">
+    <div class="corole-card">
+      <div class="ic">⚙</div>
+      <div>
+        <h3>Role of Copernicus in the workflow</h3>
+        <div class="corole-mode" id="corole-mode"></div>
+        <p class="corole-detail" id="corole-detail"></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="related" id="related-section" style="margin-top:36px;">
+  <div class="container">
+    <h2>Related case studies</h2>
+    <p class="related-sub">Real-world examples illustrating this use case in practice.</p>
+    <div class="grid grid-2" id="related-grid"></div>
+  </div>
+</section>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>
+const id = new URLSearchParams(location.search).get('id');
+loadContent().then(data => {
+  mountChrome(data, 'usecases');
+  const uc = data.usecases.find(u => u.id === id);
+  if (!uc) { document.querySelector('.page-hero .container').innerHTML = '<h1>Use case not found</h1>'; return; }
+  const seg = segmentById(data, primarySegmentId(uc));
+  document.title = uc.title + ' — Copernicus for Transport';
+  document.getElementById('breadcrumb').innerHTML =
+    `<a href="usecases.html">Use cases</a> › <a href="segments.html?segment=${seg.id}">${esc(seg.name)}</a> › <span>${uc.id}</span>`;
+  // maturity marker at the top, alongside segment + id
+  document.getElementById('tags').innerHTML =
+    maturityBadge(uc.maturity) + segBadge(seg) + ` <span class="badge badge-mono" style="background:var(--bg-subtle);color:var(--text-faint)">${uc.id}</span>`;
+  document.getElementById('uc-title').textContent = uc.title;
+  document.getElementById('uc-summary').textContent = uc.summary;
+  // description is a single markdown field (the old problem/solution two-box layout
+  // merged into it during the schema migration); render as paragraphs, no markdown parser here yet
+  document.getElementById('uc-description').innerHTML = esc(uc.description).split('\n\n').map(p => `<p>${p}</p>`).join('');
+  const products = (uc.classification && uc.classification.products) || [];
+  const productsById = new Map(data.products.map(p => [p.id, p]));
+  function resolvedUrl(p){
+    let cur = p;
+    while (cur) { if (cur.url) return cur.url; cur = cur.parent ? productsById.get(cur.parent) : null; }
+    return null;
+  }
+  document.getElementById('svc-used').innerHTML = products.map(pid => {
+    const p = data.products.find(x => x.id === pid);
+    if (!p) return svcBadge(data, pid);
+    const theme = ({
+      copernicus_sentinel:{color:'#185FA5',bg:'#E6F1FB'}, copernicus_service:{color:'#27500A',bg:'#EAF3DE'},
+      copernicus_contributing:{color:'#633806',bg:'#FAEEDA'}, reanalysis:{color:'#3C3489',bg:'#EEEDFE'},
+      commercial:{color:'#791F1F',bg:'#FCEBEB'}, in_situ:{color:'#085041',bg:'#E1F5EE'}, other:{color:'#444',bg:'#ECEAE5'},
+    })[p.family] || {color:'#444',bg:'#ECEAE5'};
+    const url = resolvedUrl(p);
+    return url
+      ? `<a href="${esc(url)}" target="_blank" rel="noopener" style="background:${theme.bg};color:${theme.color}"><strong>${esc(p.name)}</strong><span style="opacity:.75">↗</span></a>`
+      : `<span style="background:${theme.bg};color:${theme.color};padding:6px 12px;border-radius:7px;display:inline-flex;align-items:center"><strong>${esc(p.name)}</strong></span>`;
+  }).join('');
+
+  // Role of Copernicus: integration mode + detail, now stored as a site-specific
+  // extension under classification.site (no equivalent top-level field in the new schema)
+  const siteExt = (uc.classification && uc.classification.site) || {};
+  if (siteExt.integration_mode || siteExt.integration_detail) {
+    document.getElementById('corole-mode').innerHTML = modeBadge(siteExt.integration_mode);
+    document.getElementById('corole-detail').textContent = siteExt.integration_detail;
+  } else {
+    document.querySelector('.corole').style.display = 'none';
+  }
+
+  const rel = (uc._caseStudies||[]).map(rid => data.casestudies.find(c => c.id === rid)).filter(Boolean);
+  if (rel.length) {
+    document.getElementById('related-grid').innerHTML = rel.map(c => {
+      const rs = segmentById(data, primarySegmentId(c));
+      const isEuProject = c.classification && c.classification.site && c.classification.site.eu_project;
+      const realTag = isEuProject ? `<span class="badge" style="background:#E1F5EE;color:#085041">★ EU project</span>` : '';
+      const csProducts = (c.classification && c.classification.products) || [];
+      return `<a class="box" href="casestudy.html?id=${c.id}" style="--box-accent:${(rs.site&&rs.site.color)||'#888'}">
+        <div class="box-top"><div class="box-meta">${segBadge(rs)}${realTag}</div>${maturityBadge(c.maturity)}</div>
+        <div class="box-title">${esc(c.title)}</div>
+        <div class="box-summary">${esc(c.summary)}</div>
+        <div class="box-foot"><div class="box-services">${csProducts.map(sv => svcBadge(data, sv)).join('')}</div><span class="box-cta">Read →</span></div>
+      </a>`;
+    }).join('');
+  } else { document.getElementById('related-section').style.display = 'none'; }
+});
+</script>
+</body>
+</html>

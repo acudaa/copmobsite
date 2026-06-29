@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tool — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .meta-bar { padding: 20px 32px; background: var(--bg-off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .meta-grid { display: flex; gap: 36px; flex-wrap: wrap; }
+  .meta-item .meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin-bottom: 3px; }
+  .meta-item .meta-val { font-size: 14px; color: var(--text); font-weight: 500; }
+  .tl-body { padding: 44px 32px; }
+  .tl-narrative { max-width: 760px; display: flex; flex-direction: column; gap: 28px; }
+  .tl-step h3 { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin-bottom: 10px; }
+  .tl-step p { font-size: 15px; line-height: 1.8; }
+  .tl-step.why { background: var(--bg-off); border-left: 3px solid var(--blue); padding: 20px 22px; border-radius: 0 var(--radius) var(--radius) 0; }
+  .tl-link-box { margin-top: 36px; max-width: 760px; padding: 18px 20px; border: 1px solid var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .tl-link-box.live { border-color: rgba(24,95,165,0.3); background: var(--blue-light, #EAF2FA); }
+  .tl-link-box .lbl { font-size: 13px; color: var(--text-muted); }
+  .tl-link-box a { font-size: 14px; font-weight: 500; }
+  .concept-banner { display:inline-flex; align-items:center; gap:8px; font-size:12px; padding:6px 12px; border-radius:20px; background:var(--bg-subtle); color:var(--text-muted); font-weight:500; margin-bottom:14px; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb" id="breadcrumb"></div>
+    <div id="concept-banner"></div>
+    <div id="tags" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;align-items:center;"></div>
+    <h1 id="tl-title"></h1>
+    <p id="tl-summary"></p>
+  </div>
+</section>
+<div class="meta-bar"><div class="container meta-grid" id="meta-grid"></div></div>
+<section class="tl-body">
+  <div class="container tl-narrative">
+    <div class="tl-step"><h3>What it does</h3><p id="tl-what"></p></div>
+    <div class="tl-step why"><h3>Why it matters</h3><p id="tl-why"></p></div>
+    <div class="tl-step" id="tl-status-wrap"><h3>Status</h3><p id="tl-status"></p></div>
+  </div>
+  <div class="container">
+    <div class="tl-link-box" id="tl-link-box">
+      <span class="lbl" id="link-lbl">Learn more</span>
+      <a id="tl-link" href="#" target="_blank" rel="noopener">Open tool ↗</a>
+    </div>
+  </div>
+</section>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>
+const id = new URLSearchParams(location.search).get('id');
+
+// Tool placeholders use '## What it does' / '## Why it matters' / '## Status'
+// headers (see content/tools/*.json) - split back into display boxes. Falls
+// back to a single box if a tool's narrative doesn't follow that convention.
+function splitNarrative(md){
+  const sections = { what:'', why:'', status:'' };
+  const map = { 'what it does':'what', 'why it matters':'why', 'status':'status' };
+  const re = /##\s*(What it does|Why it matters|Status)\s*\n([\s\S]*?)(?=\n##\s*(?:What it does|Why it matters|Status)|$)/gi;
+  let m, found = false;
+  while ((m = re.exec(md))) { sections[map[m[1].toLowerCase()]] = m[2].trim(); found = true; }
+  if (!found) sections.what = md;
+  return sections;
+}
+
+loadContent().then(data => {
+  mountChrome(data, 'tools');
+  const t = data.tools.find(x => x.id === id);
+  if (!t) { document.querySelector('.page-hero .container').innerHTML = '<h1>Tool not found</h1>'; return; }
+  const seg = segmentById(data, primarySegmentId(t));
+  const products = (t.classification && t.classification.products) || [];
+  const segs = (t.classification && t.classification.market_segments) || [];
+  const stakeholderNames = (t.stakeholders || []).map(s => s.name).join(', ');
+  const siteExt = (t.classification && t.classification.site) || {};
+  const demoUrl = siteExt.project_link || null;
+
+  document.title = t.title + ' — Copernicus for Transport';
+  document.getElementById('breadcrumb').innerHTML =
+    `<a href="tools.html">Tools</a>${seg ? ` › <a href="tools.html?segment=${seg.id}">${esc(seg.name)}</a>` : ''}`;
+  if (!demoUrl) document.getElementById('concept-banner').innerHTML = `<div class="concept-banner">○ Concept placeholder — no live demo yet</div>`;
+  document.getElementById('tags').innerHTML =
+    (seg ? segBadge(seg) : '') + ' ' + maturityBadge(t.maturity) + ' ' + products.map(sv => svcBadge(data, sv)).join(' ');
+  document.getElementById('tl-title').textContent = t.title;
+  document.getElementById('tl-summary').textContent = t.summary;
+
+  const segNames = segs.map(sid => { const s = segmentById(data, sid); return s ? s.name : sid; }).join(', ');
+  document.getElementById('meta-grid').innerHTML = `
+    <div class="meta-item"><div class="meta-label">Segments</div><div class="meta-val">${esc(segNames || '—')}</div></div>
+    <div class="meta-item"><div class="meta-label">Maturity</div><div class="meta-val" style="text-transform:capitalize">${esc(t.maturity || '—')}</div></div>
+    <div class="meta-item"><div class="meta-label">Products</div><div class="meta-val">${products.map(p => { const pr = data.products.find(x=>x.id===p); return pr?pr.name:p; }).join(', ') || '—'}</div></div>
+    ${stakeholderNames ? `<div class="meta-item"><div class="meta-label">Behind it</div><div class="meta-val">${esc(stakeholderNames)}</div></div>` : ''}`;
+
+  const sections = splitNarrative(t.narrative);
+  document.getElementById('tl-what').textContent = sections.what;
+  document.getElementById('tl-why').textContent = sections.why;
+  if (sections.status) {
+    document.getElementById('tl-status').textContent = sections.status;
+  } else {
+    document.getElementById('tl-status-wrap').style.display = 'none';
+  }
+  if (!sections.why) document.querySelector('.tl-step.why').style.display = 'none';
+
+  const linkBox = document.getElementById('tl-link-box');
+  const link = document.getElementById('tl-link');
+  if (demoUrl) {
+    linkBox.classList.add('live');
+    link.href = demoUrl;
+    link.textContent = 'Open tool ↗';
+    document.getElementById('link-lbl').textContent = 'This tool has a live demonstration:';
+  } else {
+    link.href = '#';
+    link.textContent = 'No demo available yet';
+    link.style.opacity = '0.5';
+    link.style.pointerEvents = 'none';
+    document.getElementById('link-lbl').textContent = "This is a concept placeholder. A working demonstrator hasn't been published yet.";
+  }
+});
+</script>
+</body>
+</html>

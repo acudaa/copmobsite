@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/news.schema.json",
+  "title": "News item",
+  "description": "A short news/announcement item for the site's News feed (grant calls, procurement notices, product updates, project milestones...). Aligned with the other content schemas via common.schema.json's shared building blocks (identifier, summary, markdownText, classification) so news appears in the same segment-filtered views as needs/use cases/case studies/tools. Deliberately lighter-weight than those: news is NOT part of the demand -> pattern -> evidence graph (no 'relations', 'sources', or 'history' - a news item is a point-in-time announcement, not a node other content links to or that accrues an edit history worth tracking the same way).",
+  "type": "object",
+  "required": ["id", "date", "title", "summary"],
+  "properties": {
+    "id": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/identifier" },
+
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Publication date (YYYY-MM-DD). Listings sort newest first by this field."
+    },
+
+    "type": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/newsType",
+      "description": "Category shown as a label on the news card."
+    },
+
+    "title": {
+      "type": "string",
+      "description": "Headline written for a website reader."
+    },
+
+    "summary": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/summary" },
+
+    "body": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/markdownText",
+      "description": "Full body text shown on the news page. Supports Markdown. Optional - some items are summary-only with an outbound link."
+    },
+
+    "link": {
+      "type": "string",
+      "description": "URL to the original source (funding call, procurement notice, project page, etc.)."
+    },
+
+    "classification": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/classification",
+      "description": "Shared subject facets, primarily market_segments. Use classification.market_segments: ['all'] for items not specific to one segment (the site's segment filter treats 'all' as matching every filter value), or a single segment id e.g. ['transport.rail'] for a segment-specific item."
+    },
+
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Free-text keyword tags, independent of the structured classification facets."
+    }
+  },
+  "additionalProperties": false
+}

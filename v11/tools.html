@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tools — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<section class="page-hero">
+  <div class="container">
+    <h1>Tools</h1>
+    <p>Interactive demonstrators and applications built on Copernicus data for transport and mobility. Most entries here are concept-stage placeholders describing what a demonstrator would do; a launch link appears once a live instance exists.</p>
+  </div>
+</section>
+<section style="padding:28px 32px 64px;">
+  <div class="container">
+    <div class="filter-bar" id="filter-bar"></div>
+    <div class="result-count" id="result-count"></div>
+    <div class="grid grid-3" id="tool-grid"></div>
+  </div>
+</section>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>
+let DATA;
+function toolCard(t){
+  const s = segmentById(DATA, primarySegmentId(t));
+  const demoUrl = t.classification && t.classification.site && t.classification.site.project_link;
+  const hasDemo = !!demoUrl;
+  const products = (t.classification && t.classification.products) || [];
+  return `<a class="box" href="tool.html?id=${t.id}" style="--box-accent:${(s&&s.site&&s.site.color)||'#888'}">
+    <div class="box-top">
+      <div class="box-meta">${s ? segBadge(s) : ''}${hasDemo ? `<span class="badge" style="background:#E6F1FB;color:#0C447C">▶ Live demo</span>` : ''}</div>
+      ${maturityBadge(t.maturity)}
+    </div>
+    <div class="box-title">${esc(t.title)}</div>
+    <div class="box-summary">${esc(t.summary)}</div>
+    <div class="box-foot">
+      <div class="box-services">${products.map(sv => svcBadge(DATA, sv)).join('')}</div>
+      <span class="box-cta">${hasDemo ? 'Open tool →' : 'View →'}</span>
+    </div>
+  </a>`;
+}
+function renderList(seg){
+  const list = seg === 'all' ? DATA.tools : DATA.tools.filter(t => primarySegmentId(t) === seg);
+  document.getElementById('result-count').textContent = `${list.length} tool${list.length!==1?'s':''}`;
+  document.getElementById('tool-grid').innerHTML = list.length ? list.map(toolCard).join('') : '<p style="color:var(--text-faint)">No tools in this segment yet.</p>';
+}
+loadContent().then(data => {
+  DATA = data;
+  mountChrome(data, 'tools');
+  const seg = new URLSearchParams(location.search).get('segment') || 'all';
+  buildFilterButtons(document.getElementById('filter-bar'), data, seg, renderList);
+  renderList(seg);
+});
+</script>
+</body>
+</html>

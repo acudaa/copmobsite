@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Products — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .ov-section { padding: 8px 32px 36px; }
+  .ov-cards { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:14px; margin-top:16px; }
+  .ov-card { border:1px solid var(--border); border-radius: var(--radius); padding:16px 18px; background:var(--bg); }
+  .ov-card .on { font-size:14px; font-weight:500; margin-bottom:4px; }
+  .ov-card .oc { font-size:12px; color:var(--text-faint); font-family: var(--font-mono, monospace); }
+
+  .tree-section { padding: 24px 32px 44px; border-top: 1px solid var(--border); }
+  .tree-hint { font-size: 13px; color: var(--text-muted); margin: 6px 0 16px; }
+  .tree-root { display:flex; flex-direction:column; gap:2px; }
+  .tree-node { user-select:none; }
+  .tree-row { display:flex; align-items:center; gap:8px; padding:7px 8px; border-radius: var(--radius-sm); cursor:pointer; }
+  .tree-row:hover { background: var(--bg-off); }
+  .tree-row.is-leaf { cursor:default; }
+  .tree-row.is-leaf:hover { background: none; }
+  .tree-toggle { width:16px; height:16px; flex:0 0 auto; display:flex; align-items:center; justify-content:center; font-size:10px; color: var(--text-faint); transition: transform .12s; }
+  .tree-toggle.open { transform: rotate(90deg); }
+  .tree-toggle.empty { visibility: hidden; }
+  .tree-name { font-size:13.5px; flex:1; }
+  .tree-level { font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-faint); white-space:nowrap; }
+  .tree-count { font-size:11px; color:var(--text-faint); font-family: var(--font-mono, monospace); white-space:nowrap; }
+  .tree-children { margin-left: 22px; padding-left: 12px; border-left: 1px solid var(--border); display:none; flex-direction:column; gap:2px; }
+  .tree-children.open { display:flex; }
+  .tree-load-more { font-size:11.5px; color: var(--blue, #185FA5); padding: 5px 8px 5px 30px; cursor:pointer; }
+  .tree-load-more:hover { text-decoration: underline; }
+  .tree-detail { font-size:12px; color: var(--text-muted); margin: 4px 0 6px 30px; padding: 8px 10px; background: var(--bg-off); border-radius: var(--radius-sm); display:none; }
+  .tree-detail.open { display:block; }
+  .tree-detail .td-row { margin-bottom: 3px; }
+  .tree-detail .td-row b { color: var(--text); font-weight: 500; }
+  .tree-detail a { font-size: 12px; }
+
+  .search-section { padding: 24px 32px 64px; border-top: 1px solid var(--border); }
+  .search-bar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin: 18px 0 8px; }
+  .search-bar input[type=text] { flex:1; min-width:220px; padding:10px 14px; border:1px solid var(--border-mid); border-radius: var(--radius-sm); font-size:14px; }
+  .search-bar select { padding:10px 12px; border:1px solid var(--border-mid); border-radius: var(--radius-sm); font-size:13px; background:var(--bg); color:var(--text); }
+  .filter-toggle-row { display:flex; align-items:center; gap:8px; margin-bottom: 4px; }
+  .filter-toggle-row button { font-size: 12px; color: var(--blue, #185FA5); background:none; border:none; cursor:pointer; padding: 4px 0; }
+  .filter-toggle-row button:hover { text-decoration: underline; }
+  .more-filters { display:none; gap:10px; flex-wrap:wrap; margin: 0 0 12px; }
+  .more-filters.open { display:flex; }
+  .active-filter-chips { display:flex; gap:6px; flex-wrap:wrap; margin-bottom: 10px; }
+  .chip { font-size:11.5px; padding:4px 10px; border-radius: 14px; background: var(--bg-subtle, #ECEAE5); color: var(--text-muted); display:inline-flex; align-items:center; gap:6px; }
+  .chip button { background:none; border:none; cursor:pointer; color: var(--text-faint); font-size: 13px; line-height:1; padding:0; }
+  .chip button:hover { color: var(--text); }
+  .search-count { font-size:13px; color:var(--text-faint); margin-bottom:14px; }
+
+  .res-list { display:flex; flex-direction:column; gap:8px; }
+  .res-item { border:1px solid var(--border); border-radius: var(--radius-sm); padding:13px 16px; background:var(--bg); }
+  .res-top { display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .res-name { font-size:14px; font-weight:500; }
+  .res-path { font-size:11px; color:var(--text-faint); font-family: var(--font-mono, monospace); margin-top:2px; }
+  .res-level { font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-faint); white-space:nowrap; }
+  .res-desc { font-size:12.5px; color:var(--text-muted); margin-top:6px; line-height:1.55; }
+  .res-meta { display:flex; gap:14px; flex-wrap:wrap; margin-top:8px; font-size:11.5px; color:var(--text-faint); }
+  .res-meta span b { color:var(--text-muted); font-weight:500; }
+  .res-link { font-size:12px; margin-top:6px; display:inline-block; }
+  .load-more { display:block; margin: 18px auto 0; padding:9px 22px; border:1px solid var(--border-mid); border-radius: var(--radius-sm); background:var(--bg); cursor:pointer; font-size:13px; }
+  .load-more:hover { background: var(--bg-off); }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<section class="page-hero">
+  <div class="container">
+    <h1>Products</h1>
+    <p>The Copernicus data and services referenced across this site — from top-level missions and services down to individual catalogue datasets and output variables. Search below to find a specific product; the overview shows the broad families.</p>
+  </div>
+</section>
+<section class="ov-section">
+  <div class="container">
+    <h2 style="font-size:16px;font-weight:500;">Services &amp; missions overview</h2>
+    <div class="ov-cards" id="ov-cards"></div>
+  </div>
+</section>
+<section class="tree-section">
+  <div class="container">
+    <h2 style="font-size:16px;font-weight:500;">Browse the hierarchy</h2>
+    <p class="tree-hint">Click a row to expand it. Large branches load 25 children at a time — use "Show more" rather than expanding everything at once.</p>
+    <div class="tree-root" id="tree-root"></div>
+  </div>
+</section>
+<section class="search-section">
+  <div class="container">
+    <h2 style="font-size:16px;font-weight:500;">Search the full catalogue</h2>
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Search by name, description, parameter…" />
+      <select id="group-filter"><option value="">All groups</option></select>
+      <select id="level-filter">
+        <option value="">All levels</option>
+        <option value="service">Service</option>
+        <option value="mission">Mission</option>
+        <option value="instrument">Instrument</option>
+        <option value="product">Product / dataset</option>
+        <option value="sub_product">Sub-product / variable</option>
+      </select>
+      <div class="filter-toggle-row"><button type="button" id="more-filters-toggle">+ More filters</button></div>
+    </div>
+    <div class="more-filters" id="more-filters">
+      <select id="family-filter"><option value="">All families</option></select>
+      <select id="nature-filter"><option value="">All natures</option></select>
+      <select id="region-filter"><option value="">All regions</option></select>
+      <select id="access-filter"><option value="">All access methods</option></select>
+      <select id="product-type-filter"><option value="">All product types</option></select>
+      <select id="processing-level-filter"><option value="">All processing levels</option></select>
+    </div>
+    <div class="active-filter-chips" id="active-chips"></div>
+    <div class="search-count" id="search-count"></div>
+    <div class="res-list" id="res-list"></div>
+    <button class="load-more" id="load-more" style="display:none">Show more</button>
+  </div>
+</section>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>
+const PAGE_SIZE = 40;
+const TREE_PAGE_SIZE = 25;
+let visibleCount = PAGE_SIZE;
+let DATA, byId, byParent;
+
+function pathTo(p){
+  const parts = [p.name];
+  let cur = p;
+  while (cur.parent && byId.has(cur.parent)) {
+    cur = byId.get(cur.parent);
+    parts.unshift(cur.name);
+  }
+  return parts.join(' › ');
+}
+
+const FILTER_IDS = ['group-filter','level-filter','family-filter','nature-filter','region-filter','access-filter','product-type-filter','processing-level-filter'];
+const FILTER_LABELS = {
+  'group-filter': 'Group', 'level-filter': 'Level', 'family-filter': 'Family', 'nature-filter': 'Nature',
+  'region-filter': 'Region', 'access-filter': 'Access', 'product-type-filter': 'Product type', 'processing-level-filter': 'Processing level',
+};
+
+function currentFilters(){
+  const f = {};
+  FILTER_IDS.forEach(id => { const v = document.getElementById(id).value; if (v) f[id] = v; });
+  f.term = document.getElementById('search').value.trim().toLowerCase();
+  return f;
+}
+
+function matches(p, f){
+  const cm = p.catalogue_metadata || {};
+  if (f['level-filter'] && p.level !== f['level-filter']) return false;
+  if (f['group-filter'] && cm.group !== f['group-filter']) return false;
+  if (f['family-filter'] && p.family !== f['family-filter']) return false;
+  if (f['nature-filter'] && p.nature !== f['nature-filter']) return false;
+  if (f['region-filter'] && cm.region !== f['region-filter']) return false;
+  if (f['access-filter'] && cm.access_data !== f['access-filter']) return false;
+  if (f['product-type-filter'] && cm.product_type !== f['product-type-filter']) return false;
+  if (f['processing-level-filter'] && cm.processing_level !== f['processing-level-filter']) return false;
+  if (f.term) {
+    const hay = [p.name, p.description, p.type, cm.parameter, cm.specific_output_parameter, cm.group, cm.region, ...(p.aliases||[])]
+      .filter(Boolean).join(' ').toLowerCase();
+    if (!hay.includes(f.term)) return false;
+  }
+  return true;
+}
+
+function resultItem(p){
+  const cm = p.catalogue_metadata || {};
+  const meta = [];
+  if (cm.region) meta.push(`<span><b>Region:</b> ${esc(cm.region)}</span>`);
+  if (cm.spatial_resolution) meta.push(`<span><b>Resolution:</b> ${esc(cm.spatial_resolution)}</span>`);
+  if (cm.temporal_resolution) meta.push(`<span><b>Updates:</b> ${esc(cm.temporal_resolution)}</span>`);
+  if (cm.processing_level) meta.push(`<span><b>Level:</b> ${esc(cm.processing_level)}</span>`);
+  const url = p.url || cm.product_user_manual;
+  return `<div class="res-item">
+    <div class="res-top">
+      <div><div class="res-name">${esc(p.name)}</div><div class="res-path">${esc(pathTo(p))}</div></div>
+      <span class="res-level">${esc(p.level.replace('_',' '))}</span>
+    </div>
+    ${p.description ? `<div class="res-desc">${esc(p.description)}</div>` : ''}
+    ${meta.length ? `<div class="res-meta">${meta.join('')}</div>` : ''}
+    ${url ? `<a class="res-link" href="${esc(url)}" target="_blank" rel="noopener">More info ↗</a>` : ''}
+  </div>`;
+}
+
+function renderChips(f){
+  const chips = FILTER_IDS.filter(id => f[id]).map(id =>
+    `<span class="chip">${esc(FILTER_LABELS[id])}: ${esc(f[id])}<button type="button" data-clear="${id}">✕</button></span>`
+  );
+  document.getElementById('active-chips').innerHTML = chips.join('');
+  document.querySelectorAll('#active-chips [data-clear]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById(btn.dataset.clear).value = '';
+      visibleCount = PAGE_SIZE;
+      render();
+    });
+  });
+}
+
+function render(){
+  const f = currentFilters();
+  const results = DATA.products.filter(p => matches(p, f)).sort((a,b) => a.name.localeCompare(b.name));
+
+  renderChips(f);
+  const anyFilter = Object.keys(f).some(k => f[k]);
+  document.getElementById('search-count').textContent =
+    `${results.length} item${results.length!==1?'s':''}${anyFilter ? ' matching your filters' : ' in the catalogue'}`;
+  document.getElementById('res-list').innerHTML = results.slice(0, visibleCount).map(resultItem).join('') ||
+    '<p style="color:var(--text-faint)">No products match these filters.</p>';
+  const more = document.getElementById('load-more');
+  more.style.display = results.length > visibleCount ? '' : 'none';
+}
+
+// ---------------------------------------------------------------------------
+// Hierarchical drill-down tree. Lazy: a node's children are only built when
+// the node is first expanded, and large child lists render TREE_PAGE_SIZE at
+// a time with a "Show more" row, so expanding e.g. 'cems' (87 children) or
+// an ERA5 dataset (60+ variables) never dumps everything into the DOM at once
+// the way the old always-expanded products.html did.
+// ---------------------------------------------------------------------------
+const treeShownCounts = new Map(); // nodeId -> how many children currently rendered
+
+function treeChildren(nodeId){
+  return (byParent.get(nodeId) || []).slice().sort((a,b) => a.name.localeCompare(b.name));
+}
+
+function detailHtml(p){
+  const cm = p.catalogue_metadata || {};
+  const rows = [];
+  if (p.description) rows.push(`<div class="td-row">${esc(p.description)}</div>`);
+  if (cm.region) rows.push(`<div class="td-row"><b>Region:</b> ${esc(cm.region)}</div>`);
+  if (cm.spatial_resolution) rows.push(`<div class="td-row"><b>Spatial resolution:</b> ${esc(cm.spatial_resolution)}</div>`);
+  if (cm.temporal_resolution) rows.push(`<div class="td-row"><b>Temporal resolution:</b> ${esc(cm.temporal_resolution)}</div>`);
+  if (cm.processing_level) rows.push(`<div class="td-row"><b>Processing level:</b> ${esc(cm.processing_level)}</div>`);
+  if (cm.access_data) rows.push(`<div class="td-row"><b>Access:</b> ${esc(cm.access_data)}</div>`);
+  if (cm.file_format) rows.push(`<div class="td-row"><b>File format:</b> ${esc(cm.file_format)}</div>`);
+  if (p.aliases && p.aliases.length) rows.push(`<div class="td-row"><b>Also known as:</b> ${p.aliases.map(esc).join(', ')}</div>`);
+  const url = p.url || cm.product_user_manual;
+  if (url) rows.push(`<a href="${esc(url)}" target="_blank" rel="noopener">More info ↗</a>`);
+  return rows.join('') || '<div class="td-row" style="color:var(--text-faint)">No additional detail recorded.</div>';
+}
+
+function renderTreeChildrenInto(container, nodeId, count){
+  const all = treeChildren(nodeId);
+  const shown = all.slice(0, count);
+  container.innerHTML = shown.map(c => treeNodeHtml(c)).join('') +
+    (all.length > count ? `<div class="tree-load-more" data-loadmore="${esc(nodeId)}">Show more (${all.length - count} remaining) →</div>` : '');
+  container.querySelectorAll(':scope > .tree-node').forEach(wireTreeNode);
+  const loadMore = container.querySelector('[data-loadmore]');
+  if (loadMore) {
+    loadMore.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      const newCount = count + TREE_PAGE_SIZE;
+      treeShownCounts.set(nodeId, newCount);
+      renderTreeChildrenInto(container, nodeId, newCount);
+    });
+  }
+}
+
+function treeNodeHtml(p){
+  const childCount = treeChildren(p.id).length;
+  const isLeaf = childCount === 0;
+  return `<div class="tree-node" data-id="${esc(p.id)}">
+    <div class="tree-row ${isLeaf?'is-leaf':''}" data-id="${esc(p.id)}">
+      <span class="tree-toggle ${isLeaf?'empty':''}">▶</span>
+      <span class="tree-name">${esc(p.name)}</span>
+      <span class="tree-level">${esc(p.level.replace('_',' '))}</span>
+      ${childCount ? `<span class="tree-count">${childCount}</span>` : ''}
+    </div>
+    <div class="tree-detail" data-detail="${esc(p.id)}"></div>
+    ${childCount ? `<div class="tree-children" data-children="${esc(p.id)}"></div>` : ''}
+  </div>`;
+}
+
+function wireTreeNode(nodeEl){
+  const id = nodeEl.dataset.id;
+  const row = nodeEl.querySelector(`.tree-row[data-id="${cssEsc(id)}"]`);
+  if (!row || row.dataset.wired) return;
+  row.dataset.wired = '1';
+  row.addEventListener('click', () => {
+    const p = byId.get(id);
+    const childrenEl = nodeEl.querySelector(`[data-children="${cssEsc(id)}"]`);
+    const detailEl = nodeEl.querySelector(`[data-detail="${cssEsc(id)}"]`);
+    const toggle = row.querySelector('.tree-toggle');
+
+    if (childrenEl) {
+      const isOpen = childrenEl.classList.contains('open');
+      if (!isOpen && !childrenEl.dataset.built) {
+        const initial = treeShownCounts.get(id) || TREE_PAGE_SIZE;
+        treeShownCounts.set(id, initial);
+        renderTreeChildrenInto(childrenEl, id, initial);
+        childrenEl.dataset.built = '1';
+      }
+      childrenEl.classList.toggle('open', !isOpen);
+      toggle.classList.toggle('open', !isOpen);
+      detailEl.classList.remove('open');
+    } else {
+      // Leaf node: clicking shows its detail card instead of expanding.
+      const isOpen = detailEl.classList.contains('open');
+      if (!isOpen && !detailEl.dataset.built) {
+        detailEl.innerHTML = detailHtml(p);
+        detailEl.dataset.built = '1';
+      }
+      detailEl.classList.toggle('open', !isOpen);
+    }
+  });
+}
+
+function cssEsc(s){ return String(s).replace(/[^a-zA-Z0-9_-]/g, c => '\\' + c); }
+
+function buildTree(){
+  // Tree roots: the 2 component nodes (Copernicus Space Component, Copernicus
+  // Services) -- everything else nests underneath via byParent.
+  const roots = DATA.products.filter(p => !p.parent);
+  document.getElementById('tree-root').innerHTML = roots.map(r => treeNodeHtml(r)).join('');
+  document.querySelectorAll('#tree-root > .tree-node').forEach(wireTreeNode);
+}
+
+loadContent().then(data => {
+  mountChrome(data, 'products');
+  DATA = data;
+  byId = new Map(data.products.map(p => [p.id, p]));
+  byParent = new Map();
+  data.products.forEach(p => {
+    if (p.parent) {
+      if (!byParent.has(p.parent)) byParent.set(p.parent, []);
+      byParent.get(p.parent).push(p);
+    }
+  });
+
+  // Overview: missions directly under the Sentinel space component, plus the
+  // 5 named Copernicus services - a small, fixed set regardless of how many
+  // datasets sit underneath each one (avoids the old page's breakdown when a
+  // service had 100+ direct children).
+  const spaceRoot = data.products.find(p => p.level === 'component' && p.name.includes('Space'));
+  const servicesRoot = data.products.find(p => p.level === 'component' && p.name.includes('Services'));
+  const overview = data.products.filter(p =>
+    (spaceRoot && p.parent === spaceRoot.id && p.level === 'mission') ||
+    (servicesRoot && p.parent === servicesRoot.id && p.level === 'service')
+  );
+  document.getElementById('ov-cards').innerHTML = overview.map(p => {
+    const childCount = data.products.filter(c => c.parent === p.id).length;
+    return `<div class="ov-card"><div class="on">${esc(p.name)}</div><div class="oc">${childCount} item${childCount!==1?'s':''}</div></div>`;
+  }).join('');
+
+  buildTree();
+
+  // Populate every dropdown filter from whatever distinct values actually
+  // occur in the data (no hardcoded enums, so this stays correct if the
+  // catalogue is re-imported or extended).
+  function populate(selectId, getValue){
+    const values = new Set();
+    data.products.forEach(p => { const v = getValue(p); if (v) values.add(v); });
+    const sel = document.getElementById(selectId);
+    [...values].sort().forEach(v => sel.innerHTML += `<option value="${esc(v)}">${esc(v)}</option>`);
+  }
+  populate('group-filter', p => p.catalogue_metadata && p.catalogue_metadata.group);
+  populate('family-filter', p => p.family);
+  populate('nature-filter', p => p.nature);
+  populate('region-filter', p => p.catalogue_metadata && p.catalogue_metadata.region);
+  populate('access-filter', p => p.catalogue_metadata && p.catalogue_metadata.access_data);
+  populate('product-type-filter', p => p.catalogue_metadata && p.catalogue_metadata.product_type);
+  populate('processing-level-filter', p => p.catalogue_metadata && p.catalogue_metadata.processing_level);
+
+  document.getElementById('more-filters-toggle').addEventListener('click', (ev) => {
+    const panel = document.getElementById('more-filters');
+    const open = panel.classList.toggle('open');
+    ev.target.textContent = open ? '− Fewer filters' : '+ More filters';
+  });
+
+  document.getElementById('search').addEventListener('input', () => { visibleCount = PAGE_SIZE; render(); });
+  FILTER_IDS.forEach(id => document.getElementById(id).addEventListener('change', () => { visibleCount = PAGE_SIZE; render(); }));
+  document.getElementById('load-more').addEventListener('click', () => { visibleCount += PAGE_SIZE; render(); });
+
+  render();
+});
+</script>
+</body>
+</html>

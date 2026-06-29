@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/vocab/market-segment.schema.json",
+  "title": "Market segment vocabulary entry",
+  "description": "A controlled-vocabulary entry for a market segment, optionally hierarchical via 'parent'. Referenced by id from content 'classification.market_segments'.",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/identifier" },
+    "name": { "type": "string", "description": "Display name, e.g. 'Road'." },
+    "parent": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/identifier",
+      "description": "Id of the parent segment, for hierarchy (e.g. 'transport.road' -> parent 'transport'). Omit for top-level segments."
+    },
+    "description": { "type": "string" },
+    "site": {
+      "type": "object",
+      "description": "Website-presentation fields for this segment's landing page. Not part of the shared cross-content classification model - this vocabulary entry doubles as a CMS record for a themed segment overview/detail page (icon, colours, intro copy, narrative description of EO's role, and curated per-segment notes on which products matter and why). Keep optional; a segment with no 'site' block is still a valid, usable classification facet.",
+      "properties": {
+        "icon": { "type": "string", "description": "Single glyph/emoji used as the segment's visual marker." },
+        "color": { "type": "string", "description": "Primary accent colour (hex), used for borders/links/highlights." },
+        "color_bg": { "type": "string", "description": "Light background tint paired with 'color', used for badges." },
+        "color_text": { "type": "string", "description": "Text colour paired with 'color_bg' for accessible contrast on badges." },
+        "intro": { "type": "string", "description": "Short editorial paragraph introducing the segment, shown on overview cards and the detail page header." },
+        "eo_role": { "type": "string", "description": "Editorial paragraph on the general role Earth observation plays in this segment, shown in Section 01 of the detail page." },
+        "copernicus_role": {
+          "type": "array",
+          "description": "Curated rows explaining which Copernicus products matter in this segment and why, shown in Section 03 of the detail page. This is editorial prose distinct from (and a curated subset of) the union of 'classification.products' tagged across the segment's use cases - it is not auto-derivable because the 'why' text doesn't exist anywhere else.",
+          "items": {
+            "type": "object",
+            "required": ["product", "description"],
+            "properties": {
+              "product": {
+                "$ref": "https://example.org/schemas/common.schema.json#/$defs/identifier",
+                "description": "Id from vocab/products.json."
+              },
+              "description": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "Curated external resource links shown on the segment detail page.",
+          "items": {
+            "type": "object",
+            "required": ["label", "url"],
+            "properties": {
+              "label": { "type": "string" },
+              "url": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

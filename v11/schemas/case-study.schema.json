@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/case-study.schema.json",
+  "title": "Case Study",
+  "description": "A narrative case study describing a real or illustrative deployment, for website publication and discovery. This schema is also used as-is for the 'tool' content kind (content/tools/*.json) - an interactive demonstrator is presented the same editorial way as a case study (narrative, classification, maturity), so rather than maintain a near-duplicate schema, a tool validates against this one verbatim and is distinguished only by which folder it lives in. A tool's launch/demo link is the same field a case study already uses for its external link: classification.site.project_link. Aligned v2: the bespoke 'discoverability' object was replaced by the shared 'classification' block (plus top-level language/reading_time/maturity), and the relation vocabulary was unified (satisfies -> demonstrates, related_case_study -> related, added 'instantiates' for use-case linkage).",
+  "type": "object",
+  "required": ["id", "title", "summary", "narrative"],
+  "properties": {
+    "id": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/identifier" },
+
+    "title": {
+      "type": "string",
+      "description": "Headline written for a website reader (not an internal codename)."
+    },
+
+    "summary": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/summary" },
+
+    "narrative": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/markdownText",
+      "description": "The full case study body. Supports Markdown (headings, images, lists, links, emphasis)."
+    },
+
+    "status": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/editorialStatus" },
+
+    "maturity": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/maturity",
+      "description": "Deployment maturity of the specific case described (promoted from the old discoverability.maturity to top level, shared with use cases)."
+    },
+
+    "hero_image": {
+      "type": "string",
+      "description": "Path or URL to the primary image, used in listing cards and social-share previews."
+    },
+
+    "language": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/language" },
+
+    "reading_time_minutes": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Estimated reading time shown to the visitor."
+    },
+
+    "classification": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/classification",
+      "description": "Replaces the former bespoke 'discoverability' object. Map: sector -> market_segments (+ free facets), technology -> eo_techniques, organisation_type -> organisation_types, outcome_type -> outcome_types, plus the new 'products' facet."
+    },
+
+    "key_results": {
+      "type": "array",
+      "description": "Short, demonstrated outcome statements for pull-quotes / stat callouts (the use-case analogue is 'benefits', which are expected).",
+      "items": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/outcome" }
+    },
+
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Free-text keyword tags, independent of the structured classification facets."
+    },
+
+    "relations": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/relationList",
+      "description": "Typed links. Key edges: 'instantiates' -> use_case (this case realises that pattern), 'illustrates' -> need, 'demonstrates' -> requirement, plus 'depends_on', 'related', 'supersedes'."
+    },
+
+    "stakeholders": {
+      "type": "array",
+      "description": "Real-world people, organisations, or roles featured in the story (not abstract personas).",
+      "items": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/stakeholder" }
+    },
+
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/source" }
+    },
+
+    "history": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/history" }
+  },
+  "additionalProperties": false
+}

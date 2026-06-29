@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/use-case.schema.json",
+  "title": "Use Case",
+  "description": "A reusable application pattern: how a class of EO data/services addresses a class of user needs for a market segment. The use case is the hub of the graph - it 'addresses' needs/requirements and is 'instantiated' by concrete case studies. Unlike a case study it is generalised (not one real deployment) and unlike a need it is solution-oriented (the how, not the why).",
+  "type": "object",
+  "required": ["id", "title", "summary", "description"],
+  "properties": {
+    "id": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/identifier" },
+
+    "title": {
+      "type": "string",
+      "description": "Reader-facing headline, e.g. 'Monitoring infrastructure stability with InSAR ground motion'."
+    },
+
+    "summary": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/summary" },
+
+    "description": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/markdownText",
+      "description": "The full use-case body: the problem context, how EO addresses it, and the value delivered. Supports Markdown."
+    },
+
+    "value_proposition": {
+      "type": "string",
+      "maxLength": 400,
+      "description": "One- or two-sentence plain-text statement of the core benefit of this use case. Drives hero callouts and graph node previews."
+    },
+
+    "status": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/editorialStatus" },
+
+    "maturity": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/maturity" },
+
+    "hero_image": {
+      "type": "string",
+      "description": "Path or URL to the primary image, used in listing cards and social-share previews."
+    },
+
+    "language": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/language" },
+
+    "reading_time_minutes": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Estimated reading time shown to the visitor."
+    },
+
+    "actors": {
+      "type": "array",
+      "description": "Abstract roles/personas that participate in this use case (e.g. 'bridge asset manager', 'rail infrastructure manager'). For named real-world people use a case study's stakeholders instead.",
+      "items": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/actor" }
+    },
+
+    "preconditions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Assumptions / enabling conditions that must hold for this use case to apply, e.g. 'AOI has Sentinel-1 coverage with adequate revisit', 'reference benchmarks available'."
+    },
+
+    "steps": {
+      "type": "array",
+      "description": "The EO value chain for this use case, from data to decision. Ordered, lightweight; not a full process model.",
+      "items": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "order": { "type": "integer", "minimum": 1 },
+          "title": { "type": "string", "description": "Short step label, e.g. 'Ingest Sentinel-1 SLC stack'." },
+          "description": { "type": "string", "description": "What happens in this step. Supports Markdown." },
+          "products": {
+            "type": "array",
+            "items": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/identifier" },
+            "description": "Product ids (from vocab/products.json) used in this step."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "benefits": {
+      "type": "array",
+      "description": "Expected / potential outcomes of applying this use case (the case-study analogue is 'key_results', which are demonstrated).",
+      "items": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/outcome" }
+    },
+
+    "classification": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/classification" },
+
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Free-text keyword tags for search and related-content suggestions, independent of the structured classification facets."
+    },
+
+    "relations": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/relationList",
+      "description": "Typed links. Most importantly 'addresses' -> need/requirement (what user demand this use case meets). Also 'depends_on', 'related', 'supersedes'. Case studies declare the 'instantiates' edge from their side."
+    },
+
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/source" }
+    },
+
+    "history": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/history" }
+  },
+  "additionalProperties": false
+}

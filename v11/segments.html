@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Segments — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* OVERVIEW MODE */
+  .ov-intro { padding: 8px 32px 0; }
+  .ov-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px,1fr)); gap: 16px; padding: 28px 32px 64px; max-width: var(--maxw); margin: 0 auto; }
+  .ov-card { border: 1px solid var(--border); border-radius: 14px; padding: 26px; background: var(--bg); display: flex; flex-direction: column; color: var(--text); text-decoration: none; transition: border-color .15s, transform .15s, box-shadow .15s; position: relative; overflow: hidden; }
+  .ov-card::before { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background: var(--c); }
+  .ov-card:hover { border-color: var(--border-mid); transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,0,0,0.07); text-decoration: none; }
+  .ov-ic { width: 50px; height: 50px; border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size: 23px; margin-bottom: 16px; }
+  .ov-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+  .ov-card p { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; flex: 1; }
+  .ov-svcs { display:flex; flex-wrap:wrap; gap:5px; margin-top:16px; }
+  .ov-foot { margin-top: 16px; display:flex; align-items:center; justify-content:space-between; }
+  .ov-counts { font-size: 12px; color: var(--text-faint); }
+  .ov-go { font-size: 13px; font-weight: 500; color: var(--text-faint); }
+  .ov-card:hover .ov-go { color: var(--blue); }
+
+  /* DETAIL MODE */
+  .seg-detail { padding: 0 0 64px; }
+  .seg-head2 { padding: 40px 32px 32px; display:flex; gap:20px; align-items:flex-start; border-bottom:1px solid var(--border); background: linear-gradient(180deg, var(--bg-off), var(--bg)); }
+  .seg-head2 .ic { width: 58px; height: 58px; border-radius: 14px; display:flex; align-items:center; justify-content:center; font-size:27px; flex-shrink:0; }
+  .seg-head2 h1 { font-size: 28px; font-weight: 400; margin-bottom: 8px; letter-spacing:-0.01em; }
+  .seg-head2 p { font-size: 15px; color: var(--text-muted); line-height: 1.7; max-width: 680px; }
+  .seg-section { max-width: var(--maxw); margin: 0 auto; padding: 40px 32px 0; }
+  .seg-section.last { padding-bottom: 8px; }
+  .sec-label { display:flex; align-items:baseline; gap:10px; margin-bottom: 6px; }
+  .sec-num { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); }
+  .sec-label h2 { font-size: 21px; font-weight: 500; letter-spacing:-0.01em; }
+  .sec-intro { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 22px; max-width: 720px; }
+
+  /* section 1: challenges + EO role */
+  .chal-wrap { display:grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items:start; }
+  @media(max-width:820px){ .chal-wrap{ grid-template-columns:1fr; } }
+  .chal-box { border:1px solid var(--border); border-radius:12px; padding:24px; background:var(--bg); }
+  .chal-box h3 { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:var(--text-faint); margin-bottom:16px; }
+  .chal-item { display:flex; gap:10px; align-items:baseline; margin-bottom:12px; font-size:14px; line-height:1.55; }
+  .chal-item .dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:7px; }
+  .eo-text { font-size:14.5px; line-height:1.8; color:var(--text); }
+
+  /* section 2: needs -> usecases -> casestudies */
+  .need-block { border:1px solid var(--border); border-radius:12px; padding:22px 24px; margin-bottom:14px; background:var(--bg); }
+  .need-head { display:flex; gap:12px; align-items:flex-start; margin-bottom:16px; }
+  .need-n { font-family:var(--font-mono); font-size:12px; color:#fff; background:var(--c); min-width:26px; height:26px; border-radius:7px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-weight:500; }
+  .need-title { font-size:16px; font-weight:500; line-height:1.4; padding-top:2px; }
+  .need-row { display:flex; gap:10px; align-items:flex-start; margin:10px 0 0; padding-left:38px; flex-wrap:wrap; }
+  .need-row .rl { font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-faint); min-width:84px; padding-top:8px; }
+  .ref-items { display:flex; flex-direction:column; gap:7px; flex:1; min-width:240px; }
+  .ref { display:flex; align-items:center; gap:10px; padding:9px 12px; border:1px solid var(--border); border-radius:9px; text-decoration:none; color:var(--text); transition:border-color .13s, background .13s; }
+  .ref:hover { border-color:var(--border-mid); background:var(--bg-off); text-decoration:none; }
+  .ref-txt { font-size:13.5px; flex:1; line-height:1.4; }
+  .ref-arrow { font-size:12px; color:var(--text-faint); }
+  .ref:hover .ref-arrow { color:var(--blue); }
+  .ref-none { font-size:13px; color:var(--text-faint); padding:6px 0; }
+
+  /* role of copernicus services */
+  .role-block { display:flex; flex-direction:column; gap:12px; }
+  .role-row { display:flex; gap:12px; align-items:flex-start; }
+  .role-row .badge { margin-top:2px; flex-shrink:0; }
+  .role-desc { font-size:14px; color:var(--text-muted); line-height:1.65; }
+  .seg-res { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:6px; }
+  .seg-res .ll { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-faint); margin-right:6px; }
+  .seg-res a { font-size:13px; padding:6px 13px; border:1px solid rgba(24,95,165,.22); border-radius:7px; background:rgba(24,95,165,.04); }
+  .seg-res a:hover { background:rgba(24,95,165,.09); text-decoration:none; }
+  .seg-jump { display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
+  .seg-jump a { font-size:13px; font-weight:500; padding:9px 16px; border-radius:8px; border:1px solid var(--border-mid); color:var(--text); }
+  .seg-jump a:hover { background:var(--bg-off); text-decoration:none; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<div id="root"></div>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>
+let DATA;
+function ucById(id){ return DATA.usecases.find(u => u.id === id); }
+function csById(id){ return DATA.casestudies.find(c => c.id === id); }
+
+// Only segments with a 'site' block are themed transport segments with their own
+// overview/detail page; vocabulary-only entries (e.g. 'infrastructure') are skipped here.
+function themedSegments(){ return DATA.segments.filter(s => s.site); }
+function needsForSegment(segId){
+  return DATA.needs.filter(n => (n.classification && n.classification.market_segments || []).includes(segId));
+}
+
+function renderOverview(){
+  const segCards = themedSegments().map(s => {
+    const uc = DATA.usecases.filter(u => primarySegmentId(u) === s.id).length;
+    const cs = DATA.casestudies.filter(c => primarySegmentId(c) === s.id).length;
+    const svcs = [...new Set((s.site.copernicus_role||[]).map(r => r.product))];
+    return `<a class="ov-card" href="segments.html?segment=${s.id}" style="--c:${s.site.color}">
+      <div class="ov-ic" style="background:${s.site.color_bg};color:${s.site.color}">${s.site.icon}</div>
+      <h3>${esc(s.name)}</h3>
+      <p>${esc(s.site.intro)}</p>
+      <div class="ov-svcs">${svcs.map(id => svcBadge(DATA, id)).join('')}</div>
+      <div class="ov-foot"><span class="ov-counts">${uc} use cases · ${cs} case studies</span><span class="ov-go">Explore →</span></div>
+    </a>`;
+  }).join('');
+  document.getElementById('root').innerHTML = `
+    <section class="page-hero">
+      <div class="container">
+        <h1>Segments</h1>
+        <p>How Copernicus supports transport and mobility across five sectors. Each segment faces distinct challenges — select one to see its user needs, the available use cases, and real case studies.</p>
+      </div>
+    </section>
+    <div class="ov-grid">${segCards}</div>`;
+}
+
+function refUsecase(u){
+  return `<a class="ref" href="usecase.html?id=${u.id}">
+    ${maturityBadge(u.maturity)}
+    <span class="ref-txt">${esc(u.title)}</span>
+    <span class="ref-arrow">View →</span></a>`;
+}
+function refCasestudy(c){
+  const isEuProject = c.classification && c.classification.site && c.classification.site.eu_project;
+  const tag = isEuProject ? ' · EU project' : '';
+  return `<a class="ref" href="casestudy.html?id=${c.id}">
+    ${maturityBadge(c.maturity)}
+    <span class="ref-txt">${esc(c.title)}<span style="color:var(--text-faint)">${tag}</span></span>
+    <span class="ref-arrow">Read →</span></a>`;
+}
+
+function renderDetail(seg){
+  document.title = seg.name + ' — Segments — Copernicus for Transport';
+  const site = seg.site;
+  const ucCount = DATA.usecases.filter(u => primarySegmentId(u) === seg.id).length;
+  const csCount = DATA.casestudies.filter(c => primarySegmentId(c) === seg.id).length;
+  const needs = needsForSegment(seg.id);
+
+  // Section 2: each need -> usecases (via need._usecases, resolved from 'addresses'
+  // relations by resolveGraph()) -> casestudies (via usecase._caseStudies, resolved
+  // from 'instantiates' relations). Old segments.json had needs/usecases/casestudies
+  // linked by inline arrays; now it's all typed graph edges.
+  const needsHtml = needs.map((need, i) => {
+    const ucs = (need._usecases || []).map(ucById).filter(Boolean);
+    const csIds = [...new Set(ucs.flatMap(u => u._caseStudies || []))];
+    const css = csIds.map(csById).filter(Boolean);
+    return `<div class="need-block">
+      <div class="need-head"><span class="need-n">${i+1}</span><span class="need-title">${esc(need.statement)}</span></div>
+      <div class="need-row">
+        <span class="rl">Use cases</span>
+        <div class="ref-items">${ucs.length ? ucs.map(refUsecase).join('') : '<span class="ref-none">None yet</span>'}</div>
+      </div>
+      <div class="need-row">
+        <span class="rl">Case studies</span>
+        <div class="ref-items">${css.length ? css.map(refCasestudy).join('') : '<span class="ref-none">No case study available yet</span>'}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('root').innerHTML = `
+    <div class="seg-detail">
+      <div class="seg-head2" style="--c:${site.color}">
+        <div class="ic" style="background:${site.color_bg};color:${site.color}">${site.icon}</div>
+        <div>
+          <div class="breadcrumb"><a href="segments.html">Segments</a> › <span>${esc(seg.name)}</span></div>
+          <h1>${esc(seg.name)}</h1>
+          <p>${esc(site.intro)}</p>
+        </div>
+      </div>
+
+      <section class="seg-section" style="--c:${site.color}">
+        <div class="sec-label"><span class="sec-num">01</span><h2>Main challenges</h2></div>
+        <p class="sec-intro">The principal challenges this segment faces, and the role Earth observation plays in addressing them.</p>
+        <div class="chal-wrap">
+          <div class="chal-box">
+            <h3>User challenges &amp; needs</h3>
+            ${needs.map(n => `<div class="chal-item"><span class="dot" style="background:${site.color}"></span><span>${esc(n.statement)}</span></div>`).join('')}
+          </div>
+          <div class="chal-box">
+            <h3>Role of Earth observation</h3>
+            <p class="eo-text">${esc(site.eo_role)}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="seg-section" style="--c:${site.color}">
+        <div class="sec-label"><span class="sec-num">02</span><h2>User needs in detail</h2></div>
+        <p class="sec-intro">Each need below links to the use cases that address it, and to real case studies where available.</p>
+        ${needsHtml}
+      </section>
+
+      <section class="seg-section" style="--c:${site.color}">
+        <div class="sec-label"><span class="sec-num">03</span><h2>Role of Copernicus</h2></div>
+        <p class="sec-intro">The specific Copernicus services that contribute in this segment.</p>
+        <div class="role-block">
+          ${(site.copernicus_role||[]).map(r => `<div class="role-row">${svcBadge(DATA, r.product)}<span class="role-desc">${esc(r.description)}</span></div>`).join('')}
+        </div>
+        <div class="seg-res" style="margin-top:22px">
+          <span class="ll">Resources</span>
+          ${(site.links||[]).map(l => `<a href="${l.url}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}
+        </div>
+        <div class="seg-jump">
+          <a href="usecases.html?segment=${seg.id}">All ${ucCount} use cases →</a>
+          <a href="casestudies.html?segment=${seg.id}">All ${csCount} case studies →</a>
+        </div>
+      </section>
+    </div>`;
+}
+
+loadContent().then(data => {
+  DATA = data;
+  mountChrome(data, 'segments');
+  const segId = new URLSearchParams(location.search).get('segment');
+  const seg = data.segments.find(s => s.id === segId && s.site);
+  if (seg) renderDetail(seg); else renderOverview();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case study — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .meta-bar { padding: 20px 32px; background: var(--bg-off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .meta-grid { display: flex; gap: 36px; flex-wrap: wrap; }
+  .meta-item .meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin-bottom: 3px; }
+  .meta-item .meta-val { font-size: 14px; color: var(--text); font-weight: 500; }
+  .cs-body { padding: 44px 32px; }
+  .cs-narrative { max-width: 760px; display: flex; flex-direction: column; gap: 28px; }
+  .cs-step h3 { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin-bottom: 10px; }
+  .cs-step p { font-size: 15px; line-height: 1.8; }
+  .cs-step.approach { background: var(--bg-off); border-left: 3px solid var(--blue); padding: 20px 22px; border-radius: 0 var(--radius) var(--radius) 0; }
+  .cs-link-box { margin-top: 36px; max-width: 760px; padding: 18px 20px; border: 1px solid var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .cs-link-box .lbl { font-size: 13px; color: var(--text-muted); }
+  .cs-link-box a { font-size: 14px; font-weight: 500; }
+  .real-banner { display:inline-flex; align-items:center; gap:8px; font-size:12px; padding:6px 12px; border-radius:20px; background:#E1F5EE; color:#085041; font-weight:500; margin-bottom:14px; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb" id="breadcrumb"></div>
+    <div id="real-banner"></div>
+    <div id="tags" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;align-items:center;"></div>
+    <h1 id="cs-title"></h1>
+    <p id="cs-summary"></p>
+  </div>
+</section>
+<div class="meta-bar"><div class="container meta-grid" id="meta-grid"></div></div>
+<section class="cs-body">
+  <div class="container cs-narrative">
+    <div class="cs-step"><h3>The challenge</h3><p id="cs-challenge"></p></div>
+    <div class="cs-step approach"><h3>The approach</h3><p id="cs-approach"></p></div>
+    <div class="cs-step"><h3>Results &amp; impact</h3><p id="cs-results"></p></div>
+  </div>
+  <div class="container">
+    <div class="cs-link-box">
+      <span class="lbl" id="link-lbl">Learn more</span>
+      <a id="cs-link" href="#" target="_blank" rel="noopener">Visit source ↗</a>
+    </div>
+  </div>
+</section>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>
+const id = new URLSearchParams(location.search).get('id');
+
+// The migrated narrative is markdown with '## Challenge' / '## Approach' / '## Results'
+// section headers (see migrate.py) - split back into the three display boxes the page
+// already has. Falls back to putting everything in the first box if headers aren't found
+// (e.g. for case studies authored fresh against the new schema without that convention).
+function splitNarrative(md){
+  const sections = { challenge:'', approach:'', results:'' };
+  const re = /##\s*(Challenge|Approach|Results)\s*\n([\s\S]*?)(?=\n##\s*(?:Challenge|Approach|Results)|$)/gi;
+  let m, found = false;
+  while ((m = re.exec(md))) { sections[m[1].toLowerCase()] = m[2].trim(); found = true; }
+  if (!found) sections.challenge = md;
+  return sections;
+}
+
+loadContent().then(data => {
+  mountChrome(data, 'casestudies');
+  const c = data.casestudies.find(x => x.id === id);
+  if (!c) { document.querySelector('.page-hero .container').innerHTML = '<h1>Case study not found</h1>'; return; }
+  const seg = segmentById(data, primarySegmentId(c));
+  const siteExt = (c.classification && c.classification.site) || {};
+  const products = (c.classification && c.classification.products) || [];
+  const regions = (c.classification && c.classification.regions) || [];
+  const stakeholderNames = (c.stakeholders || []).map(s => s.name).join(', ');
+
+  document.title = c.title + ' — Copernicus for Transport';
+  document.getElementById('breadcrumb').innerHTML =
+    `<a href="casestudies.html">Case studies</a> › <a href="casestudies.html?segment=${seg.id}">${esc(seg.name)}</a>`;
+  if (siteExt.eu_project) document.getElementById('real-banner').innerHTML = `<div class="real-banner">★ EUSPA / Horizon Europe project</div>`;
+  document.getElementById('tags').innerHTML = segBadge(seg) + ' ' + maturityBadge(c.maturity) + ' ' + products.map(sv => svcBadge(data, sv)).join(' ');
+  document.getElementById('cs-title').textContent = c.title;
+  document.getElementById('cs-summary').textContent = c.summary;
+  document.getElementById('meta-grid').innerHTML = `
+    <div class="meta-item"><div class="meta-label">User</div><div class="meta-val">${esc(stakeholderNames || '—')}</div></div>
+    <div class="meta-item"><div class="meta-label">Location</div><div class="meta-val">${esc(regions.join(', ') || '—')}</div></div>
+    <div class="meta-item"><div class="meta-label">Maturity</div><div class="meta-val" style="text-transform:capitalize">${esc(c.maturity)}</div></div>
+    <div class="meta-item"><div class="meta-label">Services</div><div class="meta-val">${products.map(p => { const pr = data.products.find(x=>x.id===p); return pr?pr.name:p; }).join(', ')}</div></div>`;
+  const sections = splitNarrative(c.narrative);
+  document.getElementById('cs-challenge').textContent = sections.challenge;
+  document.getElementById('cs-approach').textContent = sections.approach;
+  document.getElementById('cs-results').textContent = sections.results;
+  if (!sections.approach && !sections.results) {
+    // no recognised section headers - collapse to a single narrative box rather than
+    // showing two empty "approach"/"results" headings
+    document.querySelectorAll('.cs-step')[1].style.display = 'none';
+    document.querySelectorAll('.cs-step')[2].style.display = 'none';
+  }
+  const link = document.getElementById('cs-link');
+  if (siteExt.project_link) {
+    link.href = siteExt.project_link;
+    link.textContent = siteExt.eu_project ? 'View project on EUSPA ↗' : 'Visit source ↗';
+    document.getElementById('link-lbl').textContent = siteExt.eu_project ? 'Learn more about this EU project' : 'This is an illustrative case study. Explore the underlying source:';
+  } else {
+    document.querySelector('.cs-link-box').style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>

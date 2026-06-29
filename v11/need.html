@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Need — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  .nd-body { padding: 44px 32px; }
+  .nd-grid { display: grid; grid-template-columns: 1fr; gap: 28px; max-width: 760px; }
+  .nd-block h3 { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin-bottom: 10px; }
+  .nd-block p { font-size: 15px; line-height: 1.8; color: var(--text); }
+  .nd-block.rationale { background: var(--bg-off); border-left: 3px solid var(--text-faint); padding: 20px 22px; border-radius: 0 var(--radius) var(--radius) 0; }
+  .pill-strip { padding: 20px 32px; background: var(--bg-off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display:flex; gap:8px; flex-wrap:wrap; }
+  .related { padding: 44px 32px; border-top: 1px solid var(--border); }
+  .related h2 { font-size: 18px; font-weight: 500; margin-bottom: 6px; }
+  .related-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb" id="breadcrumb"></div>
+    <div id="tags" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center;"></div>
+    <h1 id="nd-title"></h1>
+    <p id="nd-summary"></p>
+  </div>
+</section>
+<div class="pill-strip" id="pill-strip"></div>
+<section class="nd-body">
+  <div class="container nd-grid">
+    <div class="nd-block"><h3>Statement</h3><p id="nd-statement"></p></div>
+    <div class="nd-block rationale" id="nd-rationale-wrap" style="display:none"><h3>Rationale</h3><p id="nd-rationale"></p></div>
+  </div>
+</section>
+<section class="related" id="related-section">
+  <div class="container">
+    <h2>Use cases that address this</h2>
+    <p class="related-sub">Application patterns proposed to meet this need.</p>
+    <div class="grid grid-2" id="related-grid"></div>
+  </div>
+</section>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>
+const id = new URLSearchParams(location.search).get('id');
+loadContent().then(data => {
+  mountChrome(data, 'needs');
+  const n = data.needs.find(x => x.id === id);
+  if (!n) { document.querySelector('.page-hero .container').innerHTML = '<h1>Need not found</h1>'; return; }
+  const segs = (n.classification && n.classification.market_segments) || [];
+  const seg = segs.length ? segmentById(data, segs[0]) : null;
+  const kindLabel = n.kind === 'requirement' ? 'Requirement' : 'Need';
+  const kindColor = n.kind === 'requirement' ? '#9A3B3B' : '#3D5A80';
+  const kindBg = n.kind === 'requirement' ? '#F5E9E8' : '#E6ECF2';
+
+  document.title = (n.summary || n.id) + ' — Copernicus for Transport';
+  document.getElementById('breadcrumb').innerHTML =
+    `<a href="needs.html">User needs</a>${seg ? ` › <a href="needs.html?segment=${seg.id}">${esc(seg.name)}</a>` : ''} › <span>${n.id}</span>`;
+  document.getElementById('tags').innerHTML =
+    `<span class="badge" style="background:${kindBg};color:${kindColor}">${kindLabel}</span>` +
+    (seg ? segBadge(seg) : '') +
+    ` <span class="badge badge-mono" style="background:var(--bg-subtle);color:var(--text-faint)">${n.id}</span>`;
+  document.getElementById('nd-title').textContent = n.summary || n.statement;
+  const summaryEl = document.getElementById('nd-summary');
+  if (n.summary && n.summary !== n.statement) { summaryEl.textContent = n.statement; } else { summaryEl.style.display = 'none'; }
+  document.getElementById('nd-statement').innerHTML = esc(n.statement).split('\n\n').map(p => `<p>${p}</p>`).join('');
+
+  if (n.rationale) {
+    document.getElementById('nd-rationale-wrap').style.display = '';
+    document.getElementById('nd-rationale').textContent = n.rationale;
+  }
+
+  const pills = [];
+  if (n.status) pills.push(`<span class="badge" style="background:var(--bg-subtle);color:var(--text-muted)">Status: ${esc(n.status)}</span>`);
+  if (n.priority) pills.push(`<span class="badge" style="background:var(--bg-subtle);color:var(--text-muted)">Priority: ${esc(n.priority)}</span>`);
+  if (n.confidence) pills.push(`<span class="badge" style="background:var(--bg-subtle);color:var(--text-muted)">Confidence: ${esc(n.confidence)}</span>`);
+  const products = (n.classification && n.classification.products) || [];
+  products.forEach(pid => pills.push(svcBadge(data, pid)));
+  document.getElementById('pill-strip').innerHTML = pills.join('') || '<span style="color:var(--text-faint);font-size:13px">No additional classification recorded yet.</span>';
+
+  const rel = (n._usecases || []).map(uid => data.usecases.find(u => u.id === uid)).filter(Boolean);
+  if (rel.length) {
+    document.getElementById('related-grid').innerHTML = rel.map(u => {
+      const us = segmentById(data, primarySegmentId(u));
+      const ucProducts = (u.classification && u.classification.products) || [];
+      return `<a class="box" href="usecase.html?id=${u.id}" style="--box-accent:${(us.site&&us.site.color)||'#888'}">
+        <div class="box-top"><div class="box-meta">${segBadge(us)}</div>${maturityBadge(u.maturity)}</div>
+        <div class="box-title">${esc(u.title)}</div>
+        <div class="box-summary">${esc(u.summary)}</div>
+        <div class="box-foot"><div class="box-services">${ucProducts.map(sv => svcBadge(data, sv)).join('')}</div><span class="box-cta">View →</span></div>
+      </a>`;
+    }).join('');
+  } else {
+    document.getElementById('related-grid').innerHTML = '<p style="color:var(--text-faint)">No use case addresses this need yet.</p>';
+  }
+});
+</script>
+</body>
+</html>

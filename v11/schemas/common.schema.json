@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/common.schema.json",
+  "title": "Common definitions",
+  "description": "Reusable building blocks shared by the content schemas (need-requirement, use-case, case-study, news) and the side vocabularies. Centralising these is what makes the content types one interlinked graph rather than disconnected collections. Note: tools/demonstrators are a distinct content kind but deliberately have no schema of their own - they validate against case-study.schema.json verbatim (see that schema's description), distinguished only by which content/ folder they live in.",
+  "$defs": {
+
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "description": "Unique, stable, URL-safe identifier for an item. Stable across edits; use 'supersedes' relations rather than re-using ids."
+    },
+
+    "summary": {
+      "type": "string",
+      "maxLength": 280,
+      "description": "Short, plain-text gist for listing cards, search results, graph tooltips, and social sharing. Must not contain Markdown. (Aligned to 280 chars across all three content types.)"
+    },
+
+    "markdownText": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Long-form body text. Supports Markdown (headings, lists, links, emphasis, images, inline code)."
+    },
+
+    "language": {
+      "type": "string",
+      "description": "BCP-47 / ISO language code of the human-readable content, e.g. 'en', 'lv', 'cs'."
+    },
+
+    "editorialStatus": {
+      "type": "string",
+      "enum": ["draft", "review", "published", "archived"],
+      "description": "Publication lifecycle of a website content object (use cases, case studies). Tracks editorial workflow, NOT engineering acceptance."
+    },
+
+    "itemStatus": {
+      "type": "string",
+      "enum": ["draft", "proposed", "accepted", "rejected", "superseded", "implemented"],
+      "description": "Engineering lifecycle of a need/requirement item. Distinct from editorialStatus on purpose."
+    },
+
+    "newsType": {
+      "type": "string",
+      "enum": ["grant_call", "cassini", "procurement", "product_update", "project", "policy", "event", "other"],
+      "description": "Category of a news item, shown as a label on listing cards. Open-ended on purpose (includes 'other') since news topics are more varied than the controlled vocabularies elsewhere; add new values here as recurring categories emerge rather than letting news.schema.json drift out of alignment with the rest."
+    },
+
+    "maturity": {
+      "type": "string",
+      "enum": ["concept", "pilot", "demonstrated", "operational", "scaled"],
+      "description": "Deployment maturity of the application pattern (use case) or the specific deployment described (case study). concept: idea/feasibility only. pilot: limited trial. demonstrated: validated in a real setting. operational: in routine use. scaled: rolled out across many sites/users."
+    },
+
+    "priority": {
+      "type": "string",
+      "enum": ["must", "should", "could", "wont"],
+      "description": "Relative importance (MoSCoW). Use a project-specific numeric scale in attributes if finer granularity is needed."
+    },
+
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "How confident the author/stakeholders are that the item is correctly captured or specified."
+    },
+
+    "targetKind": {
+      "type": "string",
+      "enum": ["need", "requirement", "use_case", "case_study", "tool"],
+      "description": "Which collection a relation target lives in. 'need' and 'requirement' share one schema but are distinguished here because the graph treats them differently. 'tool' validates against case-study.schema.json (a tool is presented the same editorial way as a case study) but is kept as a distinct pool/kind because it is something a visitor opens and uses, not a story about a past deployment; which folder a file lives in (content/tools/ vs content/casestudies/) is what actually distinguishes the two, not the field shape. Links to side-vocabulary entries (products, market segments) are expressed via 'classification', not via relations."
+    },
+
+    "relationType": {
+      "type": "string",
+      "enum": [
+        "derives_from",
+        "depends_on",
+        "conflicts_with",
+        "duplicates",
+        "consolidates",
+        "part_of",
+        "supersedes",
+        "satisfied_by",
+        "addresses",
+        "instantiates",
+        "illustrates",
+        "demonstrates",
+        "related"
+      ],
+      "description": "Unified, directional relation vocabulary spanning the whole graph. Direction is source -> target.\n\nDEMAND-SIDE (typically need/requirement -> need/requirement):\n- derives_from: source is justified by a higher-level need (no part-whole structure).\n- conflicts_with: source is logically/practically incompatible with target (symmetric in meaning, declared once).\n- duplicates: symmetric equivalence with target.\n- consolidates: source synthesises/merges target (many raw items -> one; mark target itemStatus 'superseded').\n- part_of: source is one child of an AND-decomposition of target (one parent -> many children).\n\nGRAPH-WIDE:\n- depends_on: source cannot be satisfied/realised unless target is too (any kind -> any kind).\n- supersedes: source is a newer version of a same-kind target (mark target status superseded/archived).\n- related: generic, symmetric thematic association (any kind -> any kind); declared one-directionally.\n\nSATISFACTION / EVIDENCE (the cross-type connective tissue):\n- satisfied_by: a need/requirement is fulfilled by target (e.g. a use_case or external artifact).\n- addresses: a use_case provides a way to meet target (use_case -> need/requirement). Conceptual inverse of satisfied_by; prefer declaring from the use_case side.\n- instantiates: a case_study is a concrete real-world instance of target (case_study -> use_case).\n- illustrates: a case_study is a real-world example of target (case_study -> need).\n- demonstrates: a case_study shows target being met in practice (case_study -> requirement)."
+    },
+
+    "relation": {
+      "type": "object",
+      "required": ["type", "target", "target_kind"],
+      "properties": {
+        "type": { "$ref": "#/$defs/relationType" },
+        "target": {
+          "$ref": "#/$defs/identifier",
+          "description": "The id of the related item."
+        },
+        "target_kind": { "$ref": "#/$defs/targetKind" },
+        "note": {
+          "type": "string",
+          "description": "Optional short annotation for this edge (e.g. shown as a graph tooltip). Plain text."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "relationList": {
+      "type": "array",
+      "description": "Typed links to other items in the graph. Every relation declares target_kind so the front end can resolve and render edges uniformly.",
+      "items": { "$ref": "#/$defs/relation" },
+      "default": []
+    },
+
+    "classification": {
+      "type": "object",
+      "description": "Subject facets used for faceted search, filtering, and recommendation across ALL content types. Controlled facets reference side-vocabulary ids; the rest are open tag lists. Use 'tags' (top-level) for free keywords that are not facets.",
+      "properties": {
+        "market_segments": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/identifier" },
+          "description": "Ids from vocab/market-segments.json, e.g. 'transport.road', 'transport.rail'."
+        },
+        "products": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/identifier" },
+          "description": "Product taxonomy ids from vocab/products.json, referenced uniformly at ANY level: a service ('clms'), a mission ('sentinel-1'), a product ('egms'), or a sub-product ('egms-ortho'). The EO data/services the item is about or relies on. Filter UIs should expand by taxonomy ancestry so a query on 'clms' also matches items tagged 'egms' or 'egms-ortho'."
+        },
+        "eo_techniques": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Methods/data types featured, e.g. 'InSAR', 'optical', 'SAR', 'atmospheric modelling', 'multispectral'."
+        },
+        "regions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Geographic scope, e.g. 'Czechia', 'European Union', 'global'. Free text for now; promote to a vocabulary later if needed."
+        },
+        "organisation_types": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Types of organisation involved, e.g. 'public authority', 'SME', 'infrastructure operator', 'regulator'."
+        },
+        "outcome_types": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Kind of result, e.g. 'cost reduction', 'risk mitigation', 'regulatory compliance', 'situational awareness'."
+        },
+        "site": {
+          "type": "object",
+          "description": "Escape hatch for fields a single website needs that aren't shared cross-content facets and don't belong in the common schema (e.g. a Copernicus integration-mode pill, an 'is this a real EU project' flag, a project link). Keep this small; if a key here turns out to be useful across content types or sites, promote it to a real classification facet instead. Unlike the other classification properties, values are not constrained to string arrays.",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+
+    "stakeholder": {
+      "type": "object",
+      "description": "A real-world person, role, or organisation associated with an item (NOT an abstract persona; use 'actors' on a use case for those).",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string", "description": "Free-text role, e.g. 'end user', 'data provider', 'regulator'." },
+        "organisation": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+
+    "actor": {
+      "type": "object",
+      "description": "An abstract role/persona that participates in a use case (e.g. 'bridge asset manager'), as opposed to a named real-world stakeholder.",
+      "required": ["role"],
+      "properties": {
+        "role": { "type": "string" },
+        "description": { "type": "string", "description": "What this actor does in the use case and what they get out of it." }
+      },
+      "additionalProperties": false
+    },
+
+    "outcome": {
+      "type": "object",
+      "description": "A quotable result statement, with an optional quantified figure. Used for expected benefits (use case) and demonstrated key results (case study).",
+      "required": ["statement"],
+      "properties": {
+        "statement": { "type": "string" },
+        "metric": { "type": "string", "description": "Optional quantified figure, e.g. '40% faster inspection cycle'." }
+      },
+      "additionalProperties": false
+    },
+
+    "source": {
+      "type": "object",
+      "description": "Provenance of the content.",
+      "required": ["type", "reference"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["interview", "document", "workshop", "regulation", "derived", "dataset", "publication", "press_release", "site_visit"],
+          "description": "Unified provenance vocabulary across all content types."
+        },
+        "reference": { "type": "string", "description": "Citation, URL, document id, or person." },
+        "date": { "type": "string", "format": "date" }
+      },
+      "additionalProperties": false
+    },
+
+    "history": {
+      "type": "array",
+      "description": "Append-only event log. The first entry is creation; every later entry is an update. Derive created_at/updated_at from history[0] and history[-1] rather than storing separate fields.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "author"],
+        "properties": {
+          "timestamp": { "type": "string", "format": "date-time" },
+          "author": { "type": "string", "description": "Person who made this change." },
+          "comment": { "type": "string", "description": "What changed and why. Supports Markdown." }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

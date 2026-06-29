@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/need-requirement.schema.json",
+  "title": "Need/Requirement Item",
+  "description": "A minimal-core, extensible schema for user needs (the why) and requirements (the what/how much), with graph interrelations. Aligned v2: relations now carry target_kind, a shared 'classification' facet block was added, and summary/source vocabularies were unified with the other content types.",
+  "type": "object",
+  "required": ["id", "kind", "statement"],
+  "properties": {
+    "id": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/identifier" },
+
+    "kind": {
+      "type": "string",
+      "enum": ["need", "requirement"],
+      "description": "Whether this item expresses a user/stakeholder need (the why) or a requirement (the what/how much)."
+    },
+
+    "summary": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/summary" },
+
+    "statement": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/markdownText",
+      "description": "The full need or requirement text. Supports Markdown."
+    },
+
+    "status": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/itemStatus" },
+
+    "priority": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/priority" },
+
+    "confidence": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/confidence" },
+
+    "rationale": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/markdownText",
+      "description": "Why this item is worded/scoped as it is - the justification, trade-off, or constraint behind the current statement."
+    },
+
+    "classification": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/classification",
+      "description": "Shared subject facets so needs appear in the same filtered views as use cases and case studies, and so a need can be tied to a market segment and the products that could serve it."
+    },
+
+    "attributes": {
+      "type": "object",
+      "description": "Open bag of type-specific, structured spec key-values. Typical keys for an information need: topic, geographic_scope, temporal_scope, update_frequency, format_preference, urgency, audience_expertise. Typical keys for an observational requirement: parameter, spatial_resolution, temporal_resolution, accuracy, coverage_area, latency, data_type, verification_method. (Distinct from 'classification', which is for cross-type faceting.)",
+      "additionalProperties": { "type": "string" }
+    },
+
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Free-text labels for filtering/grouping, independent of structured attributes and classification."
+    },
+
+    "relations": {
+      "$ref": "https://example.org/schemas/common.schema.json#/$defs/relationList",
+      "description": "Typed links to other graph items. Internal RE edges (derives_from, part_of, consolidates, conflicts_with, duplicates, depends_on, supersedes) plus 'satisfied_by' to point at a use case or external artifact that fulfils this item."
+    },
+
+    "stakeholders": {
+      "type": "array",
+      "items": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/stakeholder" }
+    },
+
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/source" }
+    },
+
+    "history": { "$ref": "https://example.org/schemas/common.schema.json#/$defs/history" }
+  },
+  "additionalProperties": false
+}

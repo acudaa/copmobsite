@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>User needs — Copernicus for Transport</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav class="site-nav" id="sitenav"></nav>
+<section class="page-hero">
+  <div class="container">
+    <h1>User needs</h1>
+    <p>The demand side of the graph — what users and stakeholders need (the why) and the requirements that spell out what/how much. Each links forward to the use cases that address it.</p>
+  </div>
+</section>
+<section style="padding:28px 32px 64px;">
+  <div class="container">
+    <div class="filter-bar" id="filter-bar"></div>
+    <div class="filter-bar" id="kind-filter-bar" style="margin-top:-6px;"></div>
+    <div class="result-count" id="result-count"></div>
+    <div class="grid grid-3" id="need-grid"></div>
+  </div>
+</section>
+<footer class="site-footer" id="sitefooter"></footer>
+<script src="app.js"></script>
+<script>
+let DATA;
+let kindState = 'all'; // 'all' | 'need' | 'requirement'
+let segState = 'all';
+
+function needCard(n){
+  const segs = (n.classification && n.classification.market_segments) || [];
+  const s = segs.length ? segmentById(DATA, segs[0]) : null;
+  const nUc = (n._usecases || []).length;
+  const kindLabel = n.kind === 'requirement' ? 'Requirement' : 'Need';
+  const kindColor = n.kind === 'requirement' ? '#9A3B3B' : '#3D5A80';
+  const kindBg = n.kind === 'requirement' ? '#F5E9E8' : '#E6ECF2';
+  return `<a class="box" href="need.html?id=${n.id}" style="--box-accent:${(s&&s.site&&s.site.color)||'#888'}">
+    <div class="box-top">
+      <div class="box-meta">
+        <span class="badge" style="background:${kindBg};color:${kindColor}">${kindLabel}</span>
+        ${s ? segBadge(s) : ''}
+      </div>
+      ${n.priority ? `<span class="maturity" style="text-transform:capitalize">${esc(n.priority)}</span>` : ''}
+    </div>
+    <div class="box-title">${esc(n.summary || n.statement)}</div>
+    <div class="box-summary">${esc((n.statement||'').slice(0,180))}</div>
+    <div class="box-foot">
+      <div class="box-services"></div>
+      <span class="box-cta">${nUc ? nUc + ' use case' + (nUc>1?'s':'') + ' →' : 'View →'}</span>
+    </div>
+  </a>`;
+}
+
+function renderList(){
+  let list = DATA.needs;
+  if (segState !== 'all') list = list.filter(n => (n.classification && n.classification.market_segments || []).includes(segState));
+  if (kindState !== 'all') list = list.filter(n => n.kind === kindState);
+  document.getElementById('result-count').textContent = `${list.length} item${list.length!==1?'s':''}`;
+  document.getElementById('need-grid').innerHTML = list.length ? list.map(needCard).join('') : '<p style="color:var(--text-faint)">No needs match these filters.</p>';
+}
+
+function buildKindFilter(){
+  const counts = { all: DATA.needs.length, need: 0, requirement: 0 };
+  DATA.needs.forEach(n => { counts[n.kind] = (counts[n.kind]||0) + 1; });
+  const opts = [
+    { id: 'all', label: 'All' },
+    { id: 'need', label: `Needs (${counts.need||0})` },
+    { id: 'requirement', label: `Requirements (${counts.requirement||0})` },
+  ];
+  const bar = document.getElementById('kind-filter-bar');
+  bar.innerHTML = opts.map(o => `<button type="button" class="filter-btn ${kindState===o.id?'active':''}" data-kind="${o.id}" style="font-size:12px;padding:5px 12px;">${esc(o.label)}</button>`).join('');
+  bar.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      kindState = btn.getAttribute('data-kind');
+      const url = new URL(location.href);
+      if (kindState === 'all') url.searchParams.delete('kind'); else url.searchParams.set('kind', kindState);
+      history.replaceState(null, '', url);
+      renderList();
+    });
+  });
+}
+
+loadContent().then(data => {
+  DATA = data;
+  mountChrome(data, 'needs');
+  segState = new URLSearchParams(location.search).get('segment') || 'all';
+  kindState = new URLSearchParams(location.search).get('kind') || 'all';
+  buildFilterButtons(document.getElementById('filter-bar'), data, segState, (seg) => { segState = seg; renderList(); });
+  buildKindFilter();
+  renderList();
+});
+</script>
+</body>
+</html>

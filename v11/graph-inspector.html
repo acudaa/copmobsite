@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Graph Inspector — Copernicus for Transport</title>
+<style>
+  :root{
+    --bg:#14161B; --panel:#1B1E25; --panel-2:#20242C; --line:#2B2F39; --line-soft:#23262F;
+    --text:#E7E9ED; --text-dim:#9098A6; --text-faint:#5C6270;
+    --mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
+
+    --need-c:#E8B339;   --need-bg:#3A301B;
+    --usecase-c:#4FA8E0; --usecase-bg:#1B2C3A;
+    --casestudy-c:#56C28C; --casestudy-bg:#16322A;
+
+    --rel-addresses:#4FA8E0;
+    --rel-instantiates:#56C28C;
+    --rel-derives_from:#C77DD0;
+    --rel-depends_on:#E0834F;
+    --rel-conflicts_with:#E0544F;
+    --rel-duplicates:#9098A6;
+    --rel-consolidates:#9098A6;
+    --rel-part_of:#9098A6;
+    --rel-supersedes:#E8B339;
+    --rel-satisfied_by:#4FA8E0;
+    --rel-related:#5C6270;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);overflow:hidden;}
+  #app{display:grid;grid-template-columns:280px 1fr;grid-template-rows:52px 1fr;height:100vh;}
+
+  /* Top bar */
+  #topbar{grid-column:1/3;display:flex;align-items:center;gap:18px;padding:0 18px;background:var(--panel);border-bottom:1px solid var(--line);z-index:10;}
+  #topbar h1{font-size:13px;font-weight:600;letter-spacing:.02em;margin:0;white-space:nowrap;}
+  #topbar h1 span{color:var(--text-faint);font-weight:400;}
+  #stats{font-family:var(--mono);font-size:11px;color:var(--text-dim);display:flex;gap:14px;margin-left:auto;}
+  #stats b{color:var(--text);}
+  #search{flex:0 0 220px;background:var(--panel-2);border:1px solid var(--line);border-radius:6px;color:var(--text);font-size:12px;padding:6px 10px;font-family:var(--mono);}
+  #search:focus{outline:none;border-color:var(--text-faint);}
+  #search::placeholder{color:var(--text-faint);}
+
+  /* Left rail */
+  #rail{background:var(--panel);border-right:1px solid var(--line);overflow-y:auto;padding:16px 14px 24px;}
+  .rail-group{margin-bottom:22px;}
+  .rail-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);margin-bottom:8px;font-weight:600;}
+  .toggle-row{display:flex;align-items:center;gap:9px;padding:5px 6px;border-radius:5px;cursor:pointer;user-select:none;font-size:12.5px;}
+  .toggle-row:hover{background:var(--panel-2);}
+  .toggle-row.off{opacity:.38;}
+  .toggle-row input{display:none;}
+  .swatch{width:11px;height:11px;border-radius:3px;flex:0 0 auto;display:inline-block;}
+  .swatch.dot{border-radius:50%;}
+  .swatch.diamond{border-radius:2px;transform:rotate(45deg);}
+  .toggle-row .lbl{flex:1;font-family:var(--mono);}
+  .toggle-row .n{color:var(--text-faint);font-family:var(--mono);font-size:10.5px;}
+  .rel-line{width:18px;height:0;border-top:2px solid; flex:0 0 auto;}
+  .rel-line.dashed{border-top-style:dashed;}
+  .rail-actions{display:flex;gap:8px;margin-top:4px;}
+  .rail-btn{font-size:10.5px;font-family:var(--mono);color:var(--text-dim);background:none;border:1px solid var(--line);border-radius:4px;padding:3px 8px;cursor:pointer;}
+  .rail-btn:hover{color:var(--text);border-color:var(--text-faint);}
+  .empty-note{font-size:10.5px;color:var(--text-faint);font-style:italic;margin-top:4px;padding-left:6px;}
+
+  /* Canvas */
+  #canvas-wrap{position:relative;overflow:hidden;background:
+    radial-gradient(circle at 1px 1px, #20232B 1px, transparent 0) 0 0/22px 22px,
+    var(--bg);}
+  svg{width:100%;height:100%;display:block;cursor:grab;}
+  svg.panning{cursor:grabbing;}
+  .edge{fill:none;stroke-width:1.6;opacity:.55;}
+  .edge.dashed{stroke-dasharray:5,4;}
+  .arrow{opacity:.7;}
+  .node-group{cursor:pointer;}
+  .node-shape{stroke-width:1.6;transition:stroke-width .12s;}
+  .node-group.dim .node-shape{opacity:.15;}
+  .node-group.dim text{opacity:.12;}
+  .node-group:hover .node-shape{stroke-width:3;}
+  .node-group.selected .node-shape{stroke-width:3;filter:drop-shadow(0 0 6px currentColor);}
+  .node-label{font-family:var(--mono);font-size:9.5px;fill:var(--text-dim);pointer-events:none;}
+  .node-group.selected .node-label, .node-group:hover .node-label{fill:var(--text);}
+
+  #zoom-controls{position:absolute;bottom:18px;left:18px;display:flex;flex-direction:column;gap:6px;}
+  .zbtn{width:30px;height:30px;border-radius:7px;background:var(--panel);border:1px solid var(--line);color:var(--text-dim);font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:var(--mono);}
+  .zbtn:hover{color:var(--text);border-color:var(--text-faint);}
+
+  #legend-hint{position:absolute;bottom:18px;right:18px;font-family:var(--mono);font-size:10.5px;color:var(--text-faint);text-align:right;line-height:1.6;background:rgba(20,22,27,0.7);padding:8px 10px;border-radius:6px;border:1px solid var(--line-soft);}
+
+  /* Inspector panel */
+  #inspector{position:absolute;top:0;right:0;height:100%;width:340px;background:var(--panel);border-left:1px solid var(--line);transform:translateX(100%);transition:transform .18s ease;overflow-y:auto;z-index:20;}
+  #inspector.open{transform:translateX(0);}
+  #insp-close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--text-faint);font-size:18px;cursor:pointer;line-height:1;}
+  #insp-close:hover{color:var(--text);}
+  .insp-pad{padding:46px 20px 28px;}
+  .insp-kind{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:5px;margin-bottom:12px;}
+  .insp-id{font-family:var(--mono);font-size:10.5px;color:var(--text-faint);margin-bottom:4px;}
+  .insp-title{font-size:15px;font-weight:600;line-height:1.4;margin:0 0 14px;}
+  .insp-field{margin-bottom:16px;}
+  .insp-field-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-faint);margin-bottom:5px;font-weight:600;}
+  .insp-field-val{font-size:12.5px;line-height:1.6;color:var(--text-dim);}
+  .insp-badges{display:flex;flex-wrap:wrap;gap:5px;}
+  .insp-badge{font-family:var(--mono);font-size:10px;background:var(--panel-2);color:var(--text-dim);padding:3px 8px;border-radius:4px;border:1px solid var(--line);}
+  .insp-edges{display:flex;flex-direction:column;gap:6px;}
+  .insp-edge{display:flex;align-items:center;gap:8px;font-size:11.5px;padding:7px 9px;background:var(--panel-2);border-radius:6px;cursor:pointer;border:1px solid transparent;}
+  .insp-edge:hover{border-color:var(--text-faint);}
+  .insp-edge-type{font-family:var(--mono);font-size:9.5px;padding:1px 6px;border-radius:3px;flex:0 0 auto;white-space:nowrap;}
+  .insp-edge-target{color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;}
+  .insp-empty{font-size:11.5px;color:var(--text-faint);font-style:italic;}
+
+  #loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--text-faint);}
+  #error-box{position:absolute;top:70px;left:50%;transform:translateX(-50%);background:#3A1B1B;border:1px solid #5C2B2B;color:#E0A0A0;font-family:var(--mono);font-size:11.5px;padding:10px 16px;border-radius:6px;max-width:520px;display:none;}
+
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="topbar">
+    <h1>Graph Inspector <span>· content/ relations</span></h1>
+    <input id="search" type="text" placeholder="Filter by id, title, or text…" />
+    <div id="stats"></div>
+  </div>
+  <div id="rail">
+    <div class="rail-group">
+      <div class="rail-label">Item types</div>
+      <div id="type-toggles"></div>
+    </div>
+    <div class="rail-group">
+      <div class="rail-label">Relation types</div>
+      <div id="rel-toggles"></div>
+      <div class="rail-actions">
+        <button class="rail-btn" id="rel-all">All</button>
+        <button class="rail-btn" id="rel-none">None</button>
+        <button class="rail-btn" id="rel-used">Used only</button>
+      </div>
+    </div>
+    <div class="rail-group">
+      <div class="rail-label">Market segment</div>
+      <div id="segment-toggles"></div>
+    </div>
+  </div>
+  <div id="canvas-wrap">
+    <div id="loading">Loading content/ …</div>
+    <div id="error-box"></div>
+    <svg id="svg" viewBox="0 0 1000 800" style="display:none">
+      <defs></defs>
+      <g id="viewport">
+        <g id="edges-layer"></g>
+        <g id="nodes-layer"></g>
+      </g>
+    </svg>
+    <div id="zoom-controls" style="display:none">
+      <button class="zbtn" id="zoom-in">+</button>
+      <button class="zbtn" id="zoom-out">−</button>
+      <button class="zbtn" id="zoom-reset" title="Reset view">⤢</button>
+    </div>
+    <div id="legend-hint" style="display:none">
+      ● need &nbsp; ■ use case &nbsp; ◆ case study<br/>
+      drag canvas to pan · scroll to zoom · click a node for detail
+    </div>
+  </div>
+  <div id="inspector">
+    <button id="insp-close">✕</button>
+    <div class="insp-pad" id="insp-content"></div>
+  </div>
+</div>
+
+<script>
+// -----------------------------------------------------------------------
+// Config: kinds, relation vocabulary (full schema vocab, even types with
+// zero current instances are listed so the tool stays useful as data grows)
+// -----------------------------------------------------------------------
+const KIND_META = {
+  need:       { label: 'need',        shape: 'circle',  color: 'var(--need-c)',     bg: 'var(--need-bg)' },
+  requirement:{ label: 'requirement',  shape: 'circle',  color: 'var(--need-c)',     bg: 'var(--need-bg)' },
+  use_case:   { label: 'use case',     shape: 'square',  color: 'var(--usecase-c)',  bg: 'var(--usecase-bg)' },
+  case_study: { label: 'case study',   shape: 'diamond', color: 'var(--casestudy-c)',bg: 'var(--casestudy-bg)' },
+};
+const REL_VOCAB = [
+  'addresses','instantiates','illustrates','demonstrates','satisfied_by',
+  'derives_from','depends_on','part_of','consolidates','conflicts_with',
+  'duplicates','supersedes','related',
+];
+const REL_DASHED = new Set(['conflicts_with','duplicates','related','supersedes']);
+
+let DATA = { needs:[], usecases:[], casestudies:[], segments:[] };
+let NODES = [];      // {id, kind, title, raw, x, y, vx, vy}
+let EDGES = [];      // {source, target, type}
+let byId = new Map();
+
+let state = {
+  typeOn: { need:true, requirement:true, use_case:true, case_study:true },
+  relOn: {},
+  segmentOn: {},   // populated after load; __all__ = no segment filter
+  searchTerm: '',
+  selected: null,
+};
+REL_VOCAB.forEach(r => state.relOn[r] = true);
+
+// -----------------------------------------------------------------------
+// Load content/ — assumes this file sits next to the content/ folder,
+// i.e. served from the site root alongside index.html, app.js, content/.
+// -----------------------------------------------------------------------
+async function loadAll(){
+  const manifest = await fetchJSON('content/manifest.json');
+  const segments = await fetchJSON('content/' + (manifest.segments || 'market-segments.json'));
+  const loadFolder = (files, folder) => Promise.all(
+    files.map(f => fetchJSON('content/' + folder + '/' + f).catch(e => { console.error(f, e); return null; }))
+  ).then(arr => arr.filter(Boolean));
+  const [needs, usecases, casestudies] = await Promise.all([
+    loadFolder(manifest.needs || [], 'needs'),
+    loadFolder(manifest.usecases || [], 'usecases'),
+    loadFolder(manifest.casestudies || [], 'casestudies'),
+  ]);
+  return { needs, usecases, casestudies, segments };
+}
+async function fetchJSON(path){
+  const r = await fetch(path);
+  if (!r.ok) throw new Error(path + ' → HTTP ' + r.status);
+  return r.json();
+}
+
+function buildGraph(data){
+  DATA = data;
+  NODES = []; EDGES = []; byId = new Map();
+
+  function addNodes(items, kindFallback){
+    items.forEach(d => {
+      const kind = d.kind || kindFallback;
+      const title = d.title || d.statement || d.summary || d.id;
+      const node = { id:d.id, kind, title, raw:d,
+        x: 500 + (Math.random()-0.5)*200, y: 400 + (Math.random()-0.5)*200, vx:0, vy:0 };
+      NODES.push(node);
+      byId.set(d.id, node);
+    });
+  }
+  addNodes(data.needs, 'need');
+  addNodes(data.usecases, 'use_case');
+  addNodes(data.casestudies, 'case_study');
+
+  NODES.forEach(n => {
+    (n.raw.relations || []).forEach(rel => {
+      if (byId.has(rel.target)) {
+        EDGES.push({ source:n.id, target:rel.target, type:rel.type });
+      }
+    });
+  });
+
+  // segment toggles: every market segment id actually referenced by a node
+  const segIds = new Set();
+  NODES.forEach(n => {
+    (n.raw.classification && n.raw.classification.market_segments || []).forEach(s => segIds.add(s));
+  });
+  state.segmentOn = { __all__: true };
+  [...segIds].sort().forEach(s => state.segmentOn[s] = true);
+}
+
+function segName(id){
+  const s = DATA.segments.find(x => x.id === id);
+  return s ? s.name : id;
+}
+
+// -----------------------------------------------------------------------
+// Visibility
+// -----------------------------------------------------------------------
+function nodeVisible(n){
+  if (!state.typeOn[n.kind]) return false;
+  const segs = (n.raw.classification && n.raw.classification.market_segments) || [];
+  if (!state.segmentOn.__all__) {
+    const anyOn = segs.some(s => state.segmentOn[s]);
+    if (segs.length && !anyOn) return false;
+  }
+  if (state.searchTerm) {
+    const hay = (n.id + ' ' + n.title + ' ' + (n.raw.summary||'')).toLowerCase();
+    if (!hay.includes(state.searchTerm)) return false;
+  }
+  return true;
+}
+function edgeVisible(e){
+  if (!state.relOn[e.type]) return false;
+  const s = byId.get(e.source), t = byId.get(e.target);
+  if (!s || !t) return false;
+  return nodeVisible(s) && nodeVisible(t);
+}
+
+// -----------------------------------------------------------------------
+// Force simulation — minimal, dependency-free (no d3). Repulsion between
+// all visible nodes, spring attraction along visible edges, gentle
+// centering. Re-runs whenever visibility changes so hidden nodes drift
+// out of the way rather than leaving empty gaps.
+// -----------------------------------------------------------------------
+function tick(){
+  const visible = NODES.filter(nodeVisible);
+  const visEdges = EDGES.filter(edgeVisible);
+  const W = 1000, H = 800;
+  const REPULSE = 2600, SPRING_LEN = 130, SPRING_K = 0.02, CENTER_K = 0.0025, DAMP = 0.86;
+
+  for (let i=0;i<visible.length;i++){
+    const a = visible[i];
+    let fx=0, fy=0;
+    for (let j=0;j<visible.length;j++){
+      if (i===j) continue;
+      const b = visible[j];
+      let dx = a.x-b.x, dy = a.y-b.y;
+      let d2 = dx*dx+dy*dy; if (d2<1) d2=1;
+      const f = REPULSE/d2;
+      const d = Math.sqrt(d2);
+      fx += (dx/d)*f; fy += (dy/d)*f;
+    }
+    fx += (W/2 - a.x)*CENTER_K;
+    fy += (H/2 - a.y)*CENTER_K;
+    a.fx=fx; a.fy=fy;
+  }
+  visEdges.forEach(e => {
+    const a = byId.get(e.source), b = byId.get(e.target);
+    if (!a||!b) return;
+    let dx=b.x-a.x, dy=b.y-a.y;
+    const d = Math.sqrt(dx*dx+dy*dy)||1;
+    const f = (d-SPRING_LEN)*SPRING_K;
+    const fx=(dx/d)*f, fy=(dy/d)*f;
+    a.fx+=fx; a.fy+=fy; b.fx-=fx; b.fy-=fy;
+  });
+  visible.forEach(a => {
+    a.vx = (a.vx + (a.fx||0))*DAMP;
+    a.vy = (a.vy + (a.fy||0))*DAMP;
+    a.x += a.vx*0.06; a.y += a.vy*0.06;
+    a.x = Math.max(24, Math.min(W-24, a.x));
+    a.y = Math.max(24, Math.min(H-24, a.y));
+  });
+  renderPositions();
+}
+function runSim(steps){
+  for (let i=0;i<steps;i++) tick();
+}
+
+// -----------------------------------------------------------------------
+// Rendering
+// -----------------------------------------------------------------------
+const svg = document.getElementById('svg');
+const edgesLayer = document.getElementById('edges-layer');
+const nodesLayer = document.getElementById('nodes-layer');
+const defs = svg.querySelector('defs');
+
+function shapeEl(kind, r){
+  const meta = KIND_META[kind];
+  if (meta.shape === 'circle') {
+    const el = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    el.setAttribute('r', r);
+    return el;
+  }
+  if (meta.shape === 'square') {
+    const el = document.createElementNS('http://www.w3.org/2000/svg','rect');
+    el.setAttribute('x', -r); el.setAttribute('y', -r);
+    el.setAttribute('width', r*2); el.setAttribute('height', r*2);
+    el.setAttribute('rx', 3);
+    return el;
+  }
+  const el = document.createElementNS('http://www.w3.org/2000/svg','rect');
+  el.setAttribute('x', -r*0.8); el.setAttribute('y', -r*0.8);
+  el.setAttribute('width', r*1.6); el.setAttribute('height', r*1.6);
+  el.setAttribute('rx', 2);
+  el.setAttribute('transform', 'rotate(45)');
+  return el;
+}
+
+function buildArrowMarkers(){
+  REL_VOCAB.forEach(type => {
+    const m = document.createElementNS('http://www.w3.org/2000/svg','marker');
+    m.setAttribute('id', 'arrow-'+type);
+    m.setAttribute('viewBox', '0 0 10 10');
+    m.setAttribute('refX', '8'); m.setAttribute('refY', '5');
+    m.setAttribute('markerWidth', '7'); m.setAttribute('markerHeight', '7');
+    m.setAttribute('orient', 'auto-start-reverse');
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d', 'M0,0 L10,5 L0,10 Z');
+    path.setAttribute('fill', `var(--rel-${type})`);
+    m.appendChild(path);
+    defs.appendChild(m);
+  });
+}
+
+let nodeEls = new Map(), edgeEls = new Map();
+
+function fullRender(){
+  edgesLayer.innerHTML=''; nodesLayer.innerHTML='';
+  nodeEls.clear(); edgeEls.clear();
+
+  EDGES.forEach((e,i) => {
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.classList.add('edge');
+    if (REL_DASHED.has(e.type)) path.classList.add('dashed');
+    path.setAttribute('stroke', `var(--rel-${e.type})`);
+    path.setAttribute('marker-end', `url(#arrow-${e.type})`);
+    edgesLayer.appendChild(path);
+    edgeEls.set(i, path);
+  });
+
+  NODES.forEach(n => {
+    const meta = KIND_META[n.kind];
+    const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.classList.add('node-group');
+    g.dataset.id = n.id;
+    const r = n.kind === 'use_case' ? 9 : (n.kind === 'case_study' ? 8 : 7);
+    const shape = shapeEl(n.kind, r);
+    shape.classList.add('node-shape');
+    shape.setAttribute('fill', meta.bg);
+    shape.setAttribute('stroke', meta.color);
+    shape.style.color = meta.color;
+    g.appendChild(shape);
+    const label = document.createElementNS('http://www.w3.org/2000/svg','text');
+    label.classList.add('node-label');
+    label.setAttribute('x', r+5); label.setAttribute('y', 3);
+    label.textContent = truncate(n.title, 26);
+    g.appendChild(label);
+    g.addEventListener('click', (ev) => { ev.stopPropagation(); selectNode(n.id); });
+    nodesLayer.appendChild(g);
+    nodeEls.set(n.id, g);
+  });
+
+  renderPositions();
+  applyVisibility();
+}
+
+function renderPositions(){
+  NODES.forEach(n => {
+    const g = nodeEls.get(n.id);
+    if (g) g.setAttribute('transform', `translate(${n.x},${n.y})`);
+  });
+  EDGES.forEach((e,i) => {
+    const a = byId.get(e.source), b = byId.get(e.target);
+    const path = edgeEls.get(i);
+    if (!a || !b || !path) return;
+    const mx = (a.x+b.x)/2, my = (a.y+b.y)/2;
+    const dx = b.x-a.x, dy = b.y-a.y;
+    const nx = -dy, ny = dx;
+    const len = Math.sqrt(nx*nx+ny*ny)||1;
+    const curve = 14;
+    const cx = mx + (nx/len)*curve, cy = my + (ny/len)*curve;
+    path.setAttribute('d', `M${a.x},${a.y} Q${cx},${cy} ${b.x},${b.y}`);
+  });
+}
+
+function applyVisibility(){
+  NODES.forEach(n => {
+    const g = nodeEls.get(n.id);
+    if (!g) return;
+    g.style.display = nodeVisible(n) ? '' : 'none';
+    g.classList.toggle('selected', state.selected === n.id);
+  });
+  EDGES.forEach((e,i) => {
+    const path = edgeEls.get(i);
+    if (!path) return;
+    path.style.display = edgeVisible(e) ? '' : 'none';
+  });
+  updateStats();
+}
+
+function truncate(s, n){ s = s||''; return s.length>n ? s.slice(0,n-1)+'…' : s; }
+
+// -----------------------------------------------------------------------
+// Pan / zoom
+// -----------------------------------------------------------------------
+let view = { x:0, y:0, scale:1 };
+const viewport = document.getElementById('viewport');
+function applyView(){
+  viewport.setAttribute('transform', `translate(${view.x},${view.y}) scale(${view.scale})`);
+}
+let panState = null;
+svg.addEventListener('mousedown', (e) => {
+  panState = { startX:e.clientX, startY:e.clientY, vx:view.x, vy:view.y };
+  svg.classList.add('panning');
+});
+window.addEventListener('mousemove', (e) => {
+  if (!panState) return;
+  view.x = panState.vx + (e.clientX-panState.startX);
+  view.y = panState.vy + (e.clientY-panState.startY);
+  applyView();
+});
+window.addEventListener('mouseup', () => { panState=null; svg.classList.remove('panning'); });
+svg.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const delta = e.deltaY > 0 ? 0.9 : 1.1;
+  const rect = svg.getBoundingClientRect();
+  const mx = e.clientX-rect.left, my = e.clientY-rect.top;
+  const wx = (mx-view.x)/view.scale, wy = (my-view.y)/view.scale;
+  view.scale = Math.max(0.25, Math.min(3, view.scale*delta));
+  view.x = mx - wx*view.scale; view.y = my - wy*view.scale;
+  applyView();
+}, { passive:false });
+document.getElementById('zoom-in').onclick = () => { view.scale = Math.min(3, view.scale*1.2); applyView(); };
+document.getElementById('zoom-out').onclick = () => { view.scale = Math.max(0.25, view.scale*0.8); applyView(); };
+document.getElementById('zoom-reset').onclick = () => { view = {x:0,y:0,scale:1}; applyView(); };
+svg.addEventListener('click', () => deselect());
+
+// -----------------------------------------------------------------------
+// Rail: toggle UI
+// -----------------------------------------------------------------------
+function buildRail(){
+  const typeWrap = document.getElementById('type-toggles');
+  typeWrap.innerHTML = '';
+  ['need','use_case','case_study'].forEach(kind => {
+    const meta = KIND_META[kind];
+    const count = NODES.filter(n => n.kind === kind || (kind==='need'&&n.kind==='requirement')).length;
+    const row = document.createElement('label');
+    row.className = 'toggle-row';
+    row.innerHTML = `<input type="checkbox" checked />
+      <span class="swatch ${meta.shape==='circle'?'dot':meta.shape==='diamond'?'diamond':''}" style="background:${meta.color}"></span>
+      <span class="lbl">${meta.label}</span><span class="n">${count}</span>`;
+    row.querySelector('input').addEventListener('change', (e) => {
+      state.typeOn[kind] = e.target.checked;
+      if (kind==='need') state.typeOn['requirement'] = e.target.checked;
+      row.classList.toggle('off', !e.target.checked);
+      applyVisibility();
+    });
+    typeWrap.appendChild(row);
+  });
+
+  const relWrap = document.getElementById('rel-toggles');
+  relWrap.innerHTML = '';
+  const relCounts = {};
+  EDGES.forEach(e => relCounts[e.type] = (relCounts[e.type]||0)+1);
+  REL_VOCAB.forEach(type => {
+    const count = relCounts[type] || 0;
+    const row = document.createElement('label');
+    row.className = 'toggle-row' + (count===0 ? ' off' : '');
+    row.innerHTML = `<input type="checkbox" ${state.relOn[type]?'checked':''} />
+      <span class="rel-line ${REL_DASHED.has(type)?'dashed':''}" style="border-color:var(--rel-${type})"></span>
+      <span class="lbl">${type}</span><span class="n">${count}</span>`;
+    row.querySelector('input').addEventListener('change', (e) => {
+      state.relOn[type] = e.target.checked;
+      applyVisibility();
+    });
+    relWrap.appendChild(row);
+  });
+  if (Object.values(relCounts).length < REL_VOCAB.length) {
+    const note = document.createElement('div');
+    note.className = 'empty-note';
+    note.textContent = 'Greyed types exist in the schema but have 0 instances yet.';
+    relWrap.appendChild(note);
+  }
+  document.getElementById('rel-all').onclick = () => setAllRel(true);
+  document.getElementById('rel-none').onclick = () => setAllRel(false);
+  document.getElementById('rel-used').onclick = () => {
+    REL_VOCAB.forEach(t => state.relOn[t] = (relCounts[t]||0) > 0);
+    syncRelCheckboxes(); applyVisibility();
+  };
+
+  const segWrap = document.getElementById('segment-toggles');
+  segWrap.innerHTML = '';
+  const allRow = document.createElement('label');
+  allRow.className = 'toggle-row';
+  allRow.innerHTML = `<input type="checkbox" checked /><span class="swatch" style="background:var(--text-faint)"></span><span class="lbl">all segments</span>`;
+  allRow.querySelector('input').addEventListener('change', (e) => {
+    state.segmentOn.__all__ = e.target.checked;
+    Object.keys(state.segmentOn).forEach(k => { if (k!=='__all__') state.segmentOn[k] = e.target.checked; });
+    syncSegCheckboxes(); applyVisibility();
+  });
+  segWrap.appendChild(allRow);
+  Object.keys(state.segmentOn).filter(k => k!=='__all__').forEach(segId => {
+    const row = document.createElement('label');
+    row.className = 'toggle-row';
+    const seg = DATA.segments.find(s => s.id === segId);
+    const color = (seg && seg.site && seg.site.color) || 'var(--text-faint)';
+    row.innerHTML = `<input type="checkbox" checked /><span class="swatch" style="background:${color}"></span><span class="lbl" style="font-family:var(--sans);font-size:11.5px">${segName(segId)}</span>`;
+    row.querySelector('input').addEventListener('change', (e) => {
+      state.segmentOn[segId] = e.target.checked;
+      state.segmentOn.__all__ = Object.keys(state.segmentOn).filter(k=>k!=='__all__').every(k => state.segmentOn[k]);
+      document.querySelector('#segment-toggles .toggle-row input').checked = state.segmentOn.__all__;
+      applyVisibility();
+    });
+    segWrap.appendChild(row);
+  });
+}
+function setAllRel(on){
+  REL_VOCAB.forEach(t => state.relOn[t]=on);
+  syncRelCheckboxes(); applyVisibility();
+}
+function syncRelCheckboxes(){
+  document.querySelectorAll('#rel-toggles .toggle-row').forEach((row,i) => {
+    const type = REL_VOCAB[i];
+    const input = row.querySelector('input');
+    input.checked = state.relOn[type];
+  });
+}
+function syncSegCheckboxes(){
+  document.querySelectorAll('#segment-toggles .toggle-row input').forEach((input,i) => {
+    if (i===0) { input.checked = state.segmentOn.__all__; return; }
+    const segId = Object.keys(state.segmentOn).filter(k=>k!=='__all__')[i-1];
+    input.checked = state.segmentOn[segId];
+  });
+}
+
+function updateStats(){
+  const visN = NODES.filter(nodeVisible).length;
+  const visE = EDGES.filter(edgeVisible).length;
+  document.getElementById('stats').innerHTML =
+    `<span><b>${visN}</b>/${NODES.length} nodes</span><span><b>${visE}</b>/${EDGES.length} edges</span>`;
+}
+
+// -----------------------------------------------------------------------
+// Inspector
+// -----------------------------------------------------------------------
+function selectNode(id){
+  state.selected = id;
+  applyVisibility();
+  const n = byId.get(id);
+  const meta = KIND_META[n.kind];
+  const out = (n.raw.relations||[]).filter(r => byId.has(r.target));
+  const incoming = EDGES.filter(e => e.target === id);
+
+  const fields = [];
+  if (n.raw.statement) fields.push(['statement', n.raw.statement]);
+  if (n.raw.description) fields.push(['description', n.raw.description]);
+  if (n.raw.narrative) fields.push(['narrative', n.raw.narrative]);
+  if (n.raw.summary) fields.push(['summary', n.raw.summary]);
+
+  const segs = (n.raw.classification && n.raw.classification.market_segments) || [];
+  const products = (n.raw.classification && n.raw.classification.products) || [];
+
+  document.getElementById('insp-content').innerHTML = `
+    <div class="insp-kind" style="background:${meta.bg};color:${meta.color}">${meta.label}${n.raw.maturity ? ' · '+n.raw.maturity : ''}</div>
+    <div class="insp-id">${esc(n.id)}</div>
+    <div class="insp-title">${esc(n.title)}</div>
+    ${fields.slice(0,1).map(([k,v]) => `<div class="insp-field"><div class="insp-field-label">${k}</div><div class="insp-field-val">${esc(truncate(v,400))}</div></div>`).join('')}
+    ${segs.length ? `<div class="insp-field"><div class="insp-field-label">segments</div><div class="insp-badges">${segs.map(s=>`<span class="insp-badge">${esc(segName(s))}</span>`).join('')}</div></div>` : ''}
+    ${products.length ? `<div class="insp-field"><div class="insp-field-label">products</div><div class="insp-badges">${products.map(p=>`<span class="insp-badge">${esc(p)}</span>`).join('')}</div></div>` : ''}
+    <div class="insp-field">
+      <div class="insp-field-label">outgoing relations (${out.length})</div>
+      ${out.length ? `<div class="insp-edges">${out.map(r => edgeRow(r.type, r.target)).join('')}</div>` : '<div class="insp-empty">none</div>'}
+    </div>
+    <div class="insp-field">
+      <div class="insp-field-label">incoming relations (${incoming.length})</div>
+      ${incoming.length ? `<div class="insp-edges">${incoming.map(e => edgeRow(e.type, e.source)).join('')}</div>` : '<div class="insp-empty">none</div>'}
+    </div>
+  `;
+  document.querySelectorAll('#insp-content .insp-edge').forEach(el => {
+    el.addEventListener('click', () => selectNode(el.dataset.target));
+  });
+  document.getElementById('inspector').classList.add('open');
+}
+function edgeRow(type, targetId){
+  const t = byId.get(targetId);
+  return `<div class="insp-edge" data-target="${esc(targetId)}">
+    <span class="insp-edge-type" style="background:var(--rel-${type});color:#14161B">${type}</span>
+    <span class="insp-edge-target">${esc(t ? t.title : targetId)}</span>
+  </div>`;
+}
+function deselect(){
+  state.selected = null;
+  document.getElementById('inspector').classList.remove('open');
+  applyVisibility();
+}
+document.getElementById('insp-close').onclick = deselect;
+
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// -----------------------------------------------------------------------
+// Search
+// -----------------------------------------------------------------------
+document.getElementById('search').addEventListener('input', (e) => {
+  state.searchTerm = e.target.value.trim().toLowerCase();
+  applyVisibility();
+});
+
+// -----------------------------------------------------------------------
+// Boot
+// -----------------------------------------------------------------------
+(async function boot(){
+  try {
+    const data = await loadAll();
+    buildGraph(data);
+    buildArrowMarkers();
+    buildRail();
+    fullRender();
+    runSim(220); // settle the layout before first paint
+    document.getElementById('loading').style.display = 'none';
+    svg.style.display = '';
+    document.getElementById('zoom-controls').style.display = '';
+    document.getElementById('legend-hint').style.display = '';
+    // light continuous simulation so dragging the canvas doesn't feel static
+    setInterval(() => tick(), 90);
+  } catch (err) {
+    document.getElementById('loading').style.display = 'none';
+    const box = document.getElementById('error-box');
+    box.style.display = 'block';
+    box.textContent = 'Failed to load content/: ' + err.message + '. Serve this file from the same folder as content/ (e.g. python -m http.server), not via file://.';
+    console.error(err);
+  }
+})();
+</script>
+</body>
+</html>
